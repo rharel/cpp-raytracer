@@ -1,0 +1,14 @@
+# Windows thumbnails
+Thumbs.db
+
+# VS user specific
+*.suo
+*.user
+*.VC.db
+
+# Build output
+bin/
+
+# VS intermediate files
+Debug/
+Release/
