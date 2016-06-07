@@ -1,6 +1,9 @@
 # Windows thumbnails
 Thumbs.db
 
+# Zips
+*.7z
+
 # VS user specific
 *.suo
 *.user
