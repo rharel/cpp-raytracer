@@ -9,7 +9,7 @@
  */
 
 
-#include <iris/VectorTypes.h>
+#include <iris/SceneComponent.h>
 
 
 namespace iris
@@ -17,7 +17,7 @@ namespace iris
     /**
      * The light class is the basis for all lights in the scene.
      */
-    class Light
+    class Light : SceneComponent
     {
         public:
         /**
