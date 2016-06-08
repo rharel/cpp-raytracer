@@ -11,6 +11,7 @@ TEST_CASE("material", "[material]")
     const Material a;
     const Material b(1);
 
+    REQUIRE(Material::null.id() < 0);
     REQUIRE(a.id() == Material::null.id());
     REQUIRE(a == Material::null);
     REQUIRE(b.id() == 1);

@@ -7,7 +7,7 @@ using namespace iris;
 Material Material::null;
 
 Material::Material()
-    : Material(0) {}
+    : Material(-1) {}
 Material::Material(const int id)
     : id_(id) {}
 

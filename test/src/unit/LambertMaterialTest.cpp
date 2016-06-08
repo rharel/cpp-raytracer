@@ -10,9 +10,9 @@ TEST_CASE("lambert material", "[material][lambert-material]")
 {
     const Vector3 albedo(0.1f);
     const LambertMaterial a;
-    const LambertMaterial b(1, albedo);
+    const LambertMaterial b(0, albedo);
 
     REQUIRE(a == Material::null);
-    REQUIRE(b.id() == 1);
+    REQUIRE(b.id() == 0);
     REQUIRE(b.albedo() == albedo);
 }

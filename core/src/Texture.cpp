@@ -7,7 +7,7 @@ using namespace iris;
 const Texture Texture::null;
 
 Texture::Texture()
-    : Texture(0, 0, 0, {&Material::null}) {}
+    : Texture(-1, 0, 0, {&Material::null}) {}
 Texture::Texture(
 
     const int id,
