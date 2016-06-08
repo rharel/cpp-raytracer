@@ -62,5 +62,4 @@ namespace iris
 }
 
 
-
 #endif  // IRIS_RAY_H
