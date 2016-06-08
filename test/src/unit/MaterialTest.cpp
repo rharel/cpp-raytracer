@@ -8,8 +8,8 @@ using namespace iris;
 
 TEST_CASE("material", "[material]")
 {
-    Material a;
-    Material b(1);
+    const Material a;
+    const Material b(1);
 
     REQUIRE(a.id() == Material::null.id());
     REQUIRE(a == Material::null);

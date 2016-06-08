@@ -8,9 +8,9 @@ using namespace iris;
 
 TEST_CASE("texture", "[texture]")
 {
-    Material m1(1), m2(2), m3(3), m4(4), m5(5), m6(6);
-    Texture a;
-    Texture b(1, 2, 3, {&m1, &m2, &m3, &m4, &m5, &m6});
+    const Material m1(1), m2(2), m3(3), m4(4), m5(5), m6(6);
+    const Texture a;
+    const Texture b(1, 2, 3, {&m1, &m2, &m3, &m4, &m5, &m6});
 
     REQUIRE(a.id() == Texture::null.id());
     REQUIRE(a == Texture::null);

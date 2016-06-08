@@ -20,8 +20,8 @@ TEST_CASE("surface", "[surface]")
 {
     const Texture texture(1, 0, 0, {});
 
-    MockSurface a;
-    MockSurface b(texture);
+    const MockSurface a;
+    const MockSurface b(texture);
 
     REQUIRE(a.texture() == Texture::null);
     REQUIRE(b.texture() == texture);
