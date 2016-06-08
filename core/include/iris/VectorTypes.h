@@ -17,9 +17,15 @@ namespace iris
 {
     typedef glm::uvec2 Vector2u;
     typedef glm::uvec3 Vector3u;
+    typedef glm::uvec4 Vector4u;
+
+    typedef glm::ivec2 Vector2i;
+    typedef glm::ivec3 Vector3i;
+    typedef glm::ivec4 Vector4i;
 
     typedef glm::vec2 Vector2;
     typedef glm::vec3 Vector3;
+    typedef glm::vec4 Vector4;
 }
 
 
