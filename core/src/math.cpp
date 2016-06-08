@@ -12,6 +12,7 @@ bool iris::solve_quadratic(
     float& x0, float& x1)
 {
     const float delta = b * b - 4 * a * c;
+
     if (delta < 0) { return false; }
     else if (delta == 0)
     {
