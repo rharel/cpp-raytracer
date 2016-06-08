@@ -1,5 +1,7 @@
 #include <iris/Light.h>
 
+#include <glm/common.hpp>
+
 
 using namespace iris;
 
@@ -7,7 +9,8 @@ using namespace iris;
 Light::Light()
     : Light(Vector3(1.0f), 1.0f) {}
 Light::Light(const Vector3& color, const float intensity)
-    : color_(color), intensity_(intensity) {}
+    : color_(glm::clamp(color, 0.0f, 1.0f)), 
+      intensity_(intensity) {}
 
 const Vector3& Light::color() const
 {
