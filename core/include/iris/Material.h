@@ -45,5 +45,4 @@ namespace iris
 }
 
 
-
 #endif  // IRIS_MATERIAL_H
