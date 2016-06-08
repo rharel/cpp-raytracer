@@ -1,10 +1,21 @@
 #include "../../lib/catch.hpp"
 
+#include <iris/math.h>
 #include <iris/SceneComponent.h>
+
+#include <glm/geometric.hpp>
 
 
 using namespace iris;
 
+
+bool is_close(
+
+    const Vector3& a, const Vector3& b,
+    const float precision = 0.00001f)
+{
+    return glm::length(a - b) < precision;
+}
 
 TEST_CASE("scene component", "[scene-component]")
 {
@@ -13,6 +24,9 @@ TEST_CASE("scene component", "[scene-component]")
     REQUIRE_FALSE(a.has_parent());
     REQUIRE_FALSE(a.has_child(a));
     REQUIRE(a.child_count() == 0);
+
+    REQUIRE(a.local_transform() == Matrix4(1.0f));
+    REQUIRE(a.global_transform() == Matrix4(1.0f));
 
     SECTION("child addition")
     {
@@ -42,5 +56,31 @@ TEST_CASE("scene component", "[scene-component]")
             REQUIRE(a.child_count() == 1);
             REQUIRE(&a.child(0) == &c);
         }
+    }
+    SECTION("transformations")
+    {
+        REQUIRE(a.add_child(b));
+        REQUIRE(b.add_child(c));
+
+        a.translate(1, 0, 0);
+        b.rotate(0, constant::m_pi, 0);
+        c.scale(1, 1, 2);
+        a.update();
+
+        const Matrix4& T = a.local_transform();
+        const Matrix4& R = b.local_transform();
+        const Matrix4& S = c.local_transform();
+        const Matrix4& W = c.global_transform();
+
+        const Vector4 v(1.0f);
+        const Vector3 Tv(T * v);
+        const Vector3 Rv(R * v);
+        const Vector3 Sv(S * v);
+        const Vector3 Wv(W * v);
+
+        REQUIRE(is_close(Tv, Vector3(2, 1, 1)));
+        REQUIRE(is_close(Rv, Vector3(-1, 1, -1)));
+        REQUIRE(is_close(Sv, Vector3(1, 1, 2)));
+        REQUIRE(is_close(Wv, Vector3(0, 1, -2)));
     }
 }

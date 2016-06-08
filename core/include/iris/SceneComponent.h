@@ -9,6 +9,9 @@
  */
 
 
+#include <iris/MatrixTypes.h>
+#include <iris/VectorTypes.h>
+
 #include <set>
 
 
@@ -64,9 +67,48 @@ namespace iris
          */
         const SceneComponent& child(size_t index) const;
 
+        /**
+         * Translates component.
+         *
+         * @note Will only take effect after a call to update()
+         */
+        void translate(float x, float y, float z);
+        /**
+         * Scales component.
+         *
+         * @note Will only take effect after a call to update()
+         */
+        void scale(float x, float y, float z);
+        /**
+         * Rotates component.
+         *
+         * @note Will only take effect after a call to update()
+         */
+        void rotate(float x, float y, float z);
+
+        /**
+         * Gets local transform.
+         */
+        const Matrix4& local_transform() const;
+        /**
+         * Gets global transform.
+         */
+        const Matrix4& global_transform() const;
+        
+        /**
+         * Updates inner transformation of this and all children.
+         */
+        void update();
+        
         private:
         SceneComponent* parent_ = nullptr;
         std::set<SceneComponent*> children_;
+
+        Vector3 translation_ = Vector3(0.0f);
+        Vector3 scale_ = Vector3(1.0f);
+        Vector3 rotation_ = Vector3(0.0f);
+        Matrix4 local_transform_ = Matrix4(1.0f);
+        Matrix4 global_transform_ = Matrix4(1.0f);
     };
 }
 

@@ -1,5 +1,8 @@
 #include <iris/SceneComponent.h>
 
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtx/euler_angles.hpp>
+
 
 using namespace iris;
 
@@ -61,4 +64,52 @@ const SceneComponent& SceneComponent::child(const size_t index) const
     std::advance(it, index);
 
     return **it;
+}
+
+void SceneComponent::translate(
+
+    const float x, const float y, const float z)
+{
+    translation_ = Vector3(x, y, z);
+}
+void SceneComponent::scale(
+
+    const float x, const float y, const float z)
+{
+    scale_ = Vector3(x, y, z);
+}
+void SceneComponent::rotate(
+
+    const float x, const float y, const float z)
+{
+    rotation_ = Vector3(x, y, z);
+}
+
+const Matrix4& SceneComponent::local_transform() const
+{
+    return local_transform_;
+}
+const Matrix4& SceneComponent::global_transform() const
+{
+    return global_transform_;
+}
+
+void SceneComponent::update()
+{
+    const Matrix4 S = glm::scale(Matrix4(1.0f), scale_);
+    const Matrix4 R = glm::eulerAngleXYZ(rotation_.x, rotation_.y, rotation_.z);
+    const Matrix4 T = glm::translate(Matrix4(1.0f), translation_);
+    local_transform_ = T * R * S;
+    
+    if (has_parent())
+    {
+        global_transform_ = parent().global_transform() *
+                            this->local_transform();
+    }
+    else { global_transform_ = local_transform_; }
+
+    for (SceneComponent* child : children_)
+    {
+        child->update();
+    }
 }
