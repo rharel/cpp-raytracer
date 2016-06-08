@@ -10,6 +10,7 @@
 
 
 #include <iris/Raycast.h>
+#include <iris/SceneComponent.h>
 #include <iris/Texture.h>
 
 
@@ -19,7 +20,7 @@ namespace iris
      * The surface abstract class is the general abstraction of
      * all surfaces in the scene. It handles raycasts and transformations.
      */
-    class Surface
+    class Surface : public SceneComponent
     {
         public:
         /**
