@@ -18,6 +18,10 @@ bool Raycast::hit() const
 {
     return contact_time() > 0.0f;
 }
+Vector3 Raycast::contact_point() const
+{
+    return ray().origin() + contact_time() * ray().direction();
+}
 
 float Raycast::contact_time() const
 {

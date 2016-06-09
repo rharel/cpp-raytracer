@@ -40,6 +40,10 @@ namespace iris
          * Check whether contact_time() > 0.
          */
         bool hit() const;
+        /**
+         * Computes ray.origin() + contact_time() * ray.direction().
+         */
+        Vector3 contact_point() const;
 
         /**
          * Gets contact time.

@@ -23,7 +23,7 @@ TEST_CASE("raycast", "[raycast]")
         const float t = 1.0f;
         const Vector3 n(0, 1, 0);
         const Material material;
-        Raycast c;
+        Raycast c(ray);
         
         REQUIRE_FALSE(c.hit());
 
@@ -33,5 +33,7 @@ TEST_CASE("raycast", "[raycast]")
         REQUIRE(c.contact_time() == t);
         REQUIRE(c.contact_normal() == n);
         REQUIRE(c.contact_material() == material);
+        REQUIRE(c.contact_point() == 
+                ray.origin() + t * ray.direction());
     }
 }
