@@ -25,9 +25,15 @@ void Camera::update()
     
     position_ = Vector3(W[3]);
     
-    if (position() == target())
+    if (is_free() || position() == target())
     {
-        look_at(position() + Vector3(1, 0, 0));
+        Matrix4 R = W;
+        R[3] = Vector4(0, 0, 0, 1);
+        const Vector3 offset = glm::normalize(
+
+            Vector3(R * Vector4(0, 0, -1, 1))
+        );
+        look_at(position() + offset);
     }
 
     Vector3 X, Y, Z;
@@ -54,7 +60,17 @@ void Camera::look_at(
 }
 void Camera::look_at(const Vector3& target)
 {
+    free_ = false;
     target_ = target;
+}
+
+bool Camera::is_free() const
+{
+    return free_;
+}
+void Camera::free()
+{
+    free_ = true;
 }
 
 float Camera::fov() const

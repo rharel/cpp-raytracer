@@ -52,6 +52,17 @@ namespace iris
          * @note Only takes effect after a call to update().
          */
         void look_at(const Vector3& target);
+        
+        /**
+         * Checks if the camera has no look-at target assigned.
+         */
+        bool is_free() const;
+        /**
+         * Lets the camera's transform control the view direction.
+         *
+         * @note Only takes effect after a call to update().
+         */
+        void free();
 
         /**
          * Gets field of view.
@@ -93,6 +104,8 @@ namespace iris
         private:
         float fov_, aspect_;
         float near_, far_;
+
+        bool free_ = true;
 
         Vector3 position_ = Vector3(0);
         Vector3 forward_ = Vector3(0, 0, 1); 
