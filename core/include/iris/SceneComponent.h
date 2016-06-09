@@ -98,7 +98,7 @@ namespace iris
         /**
          * Updates inner transformation of this and all children.
          */
-        void update();
+        virtual void update();
         
         private:
         SceneComponent* parent_ = nullptr;
