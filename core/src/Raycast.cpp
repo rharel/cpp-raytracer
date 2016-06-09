@@ -14,16 +14,11 @@ const Ray& Raycast::ray() const
     return ray_;
 }
 
-void Raycast::contact(
-    
-    const float time,
-    const Vector3& normal,
-    const Material& material)
+bool Raycast::hit() const
 {
-    contact_time_ = time;
-    contact_normal_ = normal;
-    contact_material_ = &material;
+    return contact_time() > 0.0f;
 }
+
 float Raycast::contact_time() const
 {
     return contact_time_;
@@ -35,4 +30,14 @@ const Vector3& Raycast::contact_normal() const
 const Material& Raycast::contact_material() const
 {
     return *contact_material_;
+}
+void Raycast::contact(
+    
+    const float time,
+    const Vector3& normal,
+    const Material& material)
+{
+    contact_time_ = time;
+    contact_normal_ = normal;
+    contact_material_ = &material;
 }

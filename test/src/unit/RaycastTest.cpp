@@ -13,9 +13,9 @@ TEST_CASE("raycast", "[raycast]")
     const Raycast b(ray);
 
     REQUIRE(a.ray().is_null());
-    REQUIRE(b.ray() == ray);
-
     REQUIRE(a.contact_time() <= 0);
+    
+    REQUIRE(b.ray() == ray);
     REQUIRE(b.contact_time() <= 0);
 
     SECTION("setters")
@@ -24,9 +24,12 @@ TEST_CASE("raycast", "[raycast]")
         const Vector3 n(0, 1, 0);
         const Material material;
         Raycast c;
+        
+        REQUIRE_FALSE(c.hit());
 
         c.contact(t, n, material);
 
+        REQUIRE(c.hit());
         REQUIRE(c.contact_time() == t);
         REQUIRE(c.contact_normal() == n);
         REQUIRE(c.contact_material() == material);

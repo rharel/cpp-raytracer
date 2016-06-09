@@ -37,6 +37,11 @@ namespace iris
         const Ray& ray() const;
 
         /**
+         * Check whether contact_time() > 0.
+         */
+        bool hit() const;
+
+        /**
          * Gets contact time.
          */
         float contact_time() const;
