@@ -1,5 +1,8 @@
 #include "../../lib/catch.hpp"
 
+#include "../helpers.h"
+
+#include <iris/math.h>
 #include <iris/PlaneSurface.h>
 
 
@@ -47,5 +50,18 @@ TEST_CASE("plane surface", "[surface][plane-surface]")
         REQUIRE(result0.contact_material() == m0);
         REQUIRE(result1.contact_material() == m1);
         REQUIRE(result2.contact_material() == m1);
+    }
+    SECTION("transform")
+    {
+        PlaneSurface c;
+        c.scale(1, 2, 3);
+        c.rotate(constant::m_pi, 0, 0);
+        c.translate(1, 0, 0);
+        c.update();
+
+        REQUIRE(is_close(c.anchor(), Vector3(1, 0, 0)));
+        REQUIRE(is_close(c.normal(), Vector3(0, -1, 0)));
+        REQUIRE(is_close(c.U(), Vector3(1, 0, 0)));
+        REQUIRE(is_close(c.V(), Vector3(0, 0, -1)));
     }
 }

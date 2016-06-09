@@ -17,13 +17,29 @@ PlaneSurface::PlaneSurface(
     : Surface(texture), 
       texture_tile_size_(texture_tile_size) {}
 
+void PlaneSurface::update()
+{
+    Surface::update();
+
+    const Matrix4& W = global_transform();
+    Matrix4 R = W;
+    R[3] = Vector4(0, 0, 0, 1);
+    
+    anchor_ = Vector3(W[3]);
+    normal_ = Vector3(R * Vector4(0, 1, 0, 1));
+    normal_ = glm::normalize(normal_);
+    U_ = Vector3(R * Vector4(1, 0, 0, 1));
+    U_ = glm::normalize(U_);
+    V_ = Vector3(R * Vector4(0, 0, 1, 1));
+    V_ = glm::normalize(V_);
+}
 void PlaneSurface::raycast(Raycast& result) const
 {
     const Ray& ray = result.ray();
     const Vector3& O = ray.origin();
     const Vector3& D = ray.direction();
-    const Vector3& A = anchor_;
-    const Vector3& N = normal_;
+    const Vector3& A = anchor();
+    const Vector3& N = normal();
 
     const float ND = dot(N, D);
     if (ND >= 0.0f) { return; }
@@ -32,8 +48,8 @@ void PlaneSurface::raycast(Raycast& result) const
     
     const Vector3 P = ray.at(t);
     const Vector3 AP = P - A;
-    const float u = dot(AP, U_) / texture_tile_size_.x;
-    const float v = dot(AP, V_) / texture_tile_size_.y;
+    const float u = dot(AP, U()) / texture_tile_size().x;
+    const float v = dot(AP, V()) / texture_tile_size().y;
     const Material& material = texture().sample(u, v);
 
     result.contact(t, normal_, material);

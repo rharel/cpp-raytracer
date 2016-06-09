@@ -32,6 +32,10 @@ namespace iris
                      const Vector2& texture_tile_size);
 
         /**
+         * Updates inner transformation of this and all children.
+         */
+        void update() override;
+        /**
          * Checks for ray-surface intersection.
          *
          * @param[in, out] result Raycast result description.
