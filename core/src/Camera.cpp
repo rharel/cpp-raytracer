@@ -38,8 +38,8 @@ void Camera::update()
         Z.x += 0.01f;
         Z = glm::normalize(Z);
     }
-    X = glm::cross(Z, Y);
-    Y = glm::cross(-Z, X);
+    X = glm::cross(-Z, Y);
+    Y = glm::cross(Z, X);
 
     right_ = X;
     up_ = Y;

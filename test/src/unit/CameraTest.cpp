@@ -33,13 +33,13 @@ TEST_CASE("camera", "[camera]")
     {
         const Vector3 target(0, 0, 0);
         Camera c;
-        c.translate(1, 0, 0);
+        c.translate(0, 0, 1);
         c.look_at(target);
         c.update();
 
         REQUIRE(is_close(c.target(), target));
-        REQUIRE(is_close(c.forward(), Vector3(-1, 0, 0)));
-        REQUIRE(is_close(c.right(), Vector3(0, 0, 1)));
+        REQUIRE(is_close(c.forward(), Vector3(0, 0, -1)));
+        REQUIRE(is_close(c.right(), Vector3(1, 0, 0)));
         REQUIRE(is_close(c.up(), Vector3(0, 1, 0)));
     }
 }
