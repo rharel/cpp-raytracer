@@ -1,21 +1,13 @@
 #include "../../lib/catch.hpp"
 
+#include "../helpers.h"
+
 #include <iris/math.h>
 #include <iris/SceneComponent.h>
-
-#include <glm/geometric.hpp>
 
 
 using namespace iris;
 
-
-bool is_close(
-
-    const Vector3& a, const Vector3& b,
-    const float precision = 0.00001f)
-{
-    return glm::length(a - b) < precision;
-}
 
 TEST_CASE("scene component", "[scene-component]")
 {
