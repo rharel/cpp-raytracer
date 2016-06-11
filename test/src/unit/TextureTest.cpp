@@ -21,10 +21,10 @@ TEST_CASE("texture", "[texture]")
     REQUIRE(b != Texture::null);
     REQUIRE(b.resolution() == Vector2u(2, 3));
 
-    const float dx = 1.0f / 2.0f;
-    const float dy = 1.0f / 3.0f;
+    const float dx = 1.0f / static_cast<float>(b.resolution().x);
+    const float dy = 1.0f / static_cast<float>(b.resolution().y);
 
-    SECTION("sampling in [0, 1]")
+    SECTION("sampling inside [0, 1]")
     {
         REQUIRE(b.sample(0.1f * dx, 0.1f * dy) == m0);
         REQUIRE(b.sample(1.1f * dx, 0.1f * dy) == m1);

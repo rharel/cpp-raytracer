@@ -1,16 +1,15 @@
 #ifndef IRIS_TEXTURE_H
 #define IRIS_TEXTURE_H
 /**
- * @file Texture.h
  * @author Raoul Harel
- * @url github.com/rharel/cpp-pathtracer
+ * @url github.com/rharel/cpp-raytracer
  *
  * Texture class.
  */
 
 
 #include <iris/Material.h>
-#include <iris/VectorTypes.h>
+#include <iris/vector_types.h>
 
 #include <vector>
 
@@ -18,8 +17,7 @@
 namespace iris
 {
     /**
-     * The texture class defines a material spatial pattern
-     * for surfaces.
+     * The texture class defines a material spatial pattern.
      */
     class Texture
     {
@@ -33,14 +31,21 @@ namespace iris
         /**
          * Creates a new texture with given id.
          *
-         * @note id = 0 is reserved for the null texture.
+         * @param width   Horizontal resolution.
+         * @param height  Vertical resolution.
+         * @param pattern Array of width * height material pointers.
+         *
+         * @note id = -1 is reserved for the null texture.
          */
-        Texture(int id,
-                size_t x, size_t y,
-                std::initializer_list<const Material*> data);
+        Texture
+        (
+            int id,
+            size_t x, size_t y,
+            std::initializer_list<const Material*> pattern
+        );
 
         /**
-         * Samples texture at given coordinate.
+         * Samples texture at given coordinates.
          */
         const Material& sample(float u, float v) const;
 
@@ -48,6 +53,9 @@ namespace iris
          * Gets id.
          */
         int id() const;
+        /**
+         * Gets resolution.
+         */
         const Vector2u& resolution() const;
 
         bool operator==(const Texture& other) const;
@@ -56,7 +64,7 @@ namespace iris
         private:
         int id_;
         Vector2u resolution_;
-        std::vector<const Material*> data_;
+        std::vector<const Material*> pattern_;
     };
 }
 
