@@ -1,23 +1,22 @@
 #ifndef IRIS_RAYCAST_H
 #define IRIS_RAYCAST_H
 /**
- * @file Raycast.h
  * @author Raoul Harel
- * @url github.com/rharel/cpp-pathtracer
+ * @url github.com/rharel/cpp-raytracer
  *
  * Raycast class.
  */
 
 
-#include <iris/Material.h>
 #include <iris/Ray.h>
+#include <iris/vector_types.h>
 
 
 namespace iris
 {
     /**
      * Raycast descriptor. Contains information about any
-     * ray-surface contacts (if any) and their properties.
+     * ray-geometry contacts (if any) and their properties.
      */
     class Raycast
     {
@@ -37,38 +36,41 @@ namespace iris
         const Ray& ray() const;
 
         /**
-         * Check whether contact_time() > 0.
+         * Check whether time() > 0.
          */
         bool hit() const;
         /**
-         * Computes ray.origin() + contact_time() * ray.direction().
+         * Computes ray.origin() + time() * ray.direction().
          */
-        Vector3 contact_point() const;
+        Vector3 point() const;
 
         /**
          * Gets contact time.
          */
-        float contact_time() const;
+        float time() const;
         /**
          * Gets contact normal.
          */
-        const Vector3& contact_normal() const;
+        const Vector3& normal() const;
         /**
-         * Gets contact material.
+         * Gets contact (u, v) coordinates.
          */
-        const Material& contact_material() const;
+        const Vector2& uv() const;
         /**
          * Sets contact info.
          */
-        void contact(float time, 
-                     const Vector3& normal, 
-                     const Material& material);
+        void contact
+        (
+            float time, 
+            const Vector3& normal, 
+            const Vector2& uv
+        );
         
         private:
         Ray ray_;
-        float contact_time_ = -1.0f;
-        Vector3 contact_normal_ = Vector3(0, 0, 0);
-        const Material* contact_material_ = nullptr;
+        float time_ = -1.0f;
+        Vector3 normal_ = Vector3(0);
+        Vector2 uv_ = Vector2(0);
     };
 }
 
