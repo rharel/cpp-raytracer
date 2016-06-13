@@ -35,6 +35,10 @@ const Vector2& Raycast::uv() const
 {
     return uv_;
 }
+const Material& Raycast::material() const
+{
+    return *material_;
+}
 void Raycast::contact(
     
     const float time,
@@ -44,4 +48,8 @@ void Raycast::contact(
     time_ = time;
     normal_ = normal;
     uv_ = uv;
+}
+void Raycast::contact(const Material& material)
+{
+    material_ = &material;
 }

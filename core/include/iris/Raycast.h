@@ -8,6 +8,7 @@
  */
 
 
+#include <iris/Material.h>
 #include <iris/Ray.h>
 #include <iris/vector_types.h>
 
@@ -53,11 +54,15 @@ namespace iris
          */
         const Vector3& normal() const;
         /**
-         * Gets contact (u, v) coordinates.
+         * Gets contact (u, v) texture coordinates.
          */
         const Vector2& uv() const;
         /**
-         * Sets contact info.
+         * Gets contact material.
+         */
+        const Material& material() const;
+        /**
+         * Sets contact time, normal, and (u, v) coordinates.
          */
         void contact
         (
@@ -65,12 +70,17 @@ namespace iris
             const Vector3& normal, 
             const Vector2& uv
         );
-        
+        /**
+         * Sets contact material.
+         */
+        void contact(const Material& material);
+
         private:
         Ray ray_;
         float time_ = -1.0f;
         Vector3 normal_ = Vector3(0);
         Vector2 uv_ = Vector2(0);
+        const Material* material_ = nullptr;
     };
 }
 
