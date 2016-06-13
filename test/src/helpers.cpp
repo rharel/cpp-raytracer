@@ -8,16 +8,21 @@
 using namespace iris;
 
 
+void print(const Vector2& v)
+{
+    std::cout << '(' 
+              << v.x << ", " << v.y 
+              << ')' << std::endl;
+}
 void print(const Vector3& v)
 {
     std::cout << '(' 
               << v.x << ", " << v.y << ", " << v.z 
               << ')' << std::endl;
 }
-bool is_close(
-
-    const Vector3& a, const Vector3& b,
-    const float precision)
+void print(const Vector4& v)
 {
-    return glm::length(a - b) < precision;
+    std::cout << '(' 
+              << v.x << ", " << v.y << ", " << v.z << ", " << v.w 
+              << ')' << std::endl;
 }
