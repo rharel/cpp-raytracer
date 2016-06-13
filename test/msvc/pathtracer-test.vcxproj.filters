@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\src\main.cpp" />
+    <ClCompile Include="..\src\unit\RaycastTest.cpp">
+      <Filter>unit\ray</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\unit\RayTest.cpp">
+      <Filter>unit\ray</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\unit\SphereSurfaceTest.cpp">
+      <Filter>unit\geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\unit\TextureTest.cpp">
+      <Filter>unit\material</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\unit\mathTest.cpp">
+      <Filter>unit\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\unit\LambertMaterialTest.cpp">
+      <Filter>unit\material</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\unit\LightTest.cpp">
+      <Filter>unit\light</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\unit\SphereLightTest.cpp">
+      <Filter>unit\light</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\helpers.cpp" />
+    <ClCompile Include="..\src\unit\PlaneGeometryTest.cpp">
+      <Filter>unit\geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\unit\NaiveSamplerTest.cpp">
+      <Filter>unit\sampling</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\unit\sampleAggregatorsTest.cpp">
+      <Filter>unit\sampling</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\unit\CameraTest.cpp">
+      <Filter>unit\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\unit\ImageTest.cpp">
+      <Filter>unit\composition</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\unit\Object3DTest.cpp">
+      <Filter>unit\scene</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="unit">
+      <UniqueIdentifier>{e879500f-d35f-4890-bda5-fe7d61b2477a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="unit\ray">
+      <UniqueIdentifier>{edcc73b8-2451-4e60-9b8a-c2afdece78dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="unit\material">
+      <UniqueIdentifier>{6214f3ef-15b3-4e7a-abcd-9ddc6e239c91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="unit\utility">
+      <UniqueIdentifier>{66edc1c8-ab67-4a19-9ac3-c11e68d39f27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="unit\light">
+      <UniqueIdentifier>{b9888d7b-ad19-4a83-9b4a-42baa1dd63d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="unit\geometry">
+      <UniqueIdentifier>{0e97017f-ed38-424d-8c7e-d0d880c1f538}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="unit\sampling">
+      <UniqueIdentifier>{95d364ec-b270-462b-abff-71cc1a82326d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="unit\composition">
+      <UniqueIdentifier>{886ad9f9-c113-4d73-a11c-2c23cf467b3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="unit\scene">
+      <UniqueIdentifier>{4eb6921d-01bb-4b9c-9c62-ea2057988cb3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="unit\raytracing">
+      <UniqueIdentifier>{3fbfb359-bf1e-4cdf-9be8-51c4c6e15b8d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\helpers.h" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="..\include\iris\SphereSurface.h">
+      <Filter>geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\iris\Ray.h">
+      <Filter>ray</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\iris\SphereLight.h">
+      <Filter>light</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\iris\Light.h">
+      <Filter>light</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\iris\LambertMaterial.h">
+      <Filter>material</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\iris\Material.h">
+      <Filter>material</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\iris\Texture.h">
+      <Filter>material</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\iris\random.h">
+      <Filter>utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\iris\math.h">
+      <Filter>utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\iris\Sampler.h">
+      <Filter>sampling</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\iris\NaiveSampler.h">
+      <Filter>sampling</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\iris\vector_types.h">
+      <Filter>types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\iris\matrix_types.h">
+      <Filter>types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\iris\sample_aggregators.h">
+      <Filter>sampling</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\iris\sample_aggregators.hpp">
+      <Filter>sampling</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\iris\PlaneGeometry.h">
+      <Filter>geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\iris\Geometry.h">
+      <Filter>geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\iris\Raycast.h">
+      <Filter>ray</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\iris\Raytracer.h">
+      <Filter>raytracing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\iris\Pathtracer.h">
+      <Filter>raytracing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\iris\rayop.h">
+      <Filter>raytracing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\iris\Object3D.h">
+      <Filter>scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\iris\Scene.h">
+      <Filter>scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\iris\Camera.h">
+      <Filter>scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\iris\Composer.h">
+      <Filter>composition</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\iris\Image.h">
+      <Filter>composition</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\iris\iris.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="light">
+      <UniqueIdentifier>{4e25d4c7-5394-4f66-85af-f16cce678b3e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ray">
+      <UniqueIdentifier>{76c154c6-30f2-443e-b9ee-5fba537f2b19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="material">
+      <UniqueIdentifier>{8efa9140-c38b-4133-8d0a-e24c5dbc7bd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="types">
+      <UniqueIdentifier>{b19a536a-dee5-4c67-a23b-6308e0257b2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="utility">
+      <UniqueIdentifier>{79cb9ab1-1086-42eb-a7c1-2464f4fbd252}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sampling">
+      <UniqueIdentifier>{b62d62d0-807e-481a-abea-a8bd5247b13f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="geometry">
+      <UniqueIdentifier>{ce01ed08-9480-466b-b384-fac1bcb11c53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="raytracing">
+      <UniqueIdentifier>{e1e0188f-0102-41ec-980c-4a0f73aa3b3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="scene">
+      <UniqueIdentifier>{7986cf13-2f4c-4ab6-b490-5bb5755dfe2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="composition">
+      <UniqueIdentifier>{9130ef38-5597-426f-bfb7-3698e8d62018}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\Ray.cpp">
+      <Filter>ray</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\SphereSurface.cpp">
+      <Filter>geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\SphereLight.cpp">
+      <Filter>light</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LambertMaterial.cpp">
+      <Filter>material</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Texture.cpp">
+      <Filter>material</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\math.cpp">
+      <Filter>utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Material.cpp">
+      <Filter>material</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Light.cpp">
+      <Filter>light</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\NaiveSampler.cpp">
+      <Filter>sampling</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\PlaneGeometry.cpp">
+      <Filter>geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Raycast.cpp">
+      <Filter>ray</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Pathtracer.cpp">
+      <Filter>raytracing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\rayop.cpp">
+      <Filter>raytracing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Object3D.cpp">
+      <Filter>scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Scene.cpp">
+      <Filter>scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Camera.cpp">
+      <Filter>scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Composer.cpp">
+      <Filter>composition</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Image.cpp">
+      <Filter>composition</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
