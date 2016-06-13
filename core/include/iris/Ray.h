@@ -3,13 +3,13 @@
 /**
  * @file Ray.h
  * @author Raoul Harel
- * @url github.com/rharel/cpp-pathtracer
+ * @url github.com/rharel/cpp-raytracer
  *
  * Ray class.
  */
 
 
-#include <iris/VectorTypes.h>
+#include <iris/vector_types.h>
 
 
 namespace iris
