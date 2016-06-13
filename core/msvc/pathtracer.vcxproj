@@ -119,6 +119,7 @@
     <ClInclude Include="..\include\iris\Pathtracer.h" />
     <ClInclude Include="..\include\iris\PlaneGeometry.h" />
     <ClInclude Include="..\include\iris\random.h" />
+    <ClInclude Include="..\include\iris\RandomSampler.h" />
     <ClInclude Include="..\include\iris\Ray.h" />
     <ClInclude Include="..\include\iris\Raycast.h" />
     <ClInclude Include="..\include\iris\rayop.h" />
@@ -148,6 +149,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\src\PlaneGeometry.cpp" />
+    <ClCompile Include="..\src\RandomSampler.cpp" />
     <ClCompile Include="..\src\Ray.cpp" />
     <ClCompile Include="..\src\Raycast.cpp" />
     <ClCompile Include="..\src\rayop.cpp" />

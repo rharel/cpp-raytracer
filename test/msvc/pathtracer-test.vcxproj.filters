@@ -45,6 +45,9 @@
     <ClCompile Include="..\src\unit\Object3DTest.cpp">
       <Filter>unit\scene</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\unit\RandomSamplerTest.cpp">
+      <Filter>unit\sampling</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="unit">

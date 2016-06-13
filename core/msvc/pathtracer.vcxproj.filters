@@ -80,6 +80,9 @@
       <Filter>composition</Filter>
     </ClInclude>
     <ClInclude Include="..\include\iris\iris.h" />
+    <ClInclude Include="..\include\iris\RandomSampler.h">
+      <Filter>sampling</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="light">
@@ -167,6 +170,9 @@
     </ClCompile>
     <ClCompile Include="..\src\Image.cpp">
       <Filter>composition</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\RandomSampler.cpp">
+      <Filter>sampling</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
