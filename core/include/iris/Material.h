@@ -20,19 +20,6 @@ namespace iris
     class Material
     {
         public:
-        static Material null;
-
-        /**
-         * Creates the null material./
-         */
-        Material();
-        /**
-         * Creates a new material with given id.
-         *
-         * @note id = -1 is reserved for the null material.
-         */
-        Material(int id);
-
         /**
          * Evaluates the BRDF's integral.
          */
@@ -52,16 +39,8 @@ namespace iris
             const Vector3& Wo
         ) const;
 
-        /**
-         * Gets id.
-         */
-        int id() const;
-
         bool operator==(const Material& other) const;
         bool operator!=(const Material& other) const;
-
-        private:
-        int id_;
     };
 }
 

@@ -21,15 +21,17 @@ namespace iris
     {
         public:
         /**
-         * Creates the null material./
+         * Creates material with default albedo (white)./
          */
         LambertMaterial();
         /**
-         * Creates a new material with given id and albedo.
-         *
-         * @note id = -1 is reserved for the null material.
+         * Creates material with grey-scale albedo.
          */
-        LambertMaterial(int id, const Vector3& albedo);
+        LambertMaterial(float color);
+        /**
+         * Creates material with given albedo.
+         */
+        LambertMaterial(float r, float g, float b);
 
         /**
          * Evaluates the BRDF's integral.

@@ -22,24 +22,21 @@ namespace iris
     class Texture
     {
         public:
-        static const Texture null;
+        static const Material default_material;
 
         /**
-         * Creates the null texture./
+         * Creates default white texture./
          */
         Texture();
         /**
-         * Creates a new texture with given id.
+         * Creates a new texture.
          *
          * @param width   Horizontal resolution.
          * @param height  Vertical resolution.
          * @param pattern Array of width * height material pointers.
-         *
-         * @note id = -1 is reserved for the null texture.
          */
         Texture
         (
-            int id,
             size_t x, size_t y,
             std::initializer_list<const Material*> pattern
         );
@@ -50,10 +47,6 @@ namespace iris
         const Material& sample(float u, float v) const;
 
         /**
-         * Gets id.
-         */
-        int id() const;
-        /**
          * Gets resolution.
          */
         const Vector2u& resolution() const;
@@ -62,7 +55,6 @@ namespace iris
         bool operator!=(const Texture& other) const;
 
         private:
-        int id_;
         Vector2u resolution_;
         std::vector<const Material*> pattern_;
     };

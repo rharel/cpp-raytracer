@@ -1,5 +1,6 @@
 #include "../../lib/catch.hpp"
 
+#include <iris/LambertMaterial.h>
 #include <iris/Texture.h>
 
 
@@ -8,17 +9,17 @@ using namespace iris;
 
 TEST_CASE("texture", "[texture]")
 {
-    const Material m0(0), m1(1), m2(2), m3(3), m4(4), m5(5);
+    const LambertMaterial m0(0), m1(1), m2(2), m3(3), m4(4), m5(5);
     const Texture a;
-    const Texture b(0, 2, 3, {&m0, &m1, &m2, &m3, &m4, &m5});
+    const Texture b(2, 3, {&m0, &m1, &m2, &m3, &m4, &m5});
 
-    REQUIRE(Texture::null.id() < 0);
-    REQUIRE(a.id() == Texture::null.id());
-    REQUIRE(a == Texture::null);
-    REQUIRE(a.sample(0.5f, 0.5f) == Material::null);
+    REQUIRE(a == a);
+    REQUIRE(b == b);
+    REQUIRE(a != b);
 
-    REQUIRE(b.id() == 0);
-    REQUIRE(b != Texture::null);
+    REQUIRE(a.resolution() == Vector2u(1, 1));
+    REQUIRE(a.sample(0.5f, 0.5f) == Texture::default_material);
+
     REQUIRE(b.resolution() == Vector2u(2, 3));
 
     const float dx = 1.0f / static_cast<float>(b.resolution().x);

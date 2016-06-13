@@ -4,21 +4,18 @@
 using namespace iris;
 
 
-Material Material::null;
-
-Material::Material()
-    : Material(-1) {}
-Material::Material(const int id)
-    : id_(id) {}
-
-int Material::id() const
+Vector3 Material::brdf() const
 {
-    return id_;
+    return Vector3(0);
+}
+Vector3 Material::brdf(const Vector3&, const Vector3&) const
+{
+    return Vector3(0);
 }
 
 bool Material::operator==(const Material& other) const
 {
-    return this->id() == other.id();
+    return this == &other;
 }
 bool Material::operator!=(const Material& other) const
 {
