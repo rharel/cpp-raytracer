@@ -1,9 +1,8 @@
 #ifndef IRIS_MATH_H
 #define IRIS_MATH_H
 /**
- * @file math.h
  * @author Raoul Harel
- * @url github.com/rharel/cpp-pathtracer
+ * @url github.com/rharel/cpp-raytracer
  *
  * Math utility methods.
  */
