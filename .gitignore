@@ -16,3 +16,6 @@ bin/
 # VS intermediate files
 Debug/
 Release/
+
+# Demo output
+demo/img/
