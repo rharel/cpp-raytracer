@@ -38,9 +38,21 @@ namespace iris
     class Sampler
     {
         public:
+        /**
+         * Resets sampler state.
+         */
         virtual void reset() = 0;
+        /**
+         * Checks if there are more samples to be output.
+         */
         virtual bool has_next() const = 0;
+        /**
+         * Yields the next sample in pixel-normalized coordinates.
+         */
         virtual Vector2 next() = 0;
+        /**
+         * Processses the traced ray color for the last output sample.
+         */
         virtual void report(const Vector3& color) = 0;
     };
 }
