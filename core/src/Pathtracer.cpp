@@ -22,8 +22,9 @@ Vector3 Pathtracer::trace(const Ray& ray, const Scene& scene) const
     Raycast collision(ray); 
     scene.raycast(collision);
 
-    if (!collision.hit()) { return Vector3(1, 0, 0); }
-    return Vector3(0, 1, 0);
+    if (!collision.hit()) { return horizon(); }
+
+    return collision.material().brdf();
 }
 const Vector3& Pathtracer::horizon() const
 {
