@@ -25,7 +25,7 @@ TEST_CASE("texture", "[texture]")
     const float dx = 1.0f / static_cast<float>(b.resolution().x);
     const float dy = 1.0f / static_cast<float>(b.resolution().y);
 
-    SECTION("sampling inside [0, 1]")
+    SECTION("sampling inside (0, 1)")
     {
         REQUIRE(b.sample(0.1f * dx, 0.1f * dy) == m0);
         REQUIRE(b.sample(1.1f * dx, 0.1f * dy) == m1);
@@ -34,7 +34,7 @@ TEST_CASE("texture", "[texture]")
         REQUIRE(b.sample(0.1f * dx, 2.1f * dy) == m4);
         REQUIRE(b.sample(1.1f * dx, 2.1f * dy) == m5);
     }
-    SECTION("sampling outside [0, 1]")
+    SECTION("sampling outside (0, 1)")
     {
         REQUIRE(b.sample(-3 + 0.1f * dx, 3 + 0.1f * dy) == m0);
         REQUIRE(b.sample(-3 + 1.1f * dx, 3 + 0.1f * dy) == m1);
@@ -42,5 +42,9 @@ TEST_CASE("texture", "[texture]")
         REQUIRE(b.sample(-3 + 1.1f * dx, 3 + 1.1f * dy) == m3);
         REQUIRE(b.sample(-3 + 0.1f * dx, 3 + 2.1f * dy) == m4);
         REQUIRE(b.sample(-3 + 1.1f * dx, 3 + 2.1f * dy) == m5);
+    }
+    SECTION("sampling at (0, 0) and (1, 1)")
+    {
+        REQUIRE(b.sample(1, 1) == b.sample(0, 0));
     }
 }
