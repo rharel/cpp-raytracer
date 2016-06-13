@@ -13,6 +13,10 @@ const Ray& Raycast::ray() const
 {
     return ray_;
 }
+void Raycast::ray(const Ray& value)
+{
+    ray_ = value;
+}
 
 bool Raycast::hit() const
 {

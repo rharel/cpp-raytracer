@@ -32,9 +32,13 @@ namespace iris
         Raycast(const Ray& ray);
 
         /**
-         * Gets ray query.
+         * Gets ray.
          */
         const Ray& ray() const;
+        /**
+         * Set ray.
+         */
+        void ray(const Ray& value);
 
         /**
          * Check whether time() > 0.
