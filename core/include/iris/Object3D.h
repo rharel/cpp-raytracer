@@ -121,14 +121,15 @@ namespace iris
          * Gets rotation.
          */
         const Vector3& rotation() const;
+        
         /**
          * Gets local transform.
          */
-        const Matrix4& local_matrix() const;
+        const Matrix4& matrix() const;
         /**
          * Gets local transform inverse.
          */
-        const Matrix4& local_matrix_inverse() const;
+        const Matrix4& matrix_inverse() const;
         /**
          * Gets global transform.
          */
@@ -137,6 +138,18 @@ namespace iris
          * Gets global transform inverse.
          */
         const Matrix4& world_matrix_inverse() const;
+        /**
+         * Gets world translation.
+         */
+        const Vector3& world_translation() const;
+        /**
+         * Gets world rotation.
+         */
+        const Matrix4& world_rotation_matrix() const;
+        /**
+         * Gets world rotation inverse.
+         */
+        const Matrix4& world_rotation_matrix_inverse() const;
 
         /**
          * Updates transformation matrices of this and all descendants.
@@ -160,6 +173,9 @@ namespace iris
         Matrix4 local_matrix_inverse_ = Matrix4(1);
         Matrix4 world_matrix_ = Matrix4(1);
         Matrix4 world_matrix_inverse_ = Matrix4(1);
+        Vector3 world_translation_ = Vector3(0);
+        Matrix4 world_rotation_matrix_ = Matrix4(1);
+        Matrix4 world_rotation_matrix_inverse_ = Matrix4(1);
     };
 }
 

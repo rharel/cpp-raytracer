@@ -23,7 +23,29 @@ Object3D::Object3D
 void Object3D::raycast(Raycast& result) const
 {
     if (!geometry_ || !texture_) { return; }
-    else { return geometry_->raycast(result); }
+
+    Ray global = result.ray();
+    Ray local
+    (
+        result.ray().origin() - world_translation(), 
+        Vector3
+        (
+            world_rotation_matrix_inverse() * 
+            Vector4(result.ray().direction(), 1)
+        )
+    );
+    
+    result.ray(local);
+    geometry_->raycast(result); 
+    if (result.hit())
+    {
+        result.contact(texture_->sample
+        (
+            result.u(), 
+            result.v()
+        ));
+    }
+    result.ray(global);
 }
 
 bool Object3D::has_child(Object3D& target) const
@@ -130,11 +152,11 @@ const Vector3& Object3D::rotation() const
     return rotation_;
 }
 
-const Matrix4& Object3D::local_matrix() const
+const Matrix4& Object3D::matrix() const
 {
     return local_matrix_;
 }
-const Matrix4& Object3D::local_matrix_inverse() const
+const Matrix4& Object3D::matrix_inverse() const
 {
     return local_matrix_inverse_;
 }
@@ -145,6 +167,18 @@ const Matrix4& Object3D::world_matrix() const
 const Matrix4& Object3D::world_matrix_inverse() const
 {
     return world_matrix_inverse_;
+}
+const Vector3& Object3D::world_translation() const
+{
+    return world_translation_;
+}
+const Matrix4& Object3D::world_rotation_matrix() const
+{
+    return world_rotation_matrix_;
+}
+const Matrix4& Object3D::world_rotation_matrix_inverse() const
+{
+    return world_rotation_matrix_inverse_;
 }
 
 void Object3D::update()
@@ -163,7 +197,7 @@ void Object3D::update()
 
     if (has_parent())
     {
-        world_matrix_ = parent().world_matrix() * this->local_matrix();
+        world_matrix_ = parent().world_matrix() * this->matrix();
         world_matrix_inverse_ = glm::inverse(world_matrix_);
     }
     else 
@@ -171,6 +205,12 @@ void Object3D::update()
         world_matrix_ = local_matrix_; 
         world_matrix_inverse_ = local_matrix_inverse_;
     }
+
+    world_translation_ = Vector3(world_matrix_[3]);
+    
+    world_rotation_matrix_ = world_matrix_;
+    world_rotation_matrix_[3] = Vector4(0, 0, 0, 1);
+    world_rotation_matrix_inverse_ = glm::inverse(world_rotation_matrix_);
 
     for (Object3D* child : children_)
     {

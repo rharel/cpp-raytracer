@@ -17,7 +17,7 @@ TEST_CASE("object3d", "[object3d]")
     REQUIRE_FALSE(a.has_descendant(a));
     REQUIRE(a.child_count() == 0);
 
-    REQUIRE(a.local_matrix() == Matrix4(1));
+    REQUIRE(a.matrix() == Matrix4(1));
     REQUIRE(a.world_matrix() == Matrix4(1));
 
     SECTION("child addition")
@@ -66,9 +66,9 @@ TEST_CASE("object3d", "[object3d]")
         c.scale() = Vector3(1, 1, 2);
         a.update();
 
-        const Matrix4& T = a.local_matrix();
-        const Matrix4& R = b.local_matrix();
-        const Matrix4& S = c.local_matrix();
+        const Matrix4& T = a.matrix();
+        const Matrix4& R = b.matrix();
+        const Matrix4& S = c.matrix();
         const Matrix4& W = c.world_matrix();
 
         const Vector4 v(1);
