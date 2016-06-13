@@ -9,6 +9,23 @@
 using namespace iris;
 
 
+Object3D::Object3D()
+    : geometry_(nullptr), 
+      texture_(nullptr) {}
+Object3D::Object3D
+(
+    const Geometry& geometry, 
+    const Texture& texture
+)
+    : geometry_(&geometry), 
+      texture_(&texture) {}
+
+void Object3D::raycast(Raycast& result) const
+{
+    if (!geometry_ || !texture_) { return; }
+    else { return geometry_->raycast(result); }
+}
+
 bool Object3D::has_child(Object3D& target) const
 {
     return children_.find(&target) != children_.end();

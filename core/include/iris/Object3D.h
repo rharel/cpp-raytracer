@@ -8,7 +8,10 @@
  */
 
 
+#include <iris/Geometry.h>
 #include <iris/matrix_types.h>
+#include <iris/Raycast.h>
+#include <iris/Texture.h>
 #include <iris/vector_types.h>
 
 #include <unordered_set>
@@ -22,6 +25,31 @@ namespace iris
     class Object3D
     {
         public:
+        /**
+         * Creates an empty object.
+         */
+        Object3D();
+        /**
+         * Creates a new textured geometry object.
+         */
+        Object3D
+        (
+            const Geometry& geometry, 
+            const Texture& texture
+        );
+        
+        /**
+         * Checks for ray-surface intersection.
+         *
+         * @param[in, out] result Raycast result description.
+         *
+         * @details
+         *  Call t_max = result.time(). 
+         *  Checks for ray-surface intersections in t within (0, t_max).
+         *  if t_max <= 0 than looks for any intersection in t > 0.
+         */
+        void raycast(Raycast& result) const;
+
         /**
          * Checks if target is a child of this.
          */
@@ -119,6 +147,9 @@ namespace iris
         bool operator!=(const Object3D& other) const;
 
         private:
+        const Geometry* geometry_;
+        const Texture* texture_;
+
         Object3D* parent_ = nullptr;
         std::unordered_set<Object3D*> children_;
 
