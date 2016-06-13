@@ -23,19 +23,19 @@ namespace iris
         /**
          * Resets sampler state.
          */
-        void reset();
+        void reset() override;
         /**
          * Checks if there are more samples to be output.
          */
-        bool has_next() const;
+        bool has_next() const override;
         /**
          * Yields the next sample in pixel-normalized coordinates.
          */
-        Vector2 next();
+        Vector2 next() override;
         /**
          * Processses the traced ray color for the last output sample.
          */
-        void report(const Vector3& color);
+        void report(const Vector3& color) override;
 
         private:
         bool has_next_ = true;
