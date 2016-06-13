@@ -1,9 +1,9 @@
 #ifndef IRIS_VECTOR_TYPES_H
 #define IRIS_VECTOR_TYPES_H
 /**
- * @file VectorTypes.h
+ * @file vector_types.h
  * @author Raoul Harel
- * @url github.com/rharel/cpp-pathtracer
+ * @url github.com/rharel/cpp-raytracer
  *
  * Vector type definitions.
  */

@@ -1,9 +1,9 @@
 #ifndef IRIS_MATRIX_TYPES_H
 #define IRIS_MATRIX_TYPES_H
 /**
- * @file MatrixTypes.h
+ * @file matrix_types.h
  * @author Raoul Harel
- * @url github.com/rharel/cpp-pathtracer
+ * @url github.com/rharel/cpp-raytracer
  *
  * Matrix type definitions.
  */
