@@ -8,6 +8,7 @@ Thumbs.db
 *.suo
 *.user
 *.VC.db
+*.VC.opendb
 
 # Build output
 bin/
