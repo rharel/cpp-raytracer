@@ -17,6 +17,7 @@
 
 #include <iris/Sampler.h>
 #include <iris/NaiveSampler.h>
+#include <iris/RandomSampler.h>
 #include <iris/sample_aggregators.h>
 
 #include <iris/Raytracer.h>
