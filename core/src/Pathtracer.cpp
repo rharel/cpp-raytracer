@@ -1,14 +1,10 @@
 #include <iris/Pathtracer.h>
-#include <iris/random.h>
-#include <iris/rayop.h>
 
 #include <glm/common.hpp>
-#include <glm/geometric.hpp>
 
 
 using namespace iris;
 using glm::clamp;
-using glm::normalize;
 
 
 Pathtracer::Pathtracer()
