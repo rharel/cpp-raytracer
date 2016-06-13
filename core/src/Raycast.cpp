@@ -31,6 +31,14 @@ const Vector3& Raycast::normal() const
 {
     return normal_;
 }
+float Raycast::u() const
+{
+    return uv_.x;
+}
+float Raycast::v() const
+{
+    return uv_.y;
+}
 const Vector2& Raycast::uv() const
 {
     return uv_;

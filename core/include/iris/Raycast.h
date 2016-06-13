@@ -54,6 +54,14 @@ namespace iris
          */
         const Vector3& normal() const;
         /**
+         * Gets contact u texture coordinate.
+         */
+        float u() const;
+        /**
+         * Gets contact v texture coordinate.
+         */
+        float v() const;
+        /**
          * Gets contact (u, v) texture coordinates.
          */
         const Vector2& uv() const;

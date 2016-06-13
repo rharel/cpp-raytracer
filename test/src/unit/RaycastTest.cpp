@@ -37,6 +37,8 @@ TEST_CASE("raycast", "[raycast]")
         REQUIRE(c.time() == t);
         REQUIRE(c.normal() == n);
         REQUIRE(c.uv() == uv);
+        REQUIRE(c.u() == uv.x);
+        REQUIRE(c.v() == uv.y);
         REQUIRE(c.material() == m);
         REQUIRE(c.point() == ray.origin() + t * ray.direction());
     }
