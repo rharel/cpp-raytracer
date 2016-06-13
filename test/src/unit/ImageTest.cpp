@@ -21,11 +21,11 @@ TEST_CASE("image", "[image]")
     REQUIRE(a.size() == 0);
 
     REQUIRE(b.width() == 0);
-    REQUIRE(b.height() == h);
+    REQUIRE(b.height() == 0);
     REQUIRE(b.is_empty());
     REQUIRE(b.size() == 0);
 
-    REQUIRE(c.width() == w);
+    REQUIRE(c.width() == 0);
     REQUIRE(c.height() == 0);
     REQUIRE(c.is_empty());
     REQUIRE(c.size() == 0);

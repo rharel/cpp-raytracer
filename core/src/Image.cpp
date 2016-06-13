@@ -9,7 +9,16 @@ using namespace iris;
 Image::Image()
     : Image(0, 0) {}
 Image::Image(const size_t width, const size_t height)
-    : data_(height, std::vector<Vector3>(width)) {}
+{
+    if (width == 0 || height == 0)
+    {
+        data_.resize(0);
+    }
+    else
+    {
+        data_.resize(height, std::vector<Vector3>(width));
+    }
+}
 
 bool Image::is_empty() const
 {

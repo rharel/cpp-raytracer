@@ -27,6 +27,9 @@ namespace iris
         Image();
         /**
          * Creates image with given dimensions.
+         *
+         * @note If width or height are zero, the image degenerates
+         *       into a 0x0 one.
          */
         Image(size_t width, size_t height);
 
