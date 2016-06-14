@@ -8,6 +8,7 @@ using namespace iris;
 
 
 NaiveSampler Composer::default_sampler;
+UniformAggregator Composer::default_aggregator;
 Pathtracer Composer::default_tracer(3);
 
 Composer::Composer
@@ -19,18 +20,21 @@ Composer::Composer
 (
     width, height, 
     scene, camera, 
-    default_sampler, default_tracer
+    default_sampler, default_aggregator, 
+    default_tracer
 ) {}
 
 Composer::Composer
 (
     const size_t width, const size_t height,
     const Scene& scene, const Camera& camera,
-    Sampler& sampler, const Raytracer& tracer
+    Sampler& sampler, const Aggregator& aggregator,
+    const Raytracer& tracer
 )
     : image_(width, height), 
       scene_(&scene), camera_(&camera), 
-      sampler_(&sampler), tracer_(&tracer) {}
+      sampler_(&sampler), aggregator_(&aggregator),
+      tracer_(&tracer) {}
 
 void Composer::render()
 {
@@ -65,7 +69,12 @@ void Composer::render_pixel
         colors.push_back(color);
     }
 
-    image_.pixel(x, y, aggregate::uniform(colors, samples));
+    const Vector3 average = aggregator_->operator()
+    (
+        &colors[0], &samples[0], 
+        colors.size()
+    );
+    image_.pixel(x, y, average);
 }
 Ray Composer::ray_through(const float x, const float y) const
 {

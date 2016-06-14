@@ -18,6 +18,7 @@
 
 #include <iris/Sampler.h>
 #include <iris/NaiveSampler.h>
+#include <iris/sample_aggregators.h>
 
 #include <iris/vector_types.h>
 
@@ -46,7 +47,8 @@ namespace iris
         (
             size_t image_width, size_t image_height,
             const Scene& scene, const Camera& camera,
-            Sampler& sampler, const Raytracer& tracer
+            Sampler& sampler, const Aggregator& aggregator,
+            const Raytracer& tracer
         );
 
         /*
@@ -61,6 +63,7 @@ namespace iris
 
         private:
         static NaiveSampler default_sampler;
+        static UniformAggregator default_aggregator;
         static Pathtracer default_tracer;
 
         /**
@@ -74,6 +77,7 @@ namespace iris
 
         Image image_;
         Sampler* sampler_;
+        const Aggregator* aggregator_;
 
         const Scene* scene_;
         const Camera* camera_;
