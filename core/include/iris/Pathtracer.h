@@ -66,6 +66,15 @@ namespace iris
         int max_depth() const;
 
         private:
+        Vector3 illuminate
+        (
+            const Scene& scene,
+            const Vector3& position,
+            const Vector3& normal,
+            const Material& material,
+            const Vector3& Wi
+        ) const;
+
         Vector3 horizon_;
         int max_depth_;
     };
