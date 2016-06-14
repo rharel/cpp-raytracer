@@ -10,7 +10,9 @@ using namespace iris;
 const Material Texture::default_material = LambertMaterial();
 
 Texture::Texture()
-    : Texture(1, 1, {&Texture::default_material}) {}
+    : Texture(Texture::default_material) {}
+Texture::Texture(const Material& material)
+    : Texture(1, 1, {&material}) {}
 Texture::Texture
 (
     const size_t width, const size_t height,

@@ -29,6 +29,10 @@ namespace iris
          */
         Texture();
         /**
+         * Creates a uniform texture.
+         */
+        Texture(const Material& material);
+        /**
          * Creates a new texture.
          *
          * @param width   Horizontal resolution.
