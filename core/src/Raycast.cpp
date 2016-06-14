@@ -20,7 +20,7 @@ void Raycast::ray(const Ray& value)
 
 bool Raycast::hit() const
 {
-    return time() >= 0.0f;
+    return time() > 0.0f;
 }
 Vector3 Raycast::point() const
 {
