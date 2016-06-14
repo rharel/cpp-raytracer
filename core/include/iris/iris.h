@@ -14,6 +14,7 @@
 
 #include <iris/Geometry.h>
 #include <iris/PlaneGeometry.h>
+#include <iris/SphereGeometry.h>
 
 #include <iris/Sampler.h>
 #include <iris/NaiveSampler.h>

@@ -8,9 +8,6 @@
     <ClCompile Include="..\src\unit\RayTest.cpp">
       <Filter>unit\ray</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\unit\SphereSurfaceTest.cpp">
-      <Filter>unit\geometry</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\unit\TextureTest.cpp">
       <Filter>unit\material</Filter>
     </ClCompile>
@@ -47,6 +44,9 @@
     </ClCompile>
     <ClCompile Include="..\src\unit\RandomSamplerTest.cpp">
       <Filter>unit\sampling</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\unit\SphereGeometryTest.cpp">
+      <Filter>unit\geometry</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

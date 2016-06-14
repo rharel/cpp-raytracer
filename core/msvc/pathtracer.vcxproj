@@ -129,7 +129,7 @@
     <ClInclude Include="..\include\iris\Scene.h" />
     <ClInclude Include="..\include\iris\Object3D.h" />
     <ClInclude Include="..\include\iris\SphereLight.h" />
-    <ClInclude Include="..\include\iris\SphereSurface.h" />
+    <ClInclude Include="..\include\iris\SphereGeometry.h" />
     <ClInclude Include="..\include\iris\Geometry.h" />
     <ClInclude Include="..\include\iris\Texture.h" />
     <ClInclude Include="..\include\iris\vector_types.h" />
@@ -156,9 +156,9 @@
     <ClCompile Include="..\src\Scene.cpp" />
     <ClCompile Include="..\src\Object3D.cpp" />
     <ClCompile Include="..\src\SphereLight.cpp" />
-    <ClCompile Include="..\src\SphereSurface.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    <ClCompile Include="..\src\SphereGeometry.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\src\Texture.cpp" />
   </ItemGroup>
