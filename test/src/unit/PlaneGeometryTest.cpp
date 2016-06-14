@@ -8,7 +8,6 @@
 using namespace iris;
 
 
-
 TEST_CASE("plane geometry", "[geometry][plane-geometry]")
 {
     const Vector2 texture_scale(0.5f, 2.0f);
