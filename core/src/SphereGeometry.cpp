@@ -64,8 +64,8 @@ void SphereGeometry::raycast(Raycast& result) const
     if (!solve_quadratic(1.0f, b, c, t0, t1)) { return; }
     if (t0 > t1) { std::swap(t0, t1); }
     
-    if (t0 < 0) { t0 = t1; }
-    if (t0 < 0) { return; }
+    if (t0 <= 0) { t0 = t1; }
+    if (t0 <= 0) { return; }
 
     const float t = t0;
     if (result.hit() && result.time() < t) { return; }
