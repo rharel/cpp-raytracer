@@ -80,9 +80,6 @@
     <Filter Include="unit\scene">
       <UniqueIdentifier>{4eb6921d-01bb-4b9c-9c62-ea2057988cb3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="unit\raytracing">
-      <UniqueIdentifier>{3fbfb359-bf1e-4cdf-9be8-51c4c6e15b8d}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\helpers.h" />

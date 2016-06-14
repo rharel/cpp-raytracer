@@ -22,6 +22,7 @@
 #include <iris/JitterSampler.h>
 
 #include <iris/Raytracer.h>
+#include <iris/NaiveTracer.h>
 #include <iris/Pathtracer.h>
 
 #include <iris/Scene.h>
