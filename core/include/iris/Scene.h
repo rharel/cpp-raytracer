@@ -9,6 +9,8 @@
 
 
 #include <iris/Object3D.h>
+#include <iris/Light.h>
+#include <iris/Raycast.h>
 
 #include <unordered_set>
 
@@ -25,7 +27,11 @@ namespace iris
          * Adds object to scene.
          */
         void add(const Object3D& object);
-        
+        /**
+         * Adds light to scene.
+         */
+        void add_light(const Light& light);
+
         /**
          * Checks for ray-surface intersection.
          *
@@ -37,9 +43,23 @@ namespace iris
          *  if t_max <= 0 than looks for any intersection in t > 0.
          */
         void raycast(Raycast& result) const;
-        
+        /**
+         * Checks if a ray a -> b hits an obstruction before reaching b.
+         */
+        bool is_visible(const Vector3& a, const Vector3& b) const;
+
+        /**
+         * Light count.
+         */
+        size_t light_count() const;
+        /**
+         * Gets light at index.
+         */
+        const Light& light(size_t index) const;
+
         private:
         std::unordered_set<const Object3D*> objects_;
+        std::unordered_set<const Light*> lights_;
     };
 }
 
