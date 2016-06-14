@@ -4,7 +4,7 @@
  * @author Raoul Harel
  * @url github.com/rharel/cpp-raytracer
  *
- * Pathtracer class.
+ * PathTracer class.
  */
 
 
@@ -19,19 +19,19 @@ namespace iris
     /**
      * Traces rays through the scene.
      */
-    class Pathtracer : public Raytracer
+    class PathTracer : public Raytracer
     {
         public:
         /**
          * Creates default tracer.
          */
-        Pathtracer();
+        PathTracer();
         /**
          * Creates tracer with given horizon color.
          *
          * @param horizon Horizon color.
          */
-        Pathtracer(const Vector3& horizon);
+        PathTracer(const Vector3& horizon);
         /**
          * Creates a tracer with given maximum ray
          * bounce limit.
@@ -40,7 +40,7 @@ namespace iris
          *                  If < 0, will trace until ray weight is near
          *                  zero.
          */
-        Pathtracer(int max_depth);
+        PathTracer(int max_depth);
         /**
          * Creates tracer with given parameters.
          *
@@ -49,7 +49,7 @@ namespace iris
          *                  If < 0, will trace until ray weight is near
          *                  zero.
          */
-        Pathtracer(const Vector3& horizon, int max_depth);
+        PathTracer(const Vector3& horizon, int max_depth);
 
         /**
          * Traces a ray through the scene.

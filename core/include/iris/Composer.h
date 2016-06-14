@@ -14,7 +14,7 @@
 
 #include <iris/Ray.h>
 #include <iris/Raytracer.h>
-#include <iris/Pathtracer.h>
+#include <iris/PathTracer.h>
 
 #include <iris/Sampler.h>
 #include <iris/NaiveSampler.h>
@@ -64,7 +64,7 @@ namespace iris
         private:
         static NaiveSampler default_sampler;
         static UniformAggregator default_aggregator;
-        static Pathtracer default_tracer;
+        static PathTracer default_tracer;
 
         /**
          * Renders a pixel.

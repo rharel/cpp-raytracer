@@ -118,7 +118,7 @@
     <ClInclude Include="..\include\iris\matrix_types.h" />
     <ClInclude Include="..\include\iris\NaiveSampler.h" />
     <ClInclude Include="..\include\iris\NaiveTracer.h" />
-    <ClInclude Include="..\include\iris\Pathtracer.h" />
+    <ClInclude Include="..\include\iris\PathTracer.h" />
     <ClInclude Include="..\include\iris\PlaneGeometry.h" />
     <ClInclude Include="..\include\iris\random.h" />
     <ClInclude Include="..\include\iris\RandomSampler.h" />
@@ -147,7 +147,7 @@
     <ClCompile Include="..\src\math.cpp" />
     <ClCompile Include="..\src\NaiveSampler.cpp" />
     <ClCompile Include="..\src\NaiveTracer.cpp" />
-    <ClCompile Include="..\src\Pathtracer.cpp">
+    <ClCompile Include="..\src\PathTracer.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClCompile>

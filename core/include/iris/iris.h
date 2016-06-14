@@ -23,7 +23,7 @@
 
 #include <iris/Raytracer.h>
 #include <iris/NaiveTracer.h>
-#include <iris/Pathtracer.h>
+#include <iris/PathTracer.h>
 
 #include <iris/Scene.h>
 #include <iris/Camera.h>

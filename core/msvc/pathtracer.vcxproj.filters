@@ -49,9 +49,6 @@
     <ClInclude Include="..\include\iris\Raytracer.h">
       <Filter>raytracing</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\iris\Pathtracer.h">
-      <Filter>raytracing</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\iris\rayop.h">
       <Filter>raytracing</Filter>
     </ClInclude>
@@ -84,6 +81,9 @@
       <Filter>utility</Filter>
     </ClInclude>
     <ClInclude Include="..\include\iris\NaiveTracer.h">
+      <Filter>raytracing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\iris\PathTracer.h">
       <Filter>raytracing</Filter>
     </ClInclude>
   </ItemGroup>
@@ -150,9 +150,6 @@
     <ClCompile Include="..\src\Raycast.cpp">
       <Filter>ray</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Pathtracer.cpp">
-      <Filter>raytracing</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\rayop.cpp">
       <Filter>raytracing</Filter>
     </ClCompile>
@@ -184,6 +181,9 @@
       <Filter>utility</Filter>
     </ClCompile>
     <ClCompile Include="..\src\NaiveTracer.cpp">
+      <Filter>raytracing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\PathTracer.cpp">
       <Filter>raytracing</Filter>
     </ClCompile>
   </ItemGroup>

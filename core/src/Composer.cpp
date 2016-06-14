@@ -9,7 +9,7 @@ using namespace iris;
 
 NaiveSampler Composer::default_sampler;
 UniformAggregator Composer::default_aggregator;
-Pathtracer Composer::default_tracer(3);
+PathTracer Composer::default_tracer(3);
 
 Composer::Composer
 (
