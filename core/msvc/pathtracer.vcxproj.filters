@@ -43,9 +43,6 @@
     <ClInclude Include="..\include\iris\sample_aggregators.h">
       <Filter>sampling</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\iris\sample_aggregators.hpp">
-      <Filter>sampling</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\iris\PlaneGeometry.h">
       <Filter>geometry</Filter>
     </ClInclude>
@@ -172,6 +169,9 @@
       <Filter>composition</Filter>
     </ClCompile>
     <ClCompile Include="..\src\RandomSampler.cpp">
+      <Filter>sampling</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\sample_aggregators.cpp">
       <Filter>sampling</Filter>
     </ClCompile>
   </ItemGroup>

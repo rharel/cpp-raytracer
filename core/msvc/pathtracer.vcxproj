@@ -126,7 +126,6 @@
     <ClInclude Include="..\include\iris\Raytracer.h" />
     <ClInclude Include="..\include\iris\Sampler.h" />
     <ClInclude Include="..\include\iris\sample_aggregators.h" />
-    <ClInclude Include="..\include\iris\sample_aggregators.hpp" />
     <ClInclude Include="..\include\iris\Scene.h" />
     <ClInclude Include="..\include\iris\Object3D.h" />
     <ClInclude Include="..\include\iris\SphereLight.h" />
@@ -153,6 +152,7 @@
     <ClCompile Include="..\src\Ray.cpp" />
     <ClCompile Include="..\src\Raycast.cpp" />
     <ClCompile Include="..\src\rayop.cpp" />
+    <ClCompile Include="..\src\sample_aggregators.cpp" />
     <ClCompile Include="..\src\Scene.cpp" />
     <ClCompile Include="..\src\Object3D.cpp" />
     <ClCompile Include="..\src\SphereLight.cpp" />
