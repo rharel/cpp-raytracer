@@ -28,3 +28,43 @@ bool iris::solve_quadratic(
 
     return true; 
 }
+
+float iris::gaussian_2d
+(
+    const float x, const float y,
+    const float x0, const float y0,
+    const float sigma_x, const float sigma_y,
+    const float A
+)
+{
+    /**
+     * f(x, y) = A * exp(-a)
+     *
+     * Where:
+     *      a = a_x + a_y
+     *      a_x = ((x - x0)^2) / (2 * (s_x)^2)
+     *      a_y = ((y - y0)^2) / (2 * (s_y)^2)
+     */
+    const float a_x = 
+    (
+        pow(x - x0, 2) / 
+        (2 * pow(sigma_x, 2))
+    );
+    const float a_y = 
+    (
+        pow(y - y0, 2) / 
+        (2 * pow(sigma_y, 2))
+    );
+    const float a = a_x + a_y;
+    return A * exp(-a);
+}
+float iris::gaussian_2d_isotropic
+(
+    const float x, const float y,
+    const float x0, const float y0,
+    const float sigma
+)
+{
+    const float A = 1.0f / (2 * constant::m_pi * pow(sigma, 2));
+    return gaussian_2d(x, y, x0, y0, sigma, sigma, A);
+}
