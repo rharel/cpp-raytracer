@@ -16,6 +16,9 @@
 #include <iris/PlaneGeometry.h>
 #include <iris/SphereGeometry.h>
 
+#include <iris/Light.h>
+#include <iris/SphereLight.h>
+
 #include <iris/Sampler.h>
 #include <iris/NaiveSampler.h>
 #include <iris/RandomSampler.h>
