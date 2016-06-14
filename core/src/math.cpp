@@ -68,3 +68,14 @@ float iris::gaussian_2d_isotropic
     const float A = 1.0f / (2 * constant::m_pi * pow(sigma, 2));
     return gaussian_2d(x, y, x0, y0, sigma, sigma, A);
 }
+
+void iris::to_cartesian
+(
+    const float theta, const float phi,
+    float& x, float& y, float& z
+)
+{
+    x = sin(theta) * cos(phi);
+    y = sin(theta) * sin(phi);
+    z = cos(theta);
+}

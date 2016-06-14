@@ -90,6 +90,15 @@ namespace iris
         float x0, float y0,
         float sigma
     );
+
+    /**
+     * Computes cartesian coordinates from spherical.
+     */
+    void to_cartesian
+    (
+        float inclination, float azimuth,
+        float& x, float& y, float& z
+    );
 }
 
 

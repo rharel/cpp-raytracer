@@ -99,3 +99,14 @@ TEST_CASE("gaussian-2d-isotropic", "[math][gaussian][gaussian-2d-isotropic]")
     REQUIRE(gaussian_2d_isotropic(x, y, x0, y0, sigma) - 
             expected < 0.000001f);
 }
+TEST_CASE("spherical -> cartesian", "[math][to-cartesian]")
+{
+    const float theta = constant::m_pi, phi = 0.0f;
+    float x, y, z;
+
+    to_cartesian(theta, phi, x, y, z);
+
+    REQUIRE(x - 0 < 0.001f);
+    REQUIRE(y - 0 < 0.001f);
+    REQUIRE(z - 1 < 0.001f);
+}
