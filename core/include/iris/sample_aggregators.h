@@ -13,23 +13,51 @@
 
 namespace iris
 {
-    namespace aggregate
+    class Aggregator
     {
-        template
-        <
-            typename Vector3Iterable,
-            typename Vector2Iterable
-        >
-        Vector3 uniform
+        public:
+        virtual Vector3 operator()
         (
-            Vector3Iterable colors, 
-            Vector2Iterable samples
-        );
-    }
+            const Vector3 colors[],
+            const Vector2 samples[],
+            size_t n
+        ) const = 0;
+    };
+
+    /**
+        * Computes the color average with uniform weights.
+        */
+    class UniformAggregator : public Aggregator
+    {
+        public:
+        Vector3 operator()
+        (
+            const Vector3 colors[],
+            const Vector2 samples[],
+            size_t n
+        ) const override;
+    };
+    /**
+     * Computes the color average with gaussien weights 
+     * based on distance to pixel center.
+     */
+    class GaussianAggregator : public Aggregator
+    {
+        public:
+        GaussianAggregator();
+        GaussianAggregator(float sigma);
+
+        Vector3 operator()
+        (
+            const Vector3 colors[],
+            const Vector2 samples[],
+            size_t n
+        ) const override;
+
+        private:
+        float sigma_;
+    };
 }
-
-
-#include <iris/sample_aggregators.hpp>
 
 
 #endif  // IRIS_SAMPLE_AGGREGATORS_H

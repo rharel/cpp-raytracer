@@ -8,7 +8,7 @@
 using namespace iris;
 
 
-TEST_CASE("uniform aggregator", "[aggregate][uniform-aggregate]")
+TEST_CASE("uniform aggregator", "[aggregator][uniform-aggregate]")
 {
     std::vector<Vector3> colors
     { 
@@ -16,7 +16,7 @@ TEST_CASE("uniform aggregator", "[aggregate][uniform-aggregate]")
         Vector3(0, 1, 1)
     };
     std::vector<Vector2> samples(colors.size());
-
-    REQUIRE(aggregate::uniform(colors, samples) == 
+    UniformAggregator a;
+    REQUIRE(a(&colors[0], &samples[0], colors.size()) == 
             Vector3(0.5f, 1, 0.5f));
 }
