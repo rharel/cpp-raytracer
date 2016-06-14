@@ -20,9 +20,21 @@ Object3D::Object3D
     : geometry_(&geometry), 
       texture_(&texture) {}
 
+bool Object3D::is_empty() const
+{
+    return !geometry_ || !texture_;
+}
+
 void Object3D::raycast(Raycast& result) const
 {
-    if (!geometry_ || !texture_) { return; }
+    if (is_empty())
+    { 
+        for (const Object3D* child : children_)
+        {
+            child->raycast(result);
+        }
+        return;
+    }
 
     Ray global = result.ray();
     Ray local
@@ -36,8 +48,12 @@ void Object3D::raycast(Raycast& result) const
     );
     
     result.ray(local);
+    const bool hit_before = result.hit();
+    const float t_before = result.time();
     geometry_->raycast(result); 
-    if (result.hit())
+    const float t_now = result.time();
+    if (!hit_before || 
+        (hit_before && t_now < t_before))
     {
         result.contact(texture_->sample
         (

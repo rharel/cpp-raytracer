@@ -13,6 +13,7 @@ TEST_CASE("object3d", "[object3d]")
 {
     Object3D a, b, c;
 
+    REQUIRE(a.is_empty());
     REQUIRE_FALSE(a.has_parent());
     REQUIRE_FALSE(a.has_descendant(a));
     REQUIRE(a.child_count() == 0);

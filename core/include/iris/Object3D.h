@@ -39,6 +39,12 @@ namespace iris
         );
         
         /**
+         * Checks whether this object has no geometry/texture
+         * associated with it.
+         */
+        bool is_empty() const;
+
+        /**
          * Checks for ray-surface intersection.
          *
          * @param[in, out] result Raycast result description.
