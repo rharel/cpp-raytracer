@@ -29,7 +29,8 @@ void PlaneGeometry::raycast(Raycast& result) const
     if (ND >= 0.0f) { return; }
     
     const float t = dot(-N, O - A) / ND;
-    
+    if (result.hit() && result.time() < t) { return; }
+
     const Vector3 P = ray.at(t);
     const Vector3 AP = P - A;
     const float u = dot(AP, U) / texture_scale().x;
