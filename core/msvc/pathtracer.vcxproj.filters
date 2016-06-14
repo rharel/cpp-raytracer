@@ -37,9 +37,6 @@
     <ClInclude Include="..\include\iris\matrix_types.h">
       <Filter>types</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\iris\sample_aggregators.h">
-      <Filter>sampling</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\iris\PlaneGeometry.h">
       <Filter>geometry</Filter>
     </ClInclude>
@@ -79,6 +76,12 @@
     </ClInclude>
     <ClInclude Include="..\include\iris\SphereGeometry.h">
       <Filter>geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\iris\JitterSampler.h">
+      <Filter>sampling</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\iris\aggregators.h">
+      <Filter>utility</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -168,11 +171,14 @@
     <ClCompile Include="..\src\RandomSampler.cpp">
       <Filter>sampling</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\sample_aggregators.cpp">
-      <Filter>sampling</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\SphereGeometry.cpp">
       <Filter>geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\JitterSampler.cpp">
+      <Filter>sampling</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\aggregators.cpp">
+      <Filter>utility</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -30,9 +30,6 @@
     <ClCompile Include="..\src\unit\NaiveSamplerTest.cpp">
       <Filter>unit\sampling</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\unit\sampleAggregatorsTest.cpp">
-      <Filter>unit\sampling</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\unit\CameraTest.cpp">
       <Filter>unit\scene</Filter>
     </ClCompile>
@@ -47,6 +44,12 @@
     </ClCompile>
     <ClCompile Include="..\src\unit\SphereGeometryTest.cpp">
       <Filter>unit\geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\unit\aggregatorsTest.cpp">
+      <Filter>unit\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\unit\JitterSamplerTest.cpp">
+      <Filter>unit\sampling</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

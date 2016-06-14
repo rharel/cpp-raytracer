@@ -19,7 +19,7 @@
 #include <iris/Sampler.h>
 #include <iris/NaiveSampler.h>
 #include <iris/RandomSampler.h>
-#include <iris/sample_aggregators.h>
+#include <iris/JitterSampler.h>
 
 #include <iris/Raytracer.h>
 #include <iris/Pathtracer.h>
@@ -30,6 +30,7 @@
 #include <iris/Image.h>
 #include <iris/Composer.h>
 
+#include <iris/aggregators.h>
 #include <iris/math.h>
 #include <iris/vector_types.h>
 #include <iris/matrix_types.h>

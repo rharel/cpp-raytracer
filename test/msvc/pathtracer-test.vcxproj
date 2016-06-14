@@ -116,6 +116,7 @@
     <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\unit\CameraTest.cpp" />
     <ClCompile Include="..\src\unit\ImageTest.cpp" />
+    <ClCompile Include="..\src\unit\JitterSamplerTest.cpp" />
     <ClCompile Include="..\src\unit\LambertMaterialTest.cpp" />
     <ClCompile Include="..\src\unit\LightTest.cpp" />
     <ClCompile Include="..\src\unit\mathTest.cpp" />
@@ -125,7 +126,7 @@
     <ClCompile Include="..\src\unit\RaycastTest.cpp" />
     <ClCompile Include="..\src\unit\RayTest.cpp" />
     <ClCompile Include="..\src\unit\Object3DTest.cpp" />
-    <ClCompile Include="..\src\unit\sampleAggregatorsTest.cpp" />
+    <ClCompile Include="..\src\unit\aggregatorsTest.cpp" />
     <ClCompile Include="..\src\unit\SphereLightTest.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>

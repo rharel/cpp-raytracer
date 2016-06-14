@@ -1,6 +1,6 @@
 #include "../../lib/catch.hpp"
 
-#include <iris/sample_aggregators.h>
+#include <iris/aggregators.h>
 
 #include <vector>
 

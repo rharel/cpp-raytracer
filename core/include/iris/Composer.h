@@ -18,7 +18,7 @@
 
 #include <iris/Sampler.h>
 #include <iris/NaiveSampler.h>
-#include <iris/sample_aggregators.h>
+#include <iris/aggregators.h>
 
 #include <iris/vector_types.h>
 

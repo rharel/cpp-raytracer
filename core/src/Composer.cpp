@@ -1,5 +1,5 @@
 #include <iris/Composer.h>
-#include <iris/sample_aggregators.h>
+#include <iris/aggregators.h>
 
 #include <vector>
 
