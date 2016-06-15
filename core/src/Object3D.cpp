@@ -39,7 +39,11 @@ void Object3D::raycast(Raycast& result) const
     Ray global = result.ray();
     Ray local
     (
-        result.ray().origin() - world_translation(), 
+        Vector3
+        (
+            world_matrix_inverse() * 
+            Vector4(result.ray().origin(), 1)
+        ), 
         Vector3
         (
             world_rotation_matrix_inverse() * 
@@ -50,10 +54,11 @@ void Object3D::raycast(Raycast& result) const
     result.ray(local);
     const bool hit_before = result.hit();
     const float t_before = result.time();
-    geometry_->raycast(result); 
+    geometry_->raycast(result);
+    const bool hit_now = result.hit();
     const float t_now = result.time();
-    if (!hit_before || 
-        (hit_before && t_now < t_before))
+    if ((!hit_before && hit_now) || 
+        ( hit_before && t_now < t_before))
     {
         result.contact(texture_->sample
         (
