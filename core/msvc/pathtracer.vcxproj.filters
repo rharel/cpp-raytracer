@@ -86,6 +86,9 @@
     <ClInclude Include="..\include\iris\PathTracer.h">
       <Filter>raytracing</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\iris\color.h">
+      <Filter>utility</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="light">
@@ -185,6 +188,9 @@
     </ClCompile>
     <ClCompile Include="..\src\PathTracer.cpp">
       <Filter>raytracing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\color.cpp">
+      <Filter>utility</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -115,6 +115,7 @@
     <ClCompile Include="..\src\helpers.cpp" />
     <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\unit\CameraTest.cpp" />
+    <ClCompile Include="..\src\unit\colorTest.cpp" />
     <ClCompile Include="..\src\unit\ImageTest.cpp" />
     <ClCompile Include="..\src\unit\JitterSamplerTest.cpp" />
     <ClCompile Include="..\src\unit\LambertMaterialTest.cpp" />

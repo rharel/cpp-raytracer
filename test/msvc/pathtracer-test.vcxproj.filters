@@ -51,6 +51,9 @@
     <ClCompile Include="..\src\unit\JitterSamplerTest.cpp">
       <Filter>unit\sampling</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\unit\colorTest.cpp">
+      <Filter>unit\utility</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="unit">
