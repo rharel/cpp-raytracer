@@ -9,7 +9,7 @@ NaiveTracer::NaiveTracer()
 NaiveTracer::NaiveTracer(const Vector3& horizon)
     : horizon_(horizon) {}
 
-Vector3 NaiveTracer::trace(const Ray& ray, const Scene& scene) const
+Vector3 NaiveTracer::trace(const Ray ray, const Scene& scene) const
 {
     Raycast collision(ray); 
     scene.raycast(collision);

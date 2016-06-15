@@ -24,7 +24,7 @@ namespace iris
         /**
          * Traces a ray through the scene.
          */
-        virtual Vector3 trace(const Ray& ray, const Scene& scene) const = 0;
+        virtual Vector3 trace(Ray ray, const Scene& scene) const = 0;
     };
 }
 

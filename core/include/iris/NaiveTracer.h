@@ -37,7 +37,7 @@ namespace iris
         /**
          * Traces a ray through the scene.
          */
-        Vector3 trace(const Ray& ray, const Scene& scene) const override;
+        Vector3 trace(Ray ray, const Scene& scene) const override;
 
         /**
          * Gets horizon color.

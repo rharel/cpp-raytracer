@@ -40,7 +40,7 @@ namespace iris
          *                  If < 0, will trace until ray weight is near
          *                  zero.
          */
-        PathTracer(int max_depth);
+        PathTracer(size_t max_depth);
         /**
          * Creates tracer with given parameters.
          *
@@ -49,12 +49,12 @@ namespace iris
          *                  If < 0, will trace until ray weight is near
          *                  zero.
          */
-        PathTracer(const Vector3& horizon, int max_depth);
+        PathTracer(const Vector3& horizon, size_t max_depth);
 
         /**
          * Traces a ray through the scene.
          */
-        Vector3 trace(const Ray& ray, const Scene& scene) const override;
+        Vector3 trace(Ray ray, const Scene& scene) const override;
 
         /**
          * Gets horizon color.
@@ -63,7 +63,7 @@ namespace iris
         /**
          * Gets max_depth.
          */
-        int max_depth() const;
+        size_t max_depth() const;
 
         private:
         Vector3 illuminate
@@ -76,7 +76,7 @@ namespace iris
         ) const;
 
         Vector3 horizon_;
-        int max_depth_;
+        size_t max_depth_;
     };
 }
 
