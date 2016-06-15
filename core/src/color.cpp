@@ -4,7 +4,7 @@
 using namespace iris;
 
 
-Vector3 color::hex(const int value)
+Vector3 color::from_hex(const int value)
 {
     return Vector3
     (

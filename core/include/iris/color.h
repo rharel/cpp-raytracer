@@ -8,7 +8,7 @@ namespace iris
 {
     namespace color
     {
-        Vector3 hex(int color);
+        Vector3 from_hex(int color);
     }
 }
 
