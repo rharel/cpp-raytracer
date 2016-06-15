@@ -9,6 +9,7 @@ Thumbs.db
 *.user
 *.VC.db
 *.VC.opendb
+*.vspx
 
 # Build output
 bin/
