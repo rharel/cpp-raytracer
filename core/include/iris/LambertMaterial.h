@@ -29,9 +29,17 @@ namespace iris
          */
         LambertMaterial(float color);
         /**
+         * Creates material from from_hex RGB.
+         */
+        LambertMaterial(int color);
+        /**
          * Creates material with given albedo.
          */
         LambertMaterial(float r, float g, float b);
+        /**
+         * Creates material from RGB vector.
+         */
+        LambertMaterial(const Vector3& color);
 
         /**
          * Evaluates the BRDF's integral.

@@ -1,4 +1,5 @@
 #include <iris/LambertMaterial.h>
+#include <iris/color.h>
 #include <iris/math.h>
 #include <iris/random.h>
 
@@ -12,16 +13,20 @@ using glm::clamp;
 using glm::normalize;
 
 LambertMaterial::LambertMaterial()
-    : LambertMaterial(1.0f) {}
+    : LambertMaterial(Vector3(1.0f)) {}
 LambertMaterial::LambertMaterial(const float color)
-    : LambertMaterial(color, color, color) {}
+    : LambertMaterial(Vector3(color)) {}
+LambertMaterial::LambertMaterial(const int color)
+    : LambertMaterial(color::from_hex(color)) {}
 LambertMaterial::LambertMaterial
 (
     const float r, 
     const float g, 
     const float b
 )
-    : albedo_(clamp(Vector3(r, g, b), 0.0f, 1.0f)) {}
+    : LambertMaterial(Vector3(r, g, b)) {}
+LambertMaterial::LambertMaterial(const Vector3& color)
+    : albedo_(clamp(color, 0.0f, 1.0f)) {}
 
 Vector3 LambertMaterial::brdf() const
 {
