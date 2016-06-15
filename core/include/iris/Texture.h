@@ -9,6 +9,7 @@
 
 
 #include <iris/Material.h>
+#include <iris/LambertMaterial.h>
 #include <iris/vector_types.h>
 
 #include <vector>
@@ -22,7 +23,7 @@ namespace iris
     class Texture
     {
         public:
-        static const Material default_material;
+        static const LambertMaterial default_material;
 
         /**
          * Creates default white texture./
