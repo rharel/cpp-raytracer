@@ -1,4 +1,4 @@
-#include <iris/PathTracer.h>
+    #include <iris/PathTracer.h>
 #include <iris/rayop.h>
 #include <iris/math.h>
 #include <iris/random.h>
@@ -36,7 +36,7 @@ Vector3 PathTracer::trace(Ray ray, const Scene& scene) const
         Raycast collision(ray); 
         scene.raycast(collision);
 
-        if (!collision.hit()) { break; }
+        if (!collision.hit()) { color += weight * horizon(); break; }
 
         const Vector3 x = collision.point();
         const Vector3& N = collision.normal();
@@ -48,14 +48,15 @@ Vector3 PathTracer::trace(Ray ray, const Scene& scene) const
         color += weight * Ld;
 
         // russian roulette //
-        float alpha = glm::compAdd(material.brdf()) / 3.0f;
+        const float alpha = glm::compAdd(material.brdf()) / 3.0f;
         if (random::real_in_range(0.0f, 1.0f) > alpha) { break; }
         weight /= alpha;
 
         // bounce ray //
         const Quaternion R = glm::rotation(N, Vector3(0, 1, 0));
+        const Quaternion R_inv = glm::inverse(R);
         float pdf;
-        const Vector3 Wo = material.bounce(R * Wi, pdf);
+        const Vector3 Wo = R_inv * material.bounce(R * Wi, pdf);
         const Vector3 f = material.brdf(R * Wi, R * Wo);
         const float cos_theta = dot(Wi, N);
         weight *= f * cos_theta / pdf;
