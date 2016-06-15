@@ -53,6 +53,18 @@ namespace iris
         ) const override;
 
         /**
+         * Bounces a ray to a new random direction.
+         *
+         * @param      Wi  Incoming ray direction.
+         * @param[out] pdf Probability of chosen outgoing direction.
+         *
+         * @returns Outgoing direction.
+         *
+         * @note Assumes normal at contact point is N = (0, 1, 0).
+         */
+        Vector3 bounce(const Vector3& Wi, float& pdf) const;
+
+        /**
          * Gets albedo.
          */
         const Vector3& albedo() const;
