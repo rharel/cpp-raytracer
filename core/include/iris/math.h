@@ -14,6 +14,7 @@ namespace iris
     {
         constexpr float m_pi = 3.1415926535897932384f;
         constexpr float m_2_pi = 2.0f * m_pi;
+        constexpr float m_pi_2 = 0.5f * m_pi;
     }
 
     /**
