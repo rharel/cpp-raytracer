@@ -35,6 +35,7 @@
 #include <iris/Composer.h>
 
 #include <iris/aggregators.h>
+#include <iris/color.h>
 #include <iris/math.h>
 #include <iris/vector_types.h>
 #include <iris/matrix_types.h>
