@@ -1,7 +1,6 @@
 #ifndef IRIS_LIGHT_H
 #define IRIS_LIGHT_H
 /**
- * @file Light.h
  * @author Raoul Harel
  * @url github.com/rharel/cpp-raytracer
  *
