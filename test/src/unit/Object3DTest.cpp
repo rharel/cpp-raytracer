@@ -4,6 +4,7 @@
 
 #include <iris/math.h>
 #include <iris/Object3D.h>
+#include <iris/PlaneGeometry.h>
 
 
 using namespace iris;
@@ -82,5 +83,14 @@ TEST_CASE("object3d", "[object3d]")
         REQUIRE(is_close(Rv, Vector3(-1, 1, -1)));
         REQUIRE(is_close(Sv, Vector3(1, 1, 2)));
         REQUIRE(is_close(Wv, Vector3(0, 1, -2)));
+    }
+    SECTION("geometry/texture getters")
+    {
+        PlaneGeometry plane;
+        Texture texture;
+        Object3D d(plane, texture);
+
+        REQUIRE(d.geometry() == plane);
+        REQUIRE(d.texture() == texture);
     }
 }

@@ -162,6 +162,15 @@ namespace iris
          */
         virtual void update();
         
+        /**
+         * Gets geometry. Only valid when object is not empty.
+         */
+        const Geometry& geometry() const;
+        /**
+         * Gets texture. Only valid when object is not empty.
+         */
+        const Texture& texture() const;
+
         bool operator==(const Object3D& other) const;
         bool operator!=(const Object3D& other) const;
 

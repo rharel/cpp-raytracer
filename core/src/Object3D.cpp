@@ -239,6 +239,15 @@ void Object3D::update()
     }
 }
 
+const Geometry& Object3D::geometry() const
+{
+    return *geometry_;
+}
+const Texture& Object3D::texture() const
+{
+    return *texture_;
+}
+
 bool Object3D::operator==(const Object3D& other) const
 {
     return this == &other;
