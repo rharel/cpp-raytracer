@@ -20,6 +20,13 @@ Texture::Texture
 )
     : resolution_(width, height),
       pattern_(pattern.begin(), pattern.end()) {}
+Texture::Texture
+(
+    const size_t width, const size_t height,
+    const Material** pattern
+)
+    : resolution_(width, height),
+      pattern_(&pattern[0], &pattern[width * height]) {}
 
 const Material& Texture::sample(float u, float v) const
 {

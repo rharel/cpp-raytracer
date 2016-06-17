@@ -45,6 +45,18 @@ namespace iris
             size_t x, size_t y,
             std::initializer_list<const Material*> pattern
         );
+        /**
+         * Creates a new texture.
+         *
+         * @param width   Horizontal resolution.
+         * @param height  Vertical resolution.
+         * @param pattern Array of width * height material pointers.
+         */
+        Texture
+        (
+            size_t x, size_t y,
+            const Material** pattern
+        );
 
         /**
          * Samples texture at given coordinates.
