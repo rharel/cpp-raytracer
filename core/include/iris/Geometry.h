@@ -30,6 +30,9 @@ namespace iris
          *  if t_max <= 0 than looks for any intersection in t > 0.
          */
         virtual void raycast(Raycast& result) const = 0;
+
+        bool operator==(const Geometry& other) const;
+        bool operator!=(const Geometry& other) const;
     };
 }
 
