@@ -4,7 +4,7 @@
 using namespace iris;
 
 
-void Scene::add(const Object3D& object)
+void Scene::add_object(const Object3D& object)
 {
     objects_.insert(&object);
 }
@@ -27,6 +27,17 @@ bool Scene::is_visible(const Vector3& a, const Vector3& b) const
     raycast(collision);
     return !collision.hit() || 
             collision.time() > glm::length(AB);
+}
+
+size_t Scene::object_count() const
+{
+    return objects_.size();
+}
+const Object3D& Scene::object(const size_t index) const
+{
+    auto it = objects_.begin();
+    std::advance(it, index);
+    return **it;
 }
 
 size_t Scene::light_count() const

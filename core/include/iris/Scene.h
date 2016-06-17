@@ -26,7 +26,7 @@ namespace iris
         /**
          * Adds object to scene.
          */
-        void add(const Object3D& object);
+        void add_object(const Object3D& object);
         /**
          * Adds light to scene.
          */
@@ -47,6 +47,15 @@ namespace iris
          * Checks if a ray a -> b hits an obstruction before reaching b.
          */
         bool is_visible(const Vector3& a, const Vector3& b) const;
+
+        /**
+         * Gets object count.
+         */
+        size_t object_count() const;
+        /**
+         * Gets object at index.
+         */
+        const Object3D& object(size_t index) const;
 
         /**
          * Light count.
