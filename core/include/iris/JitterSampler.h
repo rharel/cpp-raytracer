@@ -49,6 +49,15 @@ namespace iris
          */
         void report(const Vector3& color) override;
 
+        /**
+         * Gets degree of subdivision.
+         */
+        size_t degree() const;
+        /**
+         * Gets number of samples per iteration.
+         */
+        size_t sample_count() const;
+        
         private:
         size_t degree_;
         Vector2u cell_ = Vector2u(0, 0);

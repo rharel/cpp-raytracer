@@ -41,3 +41,12 @@ Vector2 JitterSampler::next()
     return sample;
 }
 void JitterSampler::report(const Vector3&) {}
+
+size_t JitterSampler::degree() const
+{
+    return degree_;
+}
+size_t JitterSampler::sample_count() const
+{
+    return degree() * degree();
+}

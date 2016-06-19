@@ -15,6 +15,9 @@ TEST_CASE("jitter sampler", "[sampler][jitter-sampler]")
     JitterSampler a(2);
     Vector2 samples[4];
 
+    REQUIRE(a.degree() == 2);
+    REQUIRE(a.sample_count() == 4);
+
     REQUIRE(a.has_next());
     samples[0] = a.next();
     REQUIRE(a.has_next());
