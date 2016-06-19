@@ -12,7 +12,7 @@
 #include <iris/Light.h>
 #include <iris/Raycast.h>
 
-#include <unordered_set>
+#include <set>
 
 
 namespace iris
@@ -67,8 +67,8 @@ namespace iris
         const Light& light(size_t index) const;
 
         private:
-        std::unordered_set<const Object3D*> objects_;
-        std::unordered_set<const Light*> lights_;
+        std::set<const Object3D*> objects_;
+        std::set<const Light*> lights_;
     };
 }
 
