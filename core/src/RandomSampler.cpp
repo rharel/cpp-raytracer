@@ -28,3 +28,8 @@ Vector2 RandomSampler::next()
     );
 }
 void RandomSampler::report(const Vector3& /* color */) {}
+
+size_t RandomSampler::sample_count() const
+{
+    return sample_count_;
+}

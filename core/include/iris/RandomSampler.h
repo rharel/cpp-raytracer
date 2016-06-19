@@ -48,6 +48,11 @@ namespace iris
          */
         void report(const Vector3& color) override;
 
+        /**
+         * Gets number of samples per iteration.
+         */
+        size_t sample_count() const;
+
         private:
         size_t sample_count_;
         size_t sample_index_ = 0;

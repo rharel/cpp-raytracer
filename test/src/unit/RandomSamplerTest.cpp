@@ -18,6 +18,7 @@ TEST_CASE("random sampler", "[sampler][random-sampler]")
 
     SECTION("default ctor")
     {
+        REQUIRE(a.sample_count() == 1);
         REQUIRE(a.has_next());
 
         const Vector2 sample = a.next();
@@ -30,6 +31,7 @@ TEST_CASE("random sampler", "[sampler][random-sampler]")
     }
     SECTION("count ctor")
     {
+        REQUIRE(b.sample_count() == count);
         for (size_t i = 0; i < count; ++i)
         {
             REQUIRE(b.has_next());
