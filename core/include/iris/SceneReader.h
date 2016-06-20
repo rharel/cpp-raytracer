@@ -13,6 +13,10 @@
 #include <iris/Geometry.h>
 #include <iris/Scene.h>
 #include <iris/Object3D.h>
+#include <iris/Light.h>
+#include <iris/Sampler.h>
+#include <iris/Raytracer.h>
+#include <iris/Camera.h>
 
 #include <memory>
 #include <string>
@@ -33,16 +37,26 @@ namespace iris
         typedef std::shared_ptr<Geometry> GeometryPtr;
         typedef std::shared_ptr<Scene> ScenePtr;
         typedef std::shared_ptr<Object3D> ObjectPtr;
+        typedef std::shared_ptr<Light> LightPtr;
+        typedef std::shared_ptr<Sampler> SamplerPtr;
+        typedef std::shared_ptr<Raytracer> TracerPtr;
         typedef std::unordered_map<ID, MaterialPtr> MaterialMap;
         typedef std::unordered_map<ID, TexturePtr> TextureMap;
         typedef std::unordered_map<ID, GeometryPtr> GeometryMap;
         typedef std::vector<ObjectPtr> ObjectList;
+        typedef std::vector<LightPtr> LightList;
 
         MaterialMap materials;
         TextureMap textures;
         GeometryMap geometries;
         ObjectList objects;
+        LightList lights;
         ScenePtr scene;
+        SamplerPtr sampler;
+        TracerPtr tracer;
+        Camera camera;
+        Vector2u image_size = Vector2u(256, 256);
+        std::string image_path = ".";
     };
     /**
      * Reads external scenes and tracing configurations.

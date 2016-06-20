@@ -7,6 +7,12 @@
 #include <iris/SphereGeometry.h>
 
 #include <iris/Scene.h>
+#include <iris/SphereLight.h>
+#include <iris/NaiveSampler.h>
+#include <iris/RandomSampler.h>
+#include <iris/JitterSampler.h>
+#include <iris/NaiveTracer.h>
+#include <iris/PathTracer.h>
 
 #include <iris/color.h>
 #include <iris/string.h>
@@ -26,6 +32,10 @@ using GeometryMap = Configuration::GeometryMap;
 using ScenePtr = Configuration::ScenePtr;
 using ObjectPtr = Configuration::ObjectPtr;
 using ObjectList = Configuration::ObjectList;
+using LightPtr = Configuration::LightPtr;
+using LightList = Configuration::LightList;
+using SamplerPtr = Configuration::SamplerPtr;
+using TracerPtr = Configuration::TracerPtr;
 using std::string;
 
 
@@ -41,6 +51,10 @@ const char* XMLSceneReader::ELEMENT_OBJECTS = "objects";
 const char* XMLSceneReader::ELEMENT_OBJECT = "object";
 const char* XMLSceneReader::ELEMENT_LIGHTS = "lights";
 const char* XMLSceneReader::ELEMENT_LIGHT = "light";
+const char* XMLSceneReader::ELEMENT_SAMPLER = "sampler";
+const char* XMLSceneReader::ELEMENT_TRACER = "tracer";
+const char* XMLSceneReader::ELEMENT_CAMERA = "camera";
+const char* XMLSceneReader::ELEMENT_IMAGE = "image";
 
 const char* XMLSceneReader::ATTRIBUTE_NAME = "name";
 const char* XMLSceneReader::ATTRIBUTE_TYPE = "type";
@@ -55,10 +69,23 @@ const char* XMLSceneReader::ATTRIBUTE_TEXTURE = "texture";
 const char* XMLSceneReader::ATTRIBUTE_TRANSLATION = "translation";
 const char* XMLSceneReader::ATTRIBUTE_SCALE = "scale";
 const char* XMLSceneReader::ATTRIBUTE_ROTATION = "rotation";
+const char* XMLSceneReader::ATTRIBUTE_COLOR = "color";
+const char* XMLSceneReader::ATTRIBUTE_INTENSITY = "intensity";
+const char* XMLSceneReader::ATTRIBUTE_DEGREE = "degree";
+const char* XMLSceneReader::ATTRIBUTE_FOV = "fov";
+const char* XMLSceneReader::ATTRIBUTE_ASPECT = "aspect";
+const char* XMLSceneReader::ATTRIBUTE_NEAR = "near";
+const char* XMLSceneReader::ATTRIBUTE_FAR = "far";
+const char* XMLSceneReader::ATTRIBUTE_LOOK_AT = "lookAt";
+const char* XMLSceneReader::ATTRIBUTE_PATH = "path";
 
 const char* XMLSceneReader::VALUE_LAMBERT = "lambert";
 const char* XMLSceneReader::VALUE_PLANE = "plane";
 const char* XMLSceneReader::VALUE_SPHERE = "sphere";
+const char* XMLSceneReader::VALUE_NAIVE = "naive";
+const char* XMLSceneReader::VALUE_RANDOM = "random";
+const char* XMLSceneReader::VALUE_JITTER = "jitter";
+const char* XMLSceneReader::VALUE_PATH = "path";
 
 const char XMLSceneReader::HEX_SYMBOL = '#';
 
@@ -128,21 +155,42 @@ bool XMLSceneReader::require_has_attributes
 
 void XMLSceneReader::parse_configuration(const Element* source)
 {
-    if (!require_has_child(source, ELEMENT_MATERIALS) ||
-        !require_has_child(source, ELEMENT_TEXTURES) ||
-        !require_has_child(source, ELEMENT_GEOMETRIES) ||
-        !require_has_child(source, ELEMENT_SCENE))
+    const Element* e_materials = source->FirstChildElement(ELEMENT_MATERIALS);
+    const Element* e_textures = source->FirstChildElement(ELEMENT_TEXTURES);
+    const Element* e_geometries = source->FirstChildElement(ELEMENT_GEOMETRIES);
+    const Element* e_scene = source->FirstChildElement(ELEMENT_SCENE);
+    const Element* e_sampler = source->FirstChildElement(ELEMENT_SAMPLER);
+    const Element* e_tracer = source->FirstChildElement(ELEMENT_TRACER);
+    const Element* e_camera = source->FirstChildElement(ELEMENT_CAMERA);
+    const Element* e_image = source->FirstChildElement(ELEMENT_IMAGE);
+
+    if (e_materials != nullptr)
     {
-        return;
+        parse_materials(e_materials);
+        if (status() != Status::Success) { return; }
+        if (e_textures != nullptr)
+        {
+            parse_textures(e_textures);
+            if (status() != Status::Success) { return; }
+        }
     }
-    parse_materials(source->FirstChildElement(ELEMENT_MATERIALS));
-    if (status() != Status::Success) { return; }
-    parse_textures(source->FirstChildElement(ELEMENT_TEXTURES));
-    if (status() != Status::Success) { return; }
-    parse_geometries(source->FirstChildElement(ELEMENT_GEOMETRIES));
-    if (status() != Status::Success) { return; }
-    parse_scene(source->FirstChildElement(ELEMENT_SCENE));
-    if (status() != Status::Success) { return; }
+    if (e_geometries != nullptr)
+    {
+        parse_geometries(e_geometries);
+        if (status() != Status::Success) { return; }
+    }
+    if (e_materials != nullptr &&
+        e_textures != nullptr &&
+        e_geometries != nullptr &&
+        e_scene != nullptr)
+    {
+        parse_scene(e_scene);
+        if (status() != Status::Success) { return; }
+    }
+    parse_sampler(e_sampler);
+    parse_tracer(e_tracer);
+    parse_camera(e_camera);
+    parse_image(e_image);
 }
 
 void XMLSceneReader::parse_materials(const Element* source)
@@ -297,23 +345,33 @@ Geometry* XMLSceneReader::parse_geometry_sphere(const Element* source)
 
 void XMLSceneReader::parse_scene(const Element* source)
 {
-    if (!require_has_child(source, ELEMENT_OBJECTS) ||
-        !require_has_child(source, ELEMENT_LIGHTS))
-    {
-        return;
-    }
     configuration_.scene = ScenePtr(new Scene());
-    parse_objects(source->FirstChildElement(ELEMENT_OBJECTS), nullptr);
-    if (status() != Status::Success) { return; }
+    
+    const Element* e_objects = source->FirstChildElement(ELEMENT_OBJECTS);
+    const Element* e_lights = source->FirstChildElement(ELEMENT_LIGHTS);
+
+    if (e_objects != nullptr)
+    {
+        parse_objects(e_objects, nullptr);
+        if (status() != Status::Success) { return; }
+    }
+    if (e_lights != nullptr)
+    {
+        parse_lights(e_lights);
+        if (status() != Status::Success) { return; }
+    }
 }
+
 void XMLSceneReader::parse_objects(const Element* source, Object3D* parent)
 {
     if (!require_has_child(source, ELEMENT_OBJECT)) { return; }
     const Element* child = source->FirstChildElement(ELEMENT_OBJECT);
     while (child != nullptr)
     {
-        parse_object(child, parent);
+        Object3D* object = parse_object(child, parent);
         if (status() != Status::Success) { return; }
+        
+        configuration_.objects.push_back(ObjectPtr(object));
         child = child->NextSiblingElement(ELEMENT_OBJECT);
     }
 }
@@ -326,8 +384,8 @@ Object3D* XMLSceneReader::parse_object(const Element* source, Object3D* parent)
     const char* texture_str = source->Attribute(ATTRIBUTE_TEXTURE);
     const char* geometry_str = source->Attribute(ATTRIBUTE_GEOMETRY);
 
-    ObjectPtr object = nullptr;
-    if (geometry_str != nullptr && texture_str != nullptr)
+    Object3D* object = nullptr;
+    if (texture_str != nullptr && geometry_str != nullptr)
     {
         if (configuration_.textures.find(texture_str) == 
             configuration_.textures.end())
@@ -345,16 +403,16 @@ Object3D* XMLSceneReader::parse_object(const Element* source, Object3D* parent)
                                string(geometry_str);
             return nullptr;
         }
-        object = ObjectPtr(new Object3D
+        object = new Object3D
         (
             *configuration_.geometries[geometry_str], 
             *configuration_.textures[texture_str]
-        ));
+        );
     }
     else
     {
-        object = ObjectPtr(new Object3D());
-        parse_objects(source, object.get());
+        object = new Object3D();
+        parse_objects(source, object);
         if (status() != Status::Success) { return nullptr; }
     }
     if (translation_str != nullptr)
@@ -380,8 +438,188 @@ Object3D* XMLSceneReader::parse_object(const Element* source, Object3D* parent)
     {
         configuration_.scene->add_object(*object);
     }
-    configuration_.objects.push_back(object);
-    return object.get();
+    return object;
+}
+
+void XMLSceneReader::parse_lights(const Element* source)
+{
+    if (!require_has_child(source, ELEMENT_LIGHT)) { return; }
+    const std::vector<const char*> required_attributes
+    { 
+        ATTRIBUTE_TYPE,
+        ATTRIBUTE_COLOR, ATTRIBUTE_INTENSITY
+    };
+    const Element* child = source->FirstChildElement(ELEMENT_LIGHT);
+    while (child != nullptr)
+    {
+        if (!require_has_attributes(child, required_attributes)) { return; }
+        const char* type = child->Attribute(ATTRIBUTE_TYPE);
+        
+        Light* light = nullptr;
+        if (strcmp(type, VALUE_SPHERE) == 0)
+        {
+            light = parse_light_sphere(child);
+        }
+        else
+        {
+            status_ = Status::ParsingError;
+            status_message_ = "Unknown light type: " + string(type);
+        }
+        if (status() != Status::Success) { return; }
+        
+        configuration_.lights.push_back(LightPtr(light));
+        configuration_.scene->add_light(*light);
+
+        child = child->NextSiblingElement(ELEMENT_LIGHT);
+    }
+}
+Light* XMLSceneReader::parse_light_sphere(const Element* source)
+{
+    const char* color_str = source->Attribute(ATTRIBUTE_COLOR);
+    const Vector3 color = parse_vector3(color_str);
+    if (status() != Status::Success) { return nullptr; }
+    const float intensity = source->FloatAttribute(ATTRIBUTE_INTENSITY);
+    
+    Light* light = new SphereLight(color, intensity);
+
+    const char* translation_str = source->Attribute(ATTRIBUTE_TRANSLATION);
+    const char* scale_str = source->Attribute(ATTRIBUTE_SCALE);
+    const char* rotation_str = source->Attribute(ATTRIBUTE_ROTATION);
+
+    if (translation_str != nullptr)
+    {
+        light->translation() = parse_vector3(translation_str);
+        if (status() != Status::Success) { return nullptr; }
+    }
+    if (scale_str != nullptr)
+    {
+        light->scale() = parse_vector3(scale_str);
+        if (status() != Status::Success) { return nullptr; }
+    }
+    if (rotation_str != nullptr)
+    {
+        light->rotation() = parse_vector3(rotation_str);
+        if (status() != Status::Success) { return nullptr; }
+    }
+    return light;
+}
+
+void XMLSceneReader::parse_sampler(const Element* source)
+{
+    if (source == nullptr)
+    {
+        configuration_.sampler = SamplerPtr(new NaiveSampler());
+        return;
+    }
+    if (!require_has_attributes(source, {ATTRIBUTE_TYPE})) { return; }
+    
+    const char* type = source->Attribute(ATTRIBUTE_TYPE);
+    if (strcmp(type, VALUE_NAIVE) == 0)
+    {
+        configuration_.sampler = SamplerPtr(new NaiveSampler());
+    }
+    else if (strcmp(type, VALUE_RANDOM) == 0)
+    {
+        const int degree = source->IntAttribute(ATTRIBUTE_DEGREE);
+        if (degree <= 0)
+        {
+            status_ = Status::ParsingError;
+            status_message_ = "Sampler degree is <= 0";
+            return;
+        }
+        configuration_.sampler = SamplerPtr(new RandomSampler(degree));
+    }
+    else if (strcmp(type, VALUE_JITTER) == 0)
+    {
+        const int degree = source->IntAttribute(ATTRIBUTE_DEGREE);
+        if (degree <= 0)
+        {
+            status_ = Status::ParsingError;
+            status_message_ = "Sampler degree is <= 0";
+            return;
+        }
+        configuration_.sampler = SamplerPtr(new JitterSampler(degree));
+    }
+    else
+    {
+        status_ = Status::ParsingError;
+        status_message_ = "Unknown sampler type: " + string(type);
+    }
+}
+void XMLSceneReader::parse_tracer(const Element* source)
+{
+    if (source == nullptr)
+    {
+        configuration_.tracer = TracerPtr(new NaiveTracer());
+        return;
+    }
+    if (!require_has_attributes(source, {ATTRIBUTE_TYPE})) { return; }
+    
+    const char* type = source->Attribute(ATTRIBUTE_TYPE);
+    if (strcmp(type, VALUE_NAIVE) == 0)
+    {
+        configuration_.tracer = TracerPtr(new NaiveTracer());
+    }
+    else if (strcmp(type, VALUE_PATH) == 0)
+    {
+        const int degree = source->IntAttribute(ATTRIBUTE_DEGREE);
+        if (degree <= 0)
+        {
+            status_ = Status::ParsingError;
+            status_message_ = "Tracer degree is <= 0";
+            return;
+        }
+        configuration_.tracer = TracerPtr(new PathTracer(degree));
+    }
+    else
+    {
+        status_ = Status::ParsingError;
+        status_message_ = "Unknown tracer type: " + string(type);
+    }
+}
+void XMLSceneReader::parse_camera(const Element* source)
+{
+    if (source == nullptr) { return; }
+    
+    const float fov = glm::radians(source->FloatAttribute(ATTRIBUTE_FOV));
+    const float aspect = source->FloatAttribute(ATTRIBUTE_ASPECT);
+    const float near = source->FloatAttribute(ATTRIBUTE_NEAR);
+    const float far = source->FloatAttribute(ATTRIBUTE_FAR);
+    
+    configuration_.camera = Camera(fov, aspect, near, far);
+
+    const char* translation = source->Attribute(ATTRIBUTE_TRANSLATION);
+    if (translation != nullptr)
+    {
+        configuration_.camera.translation() = parse_vector3(translation);
+        if (status() != Status::Success) { return; }
+    }
+    const char* look_at = source->Attribute(ATTRIBUTE_LOOK_AT);
+    if (look_at != nullptr)
+    {
+        configuration_.camera.look_at(parse_vector3(look_at));
+        if (status() != Status::Success) { return; }
+    }
+}
+void XMLSceneReader::parse_image(const Element* source)
+{
+    if (source == nullptr) { return; }
+
+    const int width = source->IntAttribute(ATTRIBUTE_WIDTH);
+    const int height = source->IntAttribute(ATTRIBUTE_HEIGHT);
+    if (width <= 0 || height <= 0)
+    {
+        status_ = Status::ParsingError;
+        status_message_ = "Image width/height is <= 0";
+        return;
+    }
+    configuration_.image_size = Vector2u(width, height);
+
+    const char* path = source->Attribute(ATTRIBUTE_PATH);
+    if (path != nullptr)
+    {
+        configuration_.image_path = path;
+    }
 }
 
 Vector3 XMLSceneReader::parse_color(const char* str)

@@ -40,6 +40,10 @@ namespace iris
         static const char* ELEMENT_OBJECT;
         static const char* ELEMENT_LIGHTS;
         static const char* ELEMENT_LIGHT;
+        static const char* ELEMENT_SAMPLER;
+        static const char* ELEMENT_TRACER;
+        static const char* ELEMENT_CAMERA;
+        static const char* ELEMENT_IMAGE;
 
         static const char* ATTRIBUTE_NAME;
         static const char* ATTRIBUTE_TYPE;
@@ -54,10 +58,23 @@ namespace iris
         static const char* ATTRIBUTE_TRANSLATION;
         static const char* ATTRIBUTE_SCALE;
         static const char* ATTRIBUTE_ROTATION;
+        static const char* ATTRIBUTE_COLOR;
+        static const char* ATTRIBUTE_INTENSITY;
+        static const char* ATTRIBUTE_DEGREE;
+        static const char* ATTRIBUTE_FOV;
+        static const char* ATTRIBUTE_ASPECT;
+        static const char* ATTRIBUTE_NEAR;
+        static const char* ATTRIBUTE_FAR;
+        static const char* ATTRIBUTE_LOOK_AT;
+        static const char* ATTRIBUTE_PATH;
 
         static const char* VALUE_LAMBERT;
         static const char* VALUE_PLANE;
         static const char* VALUE_SPHERE;
+        static const char* VALUE_NAIVE;
+        static const char* VALUE_RANDOM;
+        static const char* VALUE_JITTER;
+        static const char* VALUE_PATH;
 
         static const char HEX_SYMBOL;
 
@@ -117,7 +134,12 @@ namespace iris
         Object3D* parse_object(const Element* source, Object3D* parent);
         
         void parse_lights(const Element* source);
-        Light* parse_light(const Element* source);
+        Light* parse_light_sphere(const Element* source);
+
+        void parse_sampler(const Element* source);
+        void parse_tracer(const Element* source);
+        void parse_camera(const Element* source);
+        void parse_image(const Element* source);
 
         Vector3 parse_color(const char* string);
         Vector3 parse_vector3(const char* string);
