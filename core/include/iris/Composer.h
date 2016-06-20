@@ -51,10 +51,20 @@ namespace iris
             const Raytracer& tracer
         );
 
-        /*
+        /**
          * Renders a traced image.
          */
         void render();
+        /*
+         * Renders to selected range of pixels.
+         *
+         * @param offset Pixel from which to start rendering.
+         * @param count  Number of pixels to render. Zero-value implies
+         *               all.
+         *
+         * @returns Coordinates of last pixel rendered.
+         */
+        Vector2u render(const Vector2u& offset, size_t count);
 
         /**
          * Gets image.

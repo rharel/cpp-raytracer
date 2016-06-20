@@ -38,13 +38,24 @@ Composer::Composer
 
 void Composer::render()
 {
-    for (size_t x = 0; x < image().width(); ++x)
+    render(Vector2u(0, 0), 0);
+    
+}
+Vector2u Composer::render(const Vector2u& offset, const size_t count)
+{
+    const size_t w = image().width();
+    const size_t h = image().height();
+    size_t x = offset.x;
+    size_t y = offset.y;
+    size_t i = 0;
+    while (y < h && (count == 0 || i != count))
     {
-        for (size_t y = 0; y < image().height(); ++y)
-        {
-            render_pixel(x, y);
-        }
+        render_pixel(x, y);
+        ++x;
+        if (x == w) { x = 0; ++y; }
+        ++i;
     }
+    return Vector2u(x, y);
 }
 void Composer::render_pixel
 (
