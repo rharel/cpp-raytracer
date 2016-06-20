@@ -436,7 +436,7 @@ Object3D* XMLConfigurationLoader::parse_object(const Element* source, Object3D* 
     }
     if (rotation_str != nullptr)
     {
-        object->rotation() = parse_vector3(rotation_str);
+        object->rotation() = glm::radians(parse_vector3(rotation_str));
         if (status() != Status::Success) { return nullptr; }
     }
     if (parent != nullptr)
@@ -509,7 +509,7 @@ Light* XMLConfigurationLoader::parse_light_sphere(const Element* source)
     }
     if (rotation_str != nullptr)
     {
-        light->rotation() = parse_vector3(rotation_str);
+        light->rotation() = glm::radians(parse_vector3(rotation_str));
         if (status() != Status::Success) { return nullptr; }
     }
     return light;
