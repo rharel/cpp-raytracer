@@ -18,6 +18,7 @@
 #include <iris/string.h>
 
 #include <queue>
+#include <fstream>
 #include <sstream>
 
 
@@ -93,8 +94,10 @@ const char XMLSceneReader::DELIMETER = ',';
 
 Configuration XMLSceneReader::read_from_path(const std::string& path)
 {
-    // TODO
-    return read_from_string(path);
+    std::ifstream file(path);
+    std::stringstream contents;
+    contents << file.rdbuf();
+    return read_from_string(contents.str());
 }
 Configuration XMLSceneReader::read_from_string(const std::string& xml)
 {
@@ -437,6 +440,7 @@ Object3D* XMLSceneReader::parse_object(const Element* source, Object3D* parent)
     else
     {
         configuration_.scene->add_object(*object);
+        object->update();
     }
     return object;
 }
@@ -469,6 +473,7 @@ void XMLSceneReader::parse_lights(const Element* source)
         
         configuration_.lights.push_back(LightPtr(light));
         configuration_.scene->add_light(*light);
+        light->update();
 
         child = child->NextSiblingElement(ELEMENT_LIGHT);
     }
@@ -600,6 +605,7 @@ void XMLSceneReader::parse_camera(const Element* source)
         configuration_.camera.look_at(parse_vector3(look_at));
         if (status() != Status::Success) { return; }
     }
+    configuration_.camera.update();
 }
 void XMLSceneReader::parse_image(const Element* source)
 {
