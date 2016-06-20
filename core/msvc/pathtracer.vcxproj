@@ -109,6 +109,7 @@
     <ClInclude Include="..\include\iris\Camera.h" />
     <ClInclude Include="..\include\iris\color.h" />
     <ClInclude Include="..\include\iris\Composer.h" />
+    <ClInclude Include="..\include\iris\CookTorranceMaterial.h" />
     <ClInclude Include="..\include\iris\Image.h" />
     <ClInclude Include="..\include\iris\iris.h" />
     <ClInclude Include="..\include\iris\JitterSampler.h" />
@@ -117,6 +118,7 @@
     <ClInclude Include="..\include\iris\Material.h" />
     <ClInclude Include="..\include\iris\math.h" />
     <ClInclude Include="..\include\iris\matrix_types.h" />
+    <ClInclude Include="..\include\iris\MirrorMaterial.h" />
     <ClInclude Include="..\include\iris\NaiveSampler.h" />
     <ClInclude Include="..\include\iris\NaiveTracer.h" />
     <ClInclude Include="..\include\iris\PathTracer.h" />
@@ -131,22 +133,31 @@
     <ClInclude Include="..\include\iris\aggregators.h" />
     <ClInclude Include="..\include\iris\Scene.h" />
     <ClInclude Include="..\include\iris\Object3D.h" />
+    <ClInclude Include="..\include\iris\SceneReader.h" />
     <ClInclude Include="..\include\iris\SphereLight.h" />
     <ClInclude Include="..\include\iris\SphereGeometry.h" />
     <ClInclude Include="..\include\iris\Geometry.h" />
+    <ClInclude Include="..\include\iris\string.h" />
+    <ClInclude Include="..\include\iris\SunLight.h" />
     <ClInclude Include="..\include\iris\Texture.h" />
     <ClInclude Include="..\include\iris\vector_types.h" />
+    <ClInclude Include="..\include\iris\XMLSceneReader.h" />
+    <ClInclude Include="..\lib\tinyxml2\tinyxml2.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\lib\tinyxml2\tinyxml2.cpp" />
     <ClCompile Include="..\src\Camera.cpp" />
     <ClCompile Include="..\src\color.cpp" />
     <ClCompile Include="..\src\Composer.cpp" />
+    <ClCompile Include="..\src\CookTorranceMaterial.cpp" />
+    <ClCompile Include="..\src\Geometry.cpp" />
     <ClCompile Include="..\src\Image.cpp" />
     <ClCompile Include="..\src\JitterSampler.cpp" />
     <ClCompile Include="..\src\LambertMaterial.cpp" />
     <ClCompile Include="..\src\Light.cpp" />
     <ClCompile Include="..\src\Material.cpp" />
     <ClCompile Include="..\src\math.cpp" />
+    <ClCompile Include="..\src\MirrorMaterial.cpp" />
     <ClCompile Include="..\src\NaiveSampler.cpp" />
     <ClCompile Include="..\src\NaiveTracer.cpp" />
     <ClCompile Include="..\src\PathTracer.cpp">
@@ -161,12 +172,19 @@
     <ClCompile Include="..\src\aggregators.cpp" />
     <ClCompile Include="..\src\Scene.cpp" />
     <ClCompile Include="..\src\Object3D.cpp" />
+    <ClCompile Include="..\src\SceneReader.cpp" />
     <ClCompile Include="..\src\SphereLight.cpp" />
     <ClCompile Include="..\src\SphereGeometry.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="..\src\string.cpp" />
+    <ClCompile Include="..\src\SunLight.cpp" />
     <ClCompile Include="..\src\Texture.cpp" />
+    <ClCompile Include="..\src\XMLSceneReader.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

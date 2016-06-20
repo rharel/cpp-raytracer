@@ -89,6 +89,27 @@
     <ClInclude Include="..\include\iris\color.h">
       <Filter>utility</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\iris\MirrorMaterial.h">
+      <Filter>material</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\iris\CookTorranceMaterial.h">
+      <Filter>material</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\iris\SunLight.h">
+      <Filter>light</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\iris\XMLSceneReader.h">
+      <Filter>io</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\iris\SceneReader.h">
+      <Filter>io</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\tinyxml2\tinyxml2.h">
+      <Filter>3rd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\iris\string.h">
+      <Filter>utility</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="light">
@@ -120,6 +141,12 @@
     </Filter>
     <Filter Include="composition">
       <UniqueIdentifier>{9130ef38-5597-426f-bfb7-3698e8d62018}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="io">
+      <UniqueIdentifier>{8d398ac0-4756-420d-9e4a-b4f1f1110558}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rd">
+      <UniqueIdentifier>{92350a82-b5a1-495d-82dc-7617eb934051}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -190,6 +217,30 @@
       <Filter>raytracing</Filter>
     </ClCompile>
     <ClCompile Include="..\src\color.cpp">
+      <Filter>utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\CookTorranceMaterial.cpp">
+      <Filter>material</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MirrorMaterial.cpp">
+      <Filter>material</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\SunLight.cpp">
+      <Filter>light</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\XMLSceneReader.cpp">
+      <Filter>io</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\SceneReader.cpp">
+      <Filter>io</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\tinyxml2\tinyxml2.cpp">
+      <Filter>3rd</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Geometry.cpp">
+      <Filter>geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\string.cpp">
       <Filter>utility</Filter>
     </ClCompile>
   </ItemGroup>

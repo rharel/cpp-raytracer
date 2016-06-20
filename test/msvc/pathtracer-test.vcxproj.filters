@@ -54,6 +54,9 @@
     <ClCompile Include="..\src\unit\colorTest.cpp">
       <Filter>unit\utility</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\unit\XMLSceneReaderTest.cpp">
+      <Filter>unit\io</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="unit">
@@ -82,6 +85,9 @@
     </Filter>
     <Filter Include="unit\scene">
       <UniqueIdentifier>{4eb6921d-01bb-4b9c-9c62-ea2057988cb3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="unit\io">
+      <UniqueIdentifier>{09a1043b-0d7b-4190-b5a8-c5190eedbb1b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
