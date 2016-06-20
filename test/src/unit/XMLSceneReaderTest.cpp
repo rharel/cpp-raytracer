@@ -2,7 +2,7 @@
 
 #include "../helpers.h"
 
-#include <iris/XMLSceneReader.h>
+#include <iris/XMLConfigurationLoader.h>
 #include <iris/LambertMaterial.h>
 #include <iris/PlaneGeometry.h>
 #include <iris/SphereGeometry.h>
@@ -17,7 +17,7 @@
 #include <iostream>
 
 using namespace iris;
-using Status = SceneReader::Status;
+using Status = ConfigurationLoader::Status;
 
 
 template <typename T>
@@ -39,7 +39,7 @@ const T* get_geometry(const Configuration& config, const std::string& name)
 
 TEST_CASE("xml scene reader", "[scene-reader][xml-scene-reader]")
 {
-    XMLSceneReader reader;
+    XMLConfigurationLoader reader;
 
     SECTION("materials")
     {
@@ -52,7 +52,7 @@ TEST_CASE("xml scene reader", "[scene-reader][xml-scene-reader]")
 		                      "albedo='#000000'/>"
 	            "</materials>"
             "</configuration>";
-        const Configuration config = reader.read_from_string(xml);
+        const Configuration config = reader.load_from_string(xml);
         
         REQUIRE(reader.status() == Status::Success);
         
@@ -85,7 +85,7 @@ TEST_CASE("xml scene reader", "[scene-reader][xml-scene-reader]")
                              "pattern='black' />"
                 "</textures>"
             "</configuration>";
-        const Configuration config = reader.read_from_string(xml);
+        const Configuration config = reader.load_from_string(xml);
         
         REQUIRE(reader.status() == Status::Success);
 
@@ -118,7 +118,7 @@ TEST_CASE("xml scene reader", "[scene-reader][xml-scene-reader]")
 		                      "textureScaleU='0.3' textureScaleV='0.4' />"
 	            "</geometries>"
             "</configuration>";
-        const Configuration config = reader.read_from_string(xml);
+        const Configuration config = reader.load_from_string(xml);
         
         REQUIRE(reader.status() == Status::Success);
 
@@ -173,7 +173,7 @@ TEST_CASE("xml scene reader", "[scene-reader][xml-scene-reader]")
                 "</scene>"
             "</configuration>";
             
-        const Configuration config = reader.read_from_string(xml);
+        const Configuration config = reader.load_from_string(xml);
         
         REQUIRE(reader.status() == Status::Success);
 
@@ -248,18 +248,18 @@ TEST_CASE("xml scene reader", "[scene-reader][xml-scene-reader]")
                 "<sampler type='jitter' degree='3' />"
             "</configuration>";
 
-        const Configuration config_naive = reader.read_from_string(xml_naive);
+        const Configuration config_naive = reader.load_from_string(xml_naive);
         REQUIRE(reader.status() == Status::Success);
         auto sampler_naive = dynamic_cast<const NaiveSampler*>(config_naive.sampler.get());  
         REQUIRE(sampler_naive != nullptr);
 
-        const Configuration config_random = reader.read_from_string(xml_random);
+        const Configuration config_random = reader.load_from_string(xml_random);
         REQUIRE(reader.status() == Status::Success);
         auto sampler_random = dynamic_cast<const RandomSampler*>(config_random.sampler.get());  
         REQUIRE(sampler_random != nullptr);
         REQUIRE(sampler_random->sample_count() == 2);
 
-        const Configuration config_jitter = reader.read_from_string(xml_jitter);
+        const Configuration config_jitter = reader.load_from_string(xml_jitter);
         REQUIRE(reader.status() == Status::Success);
         auto sampler_jitter = dynamic_cast<const JitterSampler*>(config_jitter.sampler.get());  
         REQUIRE(sampler_jitter != nullptr);
@@ -276,12 +276,12 @@ TEST_CASE("xml scene reader", "[scene-reader][xml-scene-reader]")
                 "<tracer type='path' degree='2' />"
             "</configuration>";
 
-        const Configuration config_naive = reader.read_from_string(xml_naive);
+        const Configuration config_naive = reader.load_from_string(xml_naive);
         REQUIRE(reader.status() == Status::Success);
         auto tracer_naive = dynamic_cast<const NaiveTracer*>(config_naive.tracer.get());  
         REQUIRE(tracer_naive != nullptr);
 
-        const Configuration config_random = reader.read_from_string(xml_path);
+        const Configuration config_random = reader.load_from_string(xml_path);
         REQUIRE(reader.status() == Status::Success);
         auto tracer_path = dynamic_cast<const PathTracer*>(config_random.tracer.get());  
         REQUIRE(tracer_path != nullptr);
@@ -295,7 +295,7 @@ TEST_CASE("xml scene reader", "[scene-reader][xml-scene-reader]")
                         "translation='1,2,3' lookAt='4,5,6' />"
             "</configuration>";
 
-        const Configuration config = reader.read_from_string(xml);
+        const Configuration config = reader.load_from_string(xml);
         REQUIRE(reader.status() == Status::Success);
         REQUIRE(config.camera.fov() == glm::radians(75.0f));
         REQUIRE(config.camera.aspect() == 1);
@@ -311,7 +311,7 @@ TEST_CASE("xml scene reader", "[scene-reader][xml-scene-reader]")
                 "<image width='1' height='2' path='hello world' />"
             "</configuration>";
 
-        const Configuration config = reader.read_from_string(xml);
+        const Configuration config = reader.load_from_string(xml);
         REQUIRE(reader.status() == Status::Success);
         REQUIRE(config.image_size == Vector2u(1, 2));
         REQUIRE(config.image_path == "hello world");

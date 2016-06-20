@@ -1,19 +1,21 @@
-#ifndef IRIS_SCENE_READER_H
-#define IRIS_SCENE_READER_H
+#ifndef IRIS_CONFIGURATION_LOADER_H
+#define IRIS_CONFIGURATION_LOADER_H
 /**
  * @author Raoul Harel
  * @url github.com/rharel/cpp-raytracer
  *
- * SceneReader abstract class.
+ * ConfigurationLoader abstract class.
  */
 
 
 #include <iris/Material.h>
 #include <iris/Texture.h>
 #include <iris/Geometry.h>
+
 #include <iris/Scene.h>
 #include <iris/Object3D.h>
 #include <iris/Light.h>
+
 #include <iris/Sampler.h>
 #include <iris/Raytracer.h>
 #include <iris/Camera.h>
@@ -26,7 +28,7 @@
 namespace iris
 {
     /**
-     * Scene and tracing-configuration descriptor.
+     * Scene- and tracing-configuration descriptor.
      */
     class Configuration
     {
@@ -59,9 +61,9 @@ namespace iris
         std::string image_path = ".";
     };
     /**
-     * Reads external scenes and tracing configurations.
+     * Loads scene- and tracing-configurations.
      */
-    class SceneReader
+    class ConfigurationLoader
     {
         public:
         enum class Status : int
@@ -82,7 +84,7 @@ namespace iris
          *     ParsingError - when path contents could not be parsed.
          *     InternalError - when an unexpected internal failure occurs.
          */
-        virtual Configuration read_from_path(const std::string& path) = 0;
+        virtual Configuration load_from_path(const std::string& path) = 0;
         /**
          * Reads scene from path. 
          *
@@ -92,10 +94,10 @@ namespace iris
          *     ParsingError - when string contents could not be parsed.
          *     InternalError - when an unexpected internal failure occurs.
          */
-        virtual Configuration read_from_string(const std::string& xml) = 0;
+        virtual Configuration load_from_string(const std::string& xml) = 0;
 
         /**
-         * Gets status. Query this after calls to various read methods.
+         * Gets status. Query this after calls to various loading methods.
          */
         Status status() const;
         /**
@@ -105,9 +107,9 @@ namespace iris
 
         protected:
         Status status_ = Status::Success;
-        std::string status_message_;
+        std::string status_message_ = "";
     };
 }
 
 
-#endif  // IRIS_SCENE_READER_H
+#endif  // IRIS_CONFIGURATION_LOADER_H

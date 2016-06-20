@@ -1,5 +1,4 @@
 #include <iris/Composer.h>
-#include <iris/aggregators.h>
 
 #include <vector>
 
@@ -9,51 +8,59 @@ using namespace iris;
 
 NaiveSampler Composer::default_sampler;
 UniformAggregator Composer::default_aggregator;
-PathTracer Composer::default_tracer(3);
+PathTracer Composer::default_tracer;
 
 Composer::Composer
 (
-    const size_t width, const size_t height,
-    const Scene& scene, const Camera& camera
+    const Scene& scene, 
+    const Camera& camera,
+    const Vector2u& image_size
 )
     : Composer
 (
-    width, height, 
-    scene, camera, 
-    default_sampler, default_aggregator, 
-    default_tracer
+    scene, camera, image_size, 
+    default_sampler,  
+    default_tracer, 
+    default_aggregator
 ) {}
 
 Composer::Composer
 (
-    const size_t width, const size_t height,
-    const Scene& scene, const Camera& camera,
-    Sampler& sampler, const Aggregator& aggregator,
-    const Raytracer& tracer
+    const Scene& scene, 
+    const Camera& camera,
+    const Vector2u& image_size,
+    Sampler& sampler, 
+    const Raytracer& tracer,
+    const Aggregator& aggregator
 )
-    : image_(width, height), 
-      scene_(&scene), camera_(&camera), 
-      sampler_(&sampler), aggregator_(&aggregator),
-      tracer_(&tracer) {}
+    : scene_(&scene), camera_(&camera), 
+      image_(image_size.x, image_size.y),  
+      sampler_(&sampler), 
+      tracer_(&tracer),
+      aggregator_(&aggregator) {}
 
 void Composer::render()
 {
     render(Vector2u(0, 0), 0);
-    
 }
-Vector2u Composer::render(const Vector2u& offset, const size_t count)
+Vector2u Composer::render
+(
+    const Vector2u& offset, 
+    const size_t count
+)
 {
     const size_t w = image().width();
     const size_t h = image().height();
     size_t x = offset.x;
     size_t y = offset.y;
     size_t i = 0;
-    while (y < h && (count == 0 || i != count))
+    while (y < h && (count == 0 || i < count))
     {
         render_pixel(x, y);
+        ++i;
+        
         ++x;
         if (x == w) { x = 0; ++y; }
-        ++i;
     }
     return Vector2u(x, y);
 }
@@ -79,31 +86,34 @@ void Composer::render_pixel
         samples.push_back(sample);
         colors.push_back(color);
     }
-
-    const Vector3 average = aggregator_->operator()
+    const Vector3 average_color = aggregator_->operator()
     (
         &colors[0], &samples[0], 
         colors.size()
     );
-    image_.pixel(x, y, average);
+    image_.color_pixel(x, y, average_color);
 }
-Ray Composer::ray_through(const float x, const float y) const
+Ray Composer::ray_through
+(
+    const float x, 
+    const float y
+) const
 {
     // Pixel in normalized window space
-    const Vector2 pn
+    const Vector2 Pn
     (
         x / static_cast<float>(image().width()),
         y / static_cast<float>(image().height())
     );
     // Pixel in camera space
-    const Vector3 pc = camera_->on_near(pn.x, pn.y);
+    const Vector3 Pc = camera_->on_near(Pn.x, Pn.y);
     // Pixel in world space
-    const Vector3 p(camera_->view_matrix() * Vector4(pc, 1));
+    const Vector3 Pw(camera_->view_matrix() * Vector4(Pc, 1));
 
     // Ray origin in world space
     const Vector3 o = camera_->position();
     // Ray direction in world space
-    const Vector3 D = p - o;
+    const Vector3 D = Pw - o;
 
     return Ray(o, D);
 }

@@ -40,7 +40,7 @@ namespace iris
         /**
          * Sets pixel color.
          */
-        void pixel(size_t x, size_t y, const Vector3& color);
+        void color_pixel(size_t x, size_t y, const Vector3& color);
 
         /**
          * Checks if width or height are zero.

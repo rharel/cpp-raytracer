@@ -27,19 +27,19 @@ namespace iris
         static const Vector3 U, V;
 
         /**
-         * Creates default geometry with texture size = (1, 1).
+         * Creates default geometry with texture scale = (1, 1).
          */
         PlaneGeometry();
         /**
          * Creates geometry with given texture scale.
          *
-         * @param sx Texture scale along the u axis.
-         * @param sy Texture scale along the v axis.
+         * @param su Texture scale along the u axis.
+         * @param sv Texture scale along the v axis.
          */
         PlaneGeometry(float su, float sv);
 
         /**
-         * Checks for ray-surface intersection.
+         * Checks for ray-geometry intersection.
          *
          * @param[in, out] result Raycast result description.
          *

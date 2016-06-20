@@ -1,23 +1,26 @@
-#ifndef IRIS_XML_SCENE_READER_H
-#define IRIS_XML_SCENE_READER_H
+#ifndef IRIS_XML_CONFIGURATION_LOADER_H
+#define IRIS_XML_CONFIGURATION_LOADER_H
 /**
  * @author Raoul Harel
  * @url github.com/rharel/cpp-raytracer
  *
- * XMLSceneReader class.
+ * XMLConfigurationLoader class.
  */
 
 
-#include <iris/SceneReader.h>
+#include <iris/ConfigurationLoader.h>
+
 #include <iris/Material.h>
 #include <iris/Texture.h>
 #include <iris/Geometry.h>
 #include <iris/Object3D.h>
 #include <iris/Light.h>
+#include <iris/vector_types.h>
 
 #include "../lib/tinyxml2/tinyxml2.h"
 
 #include <string>
+#include <vector>
 
 
 namespace iris
@@ -25,7 +28,7 @@ namespace iris
     /**
      * Reads external scenes and tracing configurations from xml files.
      */
-    class XMLSceneReader : public SceneReader
+    class XMLConfigurationLoader : public ConfigurationLoader
     {
         public:
         static const char* ELEMENT_CONFIGURATION;
@@ -51,8 +54,8 @@ namespace iris
         static const char* ATTRIBUTE_HEIGHT;
         static const char* ATTRIBUTE_ALBEDO;
         static const char* ATTRIBUTE_PATTERN;
-        static const char* ATTRIBUTE_TEXTURE_SCALE_X;
-        static const char* ATTRIBUTE_TEXTURE_SCALE_Y;
+        static const char* ATTRIBUTE_TEXTURE_SCALE_U;
+        static const char* ATTRIBUTE_TEXTURE_SCALE_V;
         static const char* ATTRIBUTE_GEOMETRY;
         static const char* ATTRIBUTE_TEXTURE;
         static const char* ATTRIBUTE_TRANSLATION;
@@ -90,7 +93,7 @@ namespace iris
          *     ParsingError - when path contents could not be parsed.
          *     InternalError - when an unexpected internal failure occurs.
          */
-        Configuration read_from_path(const std::string& path) override;
+        Configuration load_from_path(const std::string& path) override;
         /**
          * Reads scene from path.
          *
@@ -100,7 +103,7 @@ namespace iris
          *     ParsingError - when string contents could not be parsed.
          *     InternalError - when an unexpected internal failure occurs.
          */
-        Configuration read_from_string(const std::string& xml) override;
+        Configuration load_from_string(const std::string& xml) override;
 
         private:
         typedef tinyxml2::XMLElement Element;
@@ -149,4 +152,4 @@ namespace iris
 }
 
 
-#endif  // IRIS_XML_SCENE_READER_H
+#endif  // IRIS_XML_CONFIGURATION_LOADER_H

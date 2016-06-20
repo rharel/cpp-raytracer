@@ -9,6 +9,8 @@
 
 
 #include <iris/Geometry.h>
+#include <iris/Raycast.h>
+#include <iris/vector_types.h>
 
 
 namespace iris
@@ -29,13 +31,13 @@ namespace iris
         /**
          * Creates geometry with given texture scale.
          *
-         * @param sx Texture scale along the u axis.
-         * @param sy Texture scale along the v axis.
+         * @param su Texture scale along the u axis.
+         * @param sv Texture scale along the v axis.
          */
         SphereGeometry(float su, float sv);
 
         /**
-         * Checks for ray-surface intersection.
+         * Checks for ray-geometry intersection.
          *
          * @param[in, out] result Raycast result description.
          *

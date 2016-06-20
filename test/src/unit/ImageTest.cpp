@@ -42,20 +42,20 @@ TEST_CASE("image", "[image]")
         SECTION("red")
         {
             const Vector3 red(2, -3, -4);
-            d.pixel(x, y, red);
+            d.color_pixel(x, y, red);
             REQUIRE(d.pixel(x, y) == Vector3(1, 0, 0));
         }
         SECTION("green")
         {
             const Vector3 green(-3, 2, -4);
-            d.pixel(x, y, green);
+            d.color_pixel(x, y, green);
             REQUIRE(d.pixel(x, y) == Vector3(0, 1, 0));
             
         }
         SECTION("blue")
         {
             const Vector3 blue(-3, -4, 2);
-            d.pixel(x, y, blue);
+            d.color_pixel(x, y, blue);
             REQUIRE(d.pixel(x, y) == Vector3(0, 0, 1));
         }
     }

@@ -1,25 +1,27 @@
-#include <iris/XMLSceneReader.h>
+#include <iris/XMLConfigurationLoader.h>
 
 #include <iris/LambertMaterial.h>
 
-#include <iris/Geometry.h>
 #include <iris/PlaneGeometry.h>
 #include <iris/SphereGeometry.h>
 
 #include <iris/Scene.h>
+
 #include <iris/SphereLight.h>
+
 #include <iris/NaiveSampler.h>
 #include <iris/RandomSampler.h>
 #include <iris/JitterSampler.h>
+
 #include <iris/NaiveTracer.h>
 #include <iris/PathTracer.h>
 
 #include <iris/color.h>
 #include <iris/string.h>
 
-#include <queue>
 #include <fstream>
 #include <sstream>
+#include <queue>
 
 
 using namespace iris;
@@ -40,66 +42,71 @@ using TracerPtr = Configuration::TracerPtr;
 using std::string;
 
 
-const char* XMLSceneReader::ELEMENT_CONFIGURATION = "configuration";
-const char* XMLSceneReader::ELEMENT_MATERIALS = "materials";
-const char* XMLSceneReader::ELEMENT_MATERIAL = "material";
-const char* XMLSceneReader::ELEMENT_TEXTURES = "textures";
-const char* XMLSceneReader::ELEMENT_TEXTURE = "texture";
-const char* XMLSceneReader::ELEMENT_GEOMETRIES = "geometries";
-const char* XMLSceneReader::ELEMENT_GEOMETRY = "geometry";
-const char* XMLSceneReader::ELEMENT_SCENE = "scene";
-const char* XMLSceneReader::ELEMENT_OBJECTS = "objects";
-const char* XMLSceneReader::ELEMENT_OBJECT = "object";
-const char* XMLSceneReader::ELEMENT_LIGHTS = "lights";
-const char* XMLSceneReader::ELEMENT_LIGHT = "light";
-const char* XMLSceneReader::ELEMENT_SAMPLER = "sampler";
-const char* XMLSceneReader::ELEMENT_TRACER = "tracer";
-const char* XMLSceneReader::ELEMENT_CAMERA = "camera";
-const char* XMLSceneReader::ELEMENT_IMAGE = "image";
+const char* XMLConfigurationLoader::ELEMENT_CONFIGURATION = "configuration";
+const char* XMLConfigurationLoader::ELEMENT_MATERIALS = "materials";
+const char* XMLConfigurationLoader::ELEMENT_MATERIAL = "material";
+const char* XMLConfigurationLoader::ELEMENT_TEXTURES = "textures";
+const char* XMLConfigurationLoader::ELEMENT_TEXTURE = "texture";
+const char* XMLConfigurationLoader::ELEMENT_GEOMETRIES = "geometries";
+const char* XMLConfigurationLoader::ELEMENT_GEOMETRY = "geometry";
+const char* XMLConfigurationLoader::ELEMENT_SCENE = "scene";
+const char* XMLConfigurationLoader::ELEMENT_OBJECTS = "objects";
+const char* XMLConfigurationLoader::ELEMENT_OBJECT = "object";
+const char* XMLConfigurationLoader::ELEMENT_LIGHTS = "lights";
+const char* XMLConfigurationLoader::ELEMENT_LIGHT = "light";
+const char* XMLConfigurationLoader::ELEMENT_SAMPLER = "sampler";
+const char* XMLConfigurationLoader::ELEMENT_TRACER = "tracer";
+const char* XMLConfigurationLoader::ELEMENT_CAMERA = "camera";
+const char* XMLConfigurationLoader::ELEMENT_IMAGE = "image";
 
-const char* XMLSceneReader::ATTRIBUTE_NAME = "name";
-const char* XMLSceneReader::ATTRIBUTE_TYPE = "type";
-const char* XMLSceneReader::ATTRIBUTE_WIDTH = "width";
-const char* XMLSceneReader::ATTRIBUTE_HEIGHT = "height";
-const char* XMLSceneReader::ATTRIBUTE_ALBEDO = "albedo";
-const char* XMLSceneReader::ATTRIBUTE_PATTERN = "pattern";
-const char* XMLSceneReader::ATTRIBUTE_TEXTURE_SCALE_X = "textureScaleU";
-const char* XMLSceneReader::ATTRIBUTE_TEXTURE_SCALE_Y = "textureScaleV";
-const char* XMLSceneReader::ATTRIBUTE_GEOMETRY = "geometry";
-const char* XMLSceneReader::ATTRIBUTE_TEXTURE = "texture";
-const char* XMLSceneReader::ATTRIBUTE_TRANSLATION = "translation";
-const char* XMLSceneReader::ATTRIBUTE_SCALE = "scale";
-const char* XMLSceneReader::ATTRIBUTE_ROTATION = "rotation";
-const char* XMLSceneReader::ATTRIBUTE_COLOR = "color";
-const char* XMLSceneReader::ATTRIBUTE_INTENSITY = "intensity";
-const char* XMLSceneReader::ATTRIBUTE_DEGREE = "degree";
-const char* XMLSceneReader::ATTRIBUTE_FOV = "fov";
-const char* XMLSceneReader::ATTRIBUTE_ASPECT = "aspect";
-const char* XMLSceneReader::ATTRIBUTE_NEAR = "near";
-const char* XMLSceneReader::ATTRIBUTE_FAR = "far";
-const char* XMLSceneReader::ATTRIBUTE_LOOK_AT = "lookAt";
-const char* XMLSceneReader::ATTRIBUTE_PATH = "path";
+const char* XMLConfigurationLoader::ATTRIBUTE_NAME = "name";
+const char* XMLConfigurationLoader::ATTRIBUTE_TYPE = "type";
+const char* XMLConfigurationLoader::ATTRIBUTE_WIDTH = "width";
+const char* XMLConfigurationLoader::ATTRIBUTE_HEIGHT = "height";
+const char* XMLConfigurationLoader::ATTRIBUTE_ALBEDO = "albedo";
+const char* XMLConfigurationLoader::ATTRIBUTE_PATTERN = "pattern";
+const char* XMLConfigurationLoader::ATTRIBUTE_TEXTURE_SCALE_U = "textureScaleU";
+const char* XMLConfigurationLoader::ATTRIBUTE_TEXTURE_SCALE_V = "textureScaleV";
+const char* XMLConfigurationLoader::ATTRIBUTE_GEOMETRY = "geometry";
+const char* XMLConfigurationLoader::ATTRIBUTE_TEXTURE = "texture";
+const char* XMLConfigurationLoader::ATTRIBUTE_TRANSLATION = "translation";
+const char* XMLConfigurationLoader::ATTRIBUTE_SCALE = "scale";
+const char* XMLConfigurationLoader::ATTRIBUTE_ROTATION = "rotation";
+const char* XMLConfigurationLoader::ATTRIBUTE_COLOR = "color";
+const char* XMLConfigurationLoader::ATTRIBUTE_INTENSITY = "intensity";
+const char* XMLConfigurationLoader::ATTRIBUTE_DEGREE = "degree";
+const char* XMLConfigurationLoader::ATTRIBUTE_FOV = "fov";
+const char* XMLConfigurationLoader::ATTRIBUTE_ASPECT = "aspect";
+const char* XMLConfigurationLoader::ATTRIBUTE_NEAR = "near";
+const char* XMLConfigurationLoader::ATTRIBUTE_FAR = "far";
+const char* XMLConfigurationLoader::ATTRIBUTE_LOOK_AT = "lookAt";
+const char* XMLConfigurationLoader::ATTRIBUTE_PATH = "path";
 
-const char* XMLSceneReader::VALUE_LAMBERT = "lambert";
-const char* XMLSceneReader::VALUE_PLANE = "plane";
-const char* XMLSceneReader::VALUE_SPHERE = "sphere";
-const char* XMLSceneReader::VALUE_NAIVE = "naive";
-const char* XMLSceneReader::VALUE_RANDOM = "random";
-const char* XMLSceneReader::VALUE_JITTER = "jitter";
-const char* XMLSceneReader::VALUE_PATH = "path";
+const char* XMLConfigurationLoader::VALUE_LAMBERT = "lambert";
+const char* XMLConfigurationLoader::VALUE_PLANE = "plane";
+const char* XMLConfigurationLoader::VALUE_SPHERE = "sphere";
+const char* XMLConfigurationLoader::VALUE_NAIVE = "naive";
+const char* XMLConfigurationLoader::VALUE_RANDOM = "random";
+const char* XMLConfigurationLoader::VALUE_JITTER = "jitter";
+const char* XMLConfigurationLoader::VALUE_PATH = "path";
 
-const char XMLSceneReader::HEX_SYMBOL = '#';
+const char XMLConfigurationLoader::HEX_SYMBOL = '#';
 
-const char XMLSceneReader::DELIMETER = ',';
+const char XMLConfigurationLoader::DELIMETER = ',';
 
-Configuration XMLSceneReader::read_from_path(const std::string& path)
+Configuration XMLConfigurationLoader::load_from_path(const string& path)
 {
     std::ifstream file(path);
+    if (!file.is_open())
+    {
+        status_ = Status::FileError;
+        return Configuration();
+    }
     std::stringstream contents;
     contents << file.rdbuf();
-    return read_from_string(contents.str());
+    return load_from_string(contents.str());
 }
-Configuration XMLSceneReader::read_from_string(const std::string& xml)
+Configuration XMLConfigurationLoader::load_from_string(const string& xml)
 {
     configuration_ = Configuration();
     
@@ -107,7 +114,6 @@ Configuration XMLSceneReader::read_from_string(const std::string& xml)
     status_message_ = "";
 
     XMLDocument doc;
-    auto s = std::string(xml.c_str());
     if (doc.Parse(xml.c_str()) != XML_NO_ERROR)
     {
         status_ = Status::ParsingError;
@@ -120,7 +126,7 @@ Configuration XMLSceneReader::read_from_string(const std::string& xml)
     return configuration_;
 }
 
-bool XMLSceneReader::require_has_child
+bool XMLConfigurationLoader::require_has_child
 (
     const Element* target,
     const char* name
@@ -136,7 +142,7 @@ bool XMLSceneReader::require_has_child
     }
     else { return true; }
 }
-bool XMLSceneReader::require_has_attributes
+bool XMLConfigurationLoader::require_has_attributes
 (
     const Element* target,
     const std::vector<const char*>& attribute_names
@@ -156,7 +162,7 @@ bool XMLSceneReader::require_has_attributes
     return true;
 }
 
-void XMLSceneReader::parse_configuration(const Element* source)
+void XMLConfigurationLoader::parse_configuration(const Element* source)
 {
     const Element* e_materials = source->FirstChildElement(ELEMENT_MATERIALS);
     const Element* e_textures = source->FirstChildElement(ELEMENT_TEXTURES);
@@ -196,7 +202,7 @@ void XMLSceneReader::parse_configuration(const Element* source)
     parse_image(e_image);
 }
 
-void XMLSceneReader::parse_materials(const Element* source)
+void XMLConfigurationLoader::parse_materials(const Element* source)
 {
     if (!require_has_child(source, ELEMENT_MATERIAL)) { return; }
     const std::vector<const char*> required_attributes
@@ -225,7 +231,7 @@ void XMLSceneReader::parse_materials(const Element* source)
         child = child->NextSiblingElement(ELEMENT_MATERIAL);
     }
 }
-Material* XMLSceneReader::parse_material_lambert(const Element* source)
+Material* XMLConfigurationLoader::parse_material_lambert(const Element* source)
 {
     if (!require_has_attributes(source, {ATTRIBUTE_ALBEDO})) { return nullptr; }
 
@@ -234,7 +240,7 @@ Material* XMLSceneReader::parse_material_lambert(const Element* source)
     return new LambertMaterial(albedo);
 }
 
-void XMLSceneReader::parse_textures(const Element* source)
+void XMLConfigurationLoader::parse_textures(const Element* source)
 {
     if (!require_has_child(source, ELEMENT_TEXTURE)) { return; }
     const std::vector<const char*> required_attributes
@@ -255,7 +261,7 @@ void XMLSceneReader::parse_textures(const Element* source)
         child = child->NextSiblingElement(ELEMENT_TEXTURE);
     }
 }
-Texture* XMLSceneReader::parse_texture(const Element* source)
+Texture* XMLConfigurationLoader::parse_texture(const Element* source)
 {
     const size_t width = source->IntAttribute(ATTRIBUTE_WIDTH);
     const size_t height = source->IntAttribute(ATTRIBUTE_HEIGHT);
@@ -291,7 +297,7 @@ Texture* XMLSceneReader::parse_texture(const Element* source)
     return new Texture(width, height, &pattern[0]);
 }
 
-void XMLSceneReader::parse_geometries(const Element* source)
+void XMLConfigurationLoader::parse_geometries(const Element* source)
 {
     if (!require_has_child(source, ELEMENT_GEOMETRY)) { return; }
     const std::vector<const char*> required_attributes
@@ -321,10 +327,10 @@ void XMLSceneReader::parse_geometries(const Element* source)
         child = child->NextSiblingElement(ELEMENT_GEOMETRY);
     }
 }
-Geometry* XMLSceneReader::parse_geometry_plane(const Element* source)
+Geometry* XMLConfigurationLoader::parse_geometry_plane(const Element* source)
 {
-    const float texture_scale_x = source->FloatAttribute(ATTRIBUTE_TEXTURE_SCALE_X);
-    const float texture_scale_y = source->FloatAttribute(ATTRIBUTE_TEXTURE_SCALE_Y);
+    const float texture_scale_x = source->FloatAttribute(ATTRIBUTE_TEXTURE_SCALE_U);
+    const float texture_scale_y = source->FloatAttribute(ATTRIBUTE_TEXTURE_SCALE_V);
     if (texture_scale_x <= 0 || texture_scale_y <= 0)
     {
         status_ = Status::ParsingError;
@@ -333,10 +339,10 @@ Geometry* XMLSceneReader::parse_geometry_plane(const Element* source)
     }
     return new PlaneGeometry(texture_scale_x, texture_scale_y);
 }
-Geometry* XMLSceneReader::parse_geometry_sphere(const Element* source)
+Geometry* XMLConfigurationLoader::parse_geometry_sphere(const Element* source)
 {
-    const float texture_scale_x = source->FloatAttribute(ATTRIBUTE_TEXTURE_SCALE_X);
-    const float texture_scale_y = source->FloatAttribute(ATTRIBUTE_TEXTURE_SCALE_Y);
+    const float texture_scale_x = source->FloatAttribute(ATTRIBUTE_TEXTURE_SCALE_U);
+    const float texture_scale_y = source->FloatAttribute(ATTRIBUTE_TEXTURE_SCALE_V);
     if (texture_scale_x <= 0 || texture_scale_y <= 0)
     {
         status_ = Status::ParsingError;
@@ -346,7 +352,7 @@ Geometry* XMLSceneReader::parse_geometry_sphere(const Element* source)
     return new SphereGeometry(texture_scale_x, texture_scale_y);
 }
 
-void XMLSceneReader::parse_scene(const Element* source)
+void XMLConfigurationLoader::parse_scene(const Element* source)
 {
     configuration_.scene = ScenePtr(new Scene());
     
@@ -365,7 +371,7 @@ void XMLSceneReader::parse_scene(const Element* source)
     }
 }
 
-void XMLSceneReader::parse_objects(const Element* source, Object3D* parent)
+void XMLConfigurationLoader::parse_objects(const Element* source, Object3D* parent)
 {
     if (!require_has_child(source, ELEMENT_OBJECT)) { return; }
     const Element* child = source->FirstChildElement(ELEMENT_OBJECT);
@@ -378,7 +384,7 @@ void XMLSceneReader::parse_objects(const Element* source, Object3D* parent)
         child = child->NextSiblingElement(ELEMENT_OBJECT);
     }
 }
-Object3D* XMLSceneReader::parse_object(const Element* source, Object3D* parent)
+Object3D* XMLConfigurationLoader::parse_object(const Element* source, Object3D* parent)
 {
     const char* translation_str = source->Attribute(ATTRIBUTE_TRANSLATION);
     const char* scale_str = source->Attribute(ATTRIBUTE_SCALE);
@@ -445,7 +451,7 @@ Object3D* XMLSceneReader::parse_object(const Element* source, Object3D* parent)
     return object;
 }
 
-void XMLSceneReader::parse_lights(const Element* source)
+void XMLConfigurationLoader::parse_lights(const Element* source)
 {
     if (!require_has_child(source, ELEMENT_LIGHT)) { return; }
     const std::vector<const char*> required_attributes
@@ -478,7 +484,7 @@ void XMLSceneReader::parse_lights(const Element* source)
         child = child->NextSiblingElement(ELEMENT_LIGHT);
     }
 }
-Light* XMLSceneReader::parse_light_sphere(const Element* source)
+Light* XMLConfigurationLoader::parse_light_sphere(const Element* source)
 {
     const char* color_str = source->Attribute(ATTRIBUTE_COLOR);
     const Vector3 color = parse_vector3(color_str);
@@ -509,7 +515,7 @@ Light* XMLSceneReader::parse_light_sphere(const Element* source)
     return light;
 }
 
-void XMLSceneReader::parse_sampler(const Element* source)
+void XMLConfigurationLoader::parse_sampler(const Element* source)
 {
     if (source == nullptr)
     {
@@ -551,7 +557,7 @@ void XMLSceneReader::parse_sampler(const Element* source)
         status_message_ = "Unknown sampler type: " + string(type);
     }
 }
-void XMLSceneReader::parse_tracer(const Element* source)
+void XMLConfigurationLoader::parse_tracer(const Element* source)
 {
     if (source == nullptr)
     {
@@ -582,7 +588,7 @@ void XMLSceneReader::parse_tracer(const Element* source)
         status_message_ = "Unknown tracer type: " + string(type);
     }
 }
-void XMLSceneReader::parse_camera(const Element* source)
+void XMLConfigurationLoader::parse_camera(const Element* source)
 {
     if (source == nullptr) { return; }
     
@@ -607,7 +613,7 @@ void XMLSceneReader::parse_camera(const Element* source)
     }
     configuration_.camera.update();
 }
-void XMLSceneReader::parse_image(const Element* source)
+void XMLConfigurationLoader::parse_image(const Element* source)
 {
     if (source == nullptr) { return; }
 
@@ -628,7 +634,7 @@ void XMLSceneReader::parse_image(const Element* source)
     }
 }
 
-Vector3 XMLSceneReader::parse_color(const char* str)
+Vector3 XMLConfigurationLoader::parse_color(const char* str)
 {
     Vector3 result;
     if (str[0] == HEX_SYMBOL)
@@ -646,7 +652,7 @@ Vector3 XMLSceneReader::parse_color(const char* str)
     }
     return result;
 }
-Vector3 XMLSceneReader::parse_vector3(const char* str)
+Vector3 XMLConfigurationLoader::parse_vector3(const char* str)
 {
     Vector3 result;
 

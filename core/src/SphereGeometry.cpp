@@ -1,5 +1,5 @@
-#include <iris/math.h>
 #include <iris/SphereGeometry.h>
+#include <iris/math.h>
 
 #include <glm/geometric.hpp>
 
@@ -7,12 +7,10 @@
 
 
 using namespace iris;
-using namespace constant;
-using glm::dot;
-using glm::normalize;
+using namespace iris::constant;
 
 
-const Vector3 SphereGeometry::center = Vector3(0);
+const Vector3 SphereGeometry::center = Vector3(0, 0, 0);
 const float SphereGeometry::radius = 1;
 
 SphereGeometry::SphereGeometry()
@@ -49,6 +47,9 @@ void SphereGeometry::raycast(Raycast& result) const
      *      delta > 0 -> two solutions {t0, t1}, 
      *                   take min(t0, t1).
      */
+    using glm::dot;
+    using glm::normalize;
+
     const Ray& ray = result.ray();
     const Vector3& O = ray.origin();
     const Vector3& D = ray.direction();
@@ -77,8 +78,8 @@ void SphereGeometry::raycast(Raycast& result) const
     // contact material //
     const float theta = acos(P.z / r);  // inclination
     const float phi = atan(P.y / P.x);  // azimuth
-    const float u = theta / m_pi / texture_scale().x;
-    const float v = phi / m_2_pi / texture_scale().y;
+    const float u = theta / m_pi / texture_scale_.x;
+    const float v = phi / m_2_pi / texture_scale_.y;
 
     result.contact(t, N, Vector2(u, v));
 }

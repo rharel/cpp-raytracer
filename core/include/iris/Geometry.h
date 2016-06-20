@@ -20,9 +20,9 @@ namespace iris
     {
         public:
         /**
-         * Checks for ray-surface intersection.
+         * Checks for ray-geometry intersection.
          *
-         * @param[in, out] result Raycast result description.
+         * @param[in, out] result Raycast collision description.
          *
          * @details
          *  Call t_max = result.time(). 

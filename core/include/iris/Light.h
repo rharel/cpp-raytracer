@@ -9,6 +9,7 @@
 
 
 #include <iris/Object3D.h>
+#include <iris/vector_types.h>
 
 
 namespace iris
@@ -34,7 +35,11 @@ namespace iris
          * @param[out] position Surface point.
          * @param[out] normal   Normal at point.
          */
-        virtual void random_on_surface(Vector3& position, Vector3& normal) const = 0;
+        virtual void random_on_surface
+        (
+            Vector3& position, 
+            Vector3& normal
+        ) const = 0;
         
         /**
          * Gets light surface area.

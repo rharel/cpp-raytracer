@@ -37,32 +37,34 @@ namespace iris
          */
         Composer
         (
-            size_t image_width, size_t image_height,
-            const Scene& scene, const Camera& camera
+            const Scene& scene, 
+            const Camera& camera,
+            const Vector2u& image_size
         );
         /**
-         * Creates composer with given sampler/tracer.
+         * Creates composer with given sampler, tracer, and aggregator.
          */
         Composer
         (
-            size_t image_width, size_t image_height,
-            const Scene& scene, const Camera& camera,
-            Sampler& sampler, const Aggregator& aggregator,
-            const Raytracer& tracer
+            const Scene& scene, 
+            const Camera& camera,
+            const Vector2u& image_size,
+            Sampler& sampler, 
+            const Raytracer& tracer,
+            const Aggregator& aggregator
         );
 
         /**
-         * Renders a traced image.
+         * Renders image.
          */
         void render();
         /*
          * Renders to selected range of pixels.
          *
-         * @param offset Pixel from which to start rendering.
-         * @param count  Number of pixels to render. Zero-value implies
-         *               all.
+         * @param offset Range start.
+         * @param count  Range size (zero implies entire image).
          *
-         * @returns Coordinates of last pixel rendered.
+         * @returns Range end (exclusive).
          */
         Vector2u render(const Vector2u& offset, size_t count);
 
@@ -85,13 +87,12 @@ namespace iris
          */
         Ray ray_through(float x, float y) const;
 
-        Image image_;
-        Sampler* sampler_;
-        const Aggregator* aggregator_;
-
         const Scene* scene_;
         const Camera* camera_;
+        Sampler* sampler_;
         const Raytracer* tracer_;
+        const Aggregator* aggregator_;
+        Image image_;
     };
 }
 

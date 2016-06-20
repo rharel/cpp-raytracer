@@ -22,7 +22,7 @@ Image::Image(const size_t width, const size_t height)
 
 bool Image::is_empty() const
 {
-    return width() == 0 ||  
+    return width() == 0 || 
            height() == 0;
 }
 
@@ -30,7 +30,7 @@ const Vector3& Image::pixel(const size_t x, const size_t y) const
 {
     return data_.at(y).at(x);
 }
-void Image::pixel
+void Image::color_pixel
 (
     const size_t x, const size_t y,
     const Vector3& color

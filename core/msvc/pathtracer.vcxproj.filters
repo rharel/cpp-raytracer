@@ -98,17 +98,17 @@
     <ClInclude Include="..\include\iris\SunLight.h">
       <Filter>light</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\iris\XMLSceneReader.h">
-      <Filter>io</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\iris\SceneReader.h">
-      <Filter>io</Filter>
-    </ClInclude>
-    <ClInclude Include="..\lib\tinyxml2\tinyxml2.h">
-      <Filter>3rd</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\iris\string.h">
       <Filter>utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\tinyxml2\tinyxml2.h">
+      <Filter>3rd\tinyxml2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\iris\ConfigurationLoader.h">
+      <Filter>io</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\iris\XMLConfigurationLoader.h">
+      <Filter>io</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -147,6 +147,9 @@
     </Filter>
     <Filter Include="3rd">
       <UniqueIdentifier>{92350a82-b5a1-495d-82dc-7617eb934051}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rd\tinyxml2">
+      <UniqueIdentifier>{7169fe68-ce29-4cff-b8e3-0763e99c4c90}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -228,20 +231,20 @@
     <ClCompile Include="..\src\SunLight.cpp">
       <Filter>light</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\XMLSceneReader.cpp">
-      <Filter>io</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\SceneReader.cpp">
-      <Filter>io</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\tinyxml2\tinyxml2.cpp">
-      <Filter>3rd</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\Geometry.cpp">
       <Filter>geometry</Filter>
     </ClCompile>
     <ClCompile Include="..\src\string.cpp">
       <Filter>utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\tinyxml2\tinyxml2.cpp">
+      <Filter>3rd\tinyxml2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\ConfigurationLoader.cpp">
+      <Filter>io</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\XMLConfigurationLoader.cpp">
+      <Filter>io</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

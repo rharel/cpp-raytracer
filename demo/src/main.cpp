@@ -52,20 +52,38 @@ void save(const Image& image, const std::string& path)
 void main()
 {
     const char* config_path = "../config/checkered_plane.xml";
-    XMLSceneReader reader;
-    Configuration config = reader.read_from_path(config_path);
+    XMLConfigurationLoader reader;
+    Configuration config = reader.load_from_path(config_path);
     std::cout << reader.status_message() << std::endl;
 
     UniformAggregator aggregator;
     Composer composer
     (
-        config.image_size.x, config.image_size.y, 
-        *config.scene, config.camera, 
-        *config.sampler, aggregator, 
-        *config.tracer
+        *config.scene, config.camera, config.image_size,
+        *config.sampler, *config.tracer, aggregator 
     );
     auto begin = std::chrono::high_resolution_clock::now();
-    composer.render();
+    const Vector2u last
+    (
+        composer.image().width(), 
+        composer.image().height()
+    );
+    Vector2u offset(0, 0);
+    const size_t n = 512; static_cast<size_t>(0.01f * composer.image().size());
+    size_t k = 0;
+    while (offset.y < last.y)
+    {
+        offset = composer.render(offset, n);
+        k += n;
+        const int pct = static_cast<int>(round
+        (
+            100.0f * 
+            static_cast<float>(k) / 
+            static_cast<float>(composer.image().size())
+        ));
+        std::cout << pct << "%" << std::endl;
+    }
+    //composer.render();
     auto end = std::chrono::high_resolution_clock::now();
     
     std::cout << "Time: "
