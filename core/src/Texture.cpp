@@ -1,4 +1,3 @@
-#include <iris/LambertMaterial.h>
 #include <iris/Texture.h>
 
 #include <algorithm>
@@ -30,8 +29,10 @@ Texture::Texture
 
 const Material& Texture::sample(float u, float v) const
 {
-    if (resolution().x == 0 || 
-        resolution().y == 0)
+    const size_t w = resolution_.x;
+    const size_t h = resolution_.y;
+    
+    if (w == 0 || h == 0)
     {
         return Texture::default_material;
     }
@@ -41,14 +42,14 @@ const Material& Texture::sample(float u, float v) const
     u = u < 0 ? 1 - u_mod_1 : u_mod_1;
     v = v < 0 ? 1 - v_mod_1 : v_mod_1;
 
-    const float dx = 1.0f / static_cast<float>(resolution().x);
-    const float dy = 1.0f / static_cast<float>(resolution().y);
+    const float dx = 1.0f / static_cast<float>(w);
+    const float dy = 1.0f / static_cast<float>(h);
     size_t i = static_cast<size_t>(floor(u / dx));
     size_t j = static_cast<size_t>(floor(v / dy));
-    if (i == resolution().x) { i = 0; }
-    if (j == resolution().y) { j = 0; }
+    if (i == w) { i = 0; }
+    if (j == h) { j = 0; }
 
-    return *pattern_.at(j * resolution().x + i);
+    return *pattern_.at(j * w + i);
 }
 
 const Vector2u& Texture::resolution() const

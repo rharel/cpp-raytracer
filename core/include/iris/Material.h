@@ -4,7 +4,7 @@
  * @author Raoul Harel
  * @url github.com/rharel/cpp-raytracer
  *
- * Material interface.
+ * Material abstract class.
  */
 
 

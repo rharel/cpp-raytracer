@@ -42,7 +42,7 @@ namespace iris
          */
         Texture
         (
-            size_t x, size_t y,
+            size_t width, size_t height,
             std::initializer_list<const Material*> pattern
         );
         /**
@@ -54,7 +54,7 @@ namespace iris
          */
         Texture
         (
-            size_t x, size_t y,
+            size_t width, size_t height,
             const Material** pattern
         );
 

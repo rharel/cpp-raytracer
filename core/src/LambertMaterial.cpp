@@ -10,7 +10,7 @@
 using namespace iris;
 using namespace iris::constant;
 using glm::clamp;
-using glm::normalize;
+
 
 LambertMaterial::LambertMaterial()
     : LambertMaterial(Vector3(1.0f)) {}
@@ -30,15 +30,17 @@ LambertMaterial::LambertMaterial(const Vector3& color)
 
 Vector3 LambertMaterial::brdf() const
 {
-    return albedo();
+    return albedo_;
 }
 Vector3 LambertMaterial::brdf(const Vector3&, const Vector3&) const
 {
-    return albedo() / m_pi;
+    return albedo_ / m_pi;
 }
 
 Vector3 LambertMaterial::bounce(const Vector3&, float& pdf) const
 {
+    using glm::normalize;
+
     const float r1 = random::real_in_range(0.0f, 1.0f);
     const float r2 = random::real_in_range(0.0f, 1.0f);
 

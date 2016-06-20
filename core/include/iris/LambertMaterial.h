@@ -29,7 +29,7 @@ namespace iris
          */
         LambertMaterial(float color);
         /**
-         * Creates material from from_hex RGB.
+         * Creates material from hex RGB.
          */
         LambertMaterial(int color);
         /**
@@ -37,7 +37,7 @@ namespace iris
          */
         LambertMaterial(float r, float g, float b);
         /**
-         * Creates material from RGB vector.
+         * Creates material with given albedo.
          */
         LambertMaterial(const Vector3& color);
 
