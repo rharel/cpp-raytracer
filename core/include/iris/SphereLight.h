@@ -9,6 +9,7 @@
 
 
 #include <iris/Light.h>
+#include <iris/vector_types.h>
 
 
 namespace iris

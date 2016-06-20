@@ -39,5 +39,5 @@ float SphereLight::surface_area() const
 }
 float SphereLight::radius() const
 {
-    return glm::compMax(scale());  // TODO: world_scale()
+    return glm::compMax(scale());
 }
