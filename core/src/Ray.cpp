@@ -27,7 +27,7 @@ bool Ray::is_null() const
 
 Vector3 Ray::at(const float time) const
 {
-    return origin() + time * direction();
+    return origin_ + time * direction_;
 }
 
 const Vector3& Ray::origin() const
@@ -41,8 +41,8 @@ const Vector3& Ray::direction() const
 
 bool Ray::operator==(const Ray& other) const
 {
-    return this->origin() == other.origin() &&
-           this->direction() == other.direction();
+    return this->origin_ == other.origin_ &&
+           this->direction_ == other.direction_;
 }
 bool Ray::operator!=(const Ray& other) const
 {

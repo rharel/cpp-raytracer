@@ -1,7 +1,6 @@
 #ifndef IRIS_RAY_H
 #define IRIS_RAY_H
 /**
- * @file Ray.h
  * @author Raoul Harel
  * @url github.com/rharel/cpp-raytracer
  *

@@ -8,8 +8,8 @@
  */
 
 
-#include <iris/Material.h>
 #include <iris/Ray.h>
+#include <iris/Material.h>
 #include <iris/vector_types.h>
 
 
@@ -38,7 +38,7 @@ namespace iris
         /**
          * Set ray.
          */
-        void ray(const Ray& value);
+        Ray& ray();
 
         /**
          * Check whether time() > 0.
@@ -90,8 +90,8 @@ namespace iris
         private:
         Ray ray_;
         float time_ = -1.0f;
-        Vector3 normal_ = Vector3(0);
-        Vector2 uv_ = Vector2(0);
+        Vector3 normal_ = Vector3(0, 1, 0);
+        Vector2 uv_ = Vector2(0, 0);
         const Material* material_ = nullptr;
     };
 }

@@ -51,7 +51,7 @@ void Object3D::raycast(Raycast& result) const
         )
     );
     
-    result.ray(local);
+    result.ray() = local;
     const bool hit_before = result.hit();
     const float t_before = result.time();
     geometry_->raycast(result);
@@ -66,7 +66,7 @@ void Object3D::raycast(Raycast& result) const
             result.v()
         ));
     }
-    result.ray(global);
+    result.ray() = global;
 }
 
 bool Object3D::has_child(Object3D& target) const

@@ -5,7 +5,7 @@ using namespace iris;
 
 
 Raycast::Raycast() 
-    : Raycast(Ray(Vector3(0))) {}
+    : Raycast(Ray()) {}
 Raycast::Raycast(const Ray& ray)
     : ray_(ray) {}
 
@@ -13,9 +13,9 @@ const Ray& Raycast::ray() const
 {
     return ray_;
 }
-void Raycast::ray(const Ray& value)
+Ray& Raycast::ray()
 {
-    ray_ = value;
+    return ray_;
 }
 
 bool Raycast::hit() const
@@ -24,7 +24,7 @@ bool Raycast::hit() const
 }
 Vector3 Raycast::point() const
 {
-    return ray().origin() + time() * ray().direction();
+    return ray_.at(time_);
 }
 
 float Raycast::time() const
@@ -51,11 +51,12 @@ const Material& Raycast::material() const
 {
     return *material_;
 }
-void Raycast::contact(
-    
+void Raycast::contact
+(
     const float time,
     const Vector3& normal,
-    const Vector2& uv)
+    const Vector2& uv
+)
 {
     time_ = time;
     normal_ = normal;
