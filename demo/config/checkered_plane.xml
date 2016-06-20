@@ -24,5 +24,5 @@
 	<camera fov='75' aspect='1' near='0.1' far='100' 
 	        translation='0,3,5' lookAt='0,0,0' />
 	<image width='512' height='512'
-	       path='../img/demo.bmp' />
+	       path='../img/checkered_plane.bmp' />
 </configuration>
