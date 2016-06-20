@@ -9,6 +9,7 @@
 
 
 using namespace iris;
+using namespace iris::constant;
 
 
 const size_t IMAGE_WIDTH = 512;
@@ -26,7 +27,7 @@ RGBQUAD to_24bit(const Vector3& source)
     
     return result;
 }
-void save(const Image& image)
+void save(const Image& image, const std::string& path)
 {
     fipImage img
     (
@@ -42,71 +43,27 @@ void save(const Image& image)
             img.setPixelColor(x, y, &color);
         }
     }
-    img.save(PATH_OUTPUT);
+    if (!img.save(path.c_str()))
+    {
+        std::cout << "Error saving image!" << std::endl;
+    }
 }
 
 void main()
 {
-    LambertMaterial black(0.2f);
-    LambertMaterial white(0.8f);
-    LambertMaterial red(0.8f, 0, 0);
-    LambertMaterial green(0, 0.8f, 0);
-
-    Texture checkers
-    (
-        2, 2,  // width, height 
-        { &black, &white,
-          &white, &black }  // pattern
-    );
-    Texture uniform_red(red);
-    Texture uniform_green(green);
-
-    PlaneGeometry plane_geometry;
-    SphereGeometry sphere_geometry;
-
-    Object3D floor(plane_geometry, checkers);
-    Object3D ball_a(sphere_geometry, uniform_red);
-    Object3D ball_b(sphere_geometry, uniform_green);
-    Object3D balls;
-    
-    balls.add_child(ball_a);
-    balls.add_child(ball_b);
-    ball_a.translation().x = -2.0f;
-    ball_b.translation().x =  2.0f;
-    balls.translation().y = 1.0f;
-    balls.update();
-
-    SphereLight light(Vector3(1), 7.0f);
-    light.translation() = Vector3(0, 3, -3);
-    light.scale() = Vector3(3.0f);
-    light.update();
-
-    Scene scene; 
-    scene.add(floor);
-    scene.add(balls);
-    scene.add_light(light);
-
-    Camera camera;
-    camera.translation() = Vector3(0, 3, 5);
-    camera.look_at(0, 0, 0);
-    camera.update();
-
-    //NaiveSampler sampler;
-    //RandomSampler sampler(16);
-    JitterSampler sampler(10);
-
-    //NaiveTracer tracer;
-    PathTracer tracer;
+    const char* config_path = "../config/checkered_plane.xml";
+    XMLSceneReader reader;
+    Configuration config = reader.read_from_path(config_path);
+    std::cout << reader.status_message() << std::endl;
 
     UniformAggregator aggregator;
     Composer composer
     (
-        IMAGE_WIDTH, IMAGE_HEIGHT, 
-        scene, camera, 
-        sampler, aggregator, 
-        tracer
+        config.image_size.x, config.image_size.y, 
+        *config.scene, config.camera, 
+        *config.sampler, aggregator, 
+        *config.tracer
     );
-
     auto begin = std::chrono::high_resolution_clock::now();
     composer.render();
     auto end = std::chrono::high_resolution_clock::now();
@@ -119,5 +76,5 @@ void main()
                 (end - begin).count() 
               << " ms" << std::endl;
     
-    save(composer.image());
+    save(composer.image(), config.image_path);
 }
