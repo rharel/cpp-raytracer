@@ -1,7 +1,6 @@
 #ifndef IRIS_VECTOR_TYPES_H
 #define IRIS_VECTOR_TYPES_H
 /**
- * @file vector_types.h
  * @author Raoul Harel
  * @url github.com/rharel/cpp-raytracer
  *
@@ -11,6 +10,7 @@
 
 #include <glm/vec2.hpp>
 #include <glm/vec3.hpp>
+#include <glm/vec4.hpp>
 #include <glm/gtx/quaternion.hpp>
 
 

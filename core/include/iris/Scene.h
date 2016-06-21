@@ -33,7 +33,7 @@ namespace iris
         void add_light(const Light& light);
 
         /**
-         * Checks for ray-surface intersection.
+         * Checks for ray-geometry intersection.
          *
          * @param[in, out] result Raycast result description.
          *

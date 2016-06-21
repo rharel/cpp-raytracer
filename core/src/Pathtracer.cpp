@@ -1,5 +1,5 @@
-    #include <iris/PathTracer.h>
-#include <iris/rayop.h>
+#include <iris/PathTracer.h>
+#include <iris/ray_math.h>
 #include <iris/math.h>
 #include <iris/random.h>
 
@@ -15,15 +15,20 @@ using glm::clamp;
 using glm::dot;
 using glm::normalize;
 
+
 PathTracer::PathTracer()
-    : PathTracer(Vector3(0), 8) {}
+    : PathTracer(Vector3(0), 0) {}
 PathTracer::PathTracer(const Vector3& horizon)
-    : PathTracer(horizon, 8) {}
-PathTracer::PathTracer(const size_t max_depth)
-    : PathTracer(Vector3(0), max_depth) {}
-PathTracer::PathTracer(const Vector3& horizon, const size_t max_depth)
+    : PathTracer(horizon, 0) {}
+PathTracer::PathTracer(const size_t max_bounce_count)
+    : PathTracer(Vector3(0), max_bounce_count) {}
+PathTracer::PathTracer
+(
+    const Vector3& horizon, 
+    const size_t max_bounce_count
+)
     : horizon_(clamp(horizon, 0.0f, 1.0f)), 
-      max_depth_(max_depth) {}
+      max_bounce_count_(max_bounce_count) {}
 
 Vector3 PathTracer::trace(Ray ray, const Scene& scene) const
 {
@@ -31,12 +36,16 @@ Vector3 PathTracer::trace(Ray ray, const Scene& scene) const
     Vector3 weight(1);
     
     size_t bounce_count = 0;
-    while (bounce_count < max_depth())
+    while (bounce_count < max_bounce_count_)
     {
         Raycast collision(ray); 
         scene.raycast(collision);
 
-        if (!collision.hit()) { color += weight * horizon(); break; }
+        if (!collision.hit())
+        { 
+            color += weight * horizon_; 
+            break; 
+        }
 
         const Vector3 x = collision.point();
         const Vector3& N = collision.normal();
@@ -48,9 +57,9 @@ Vector3 PathTracer::trace(Ray ray, const Scene& scene) const
         color += weight * Ld;
 
         // russian roulette //
-        const float alpha = glm::compAdd(material.brdf()) / 3.0f;
-        if (random::real_in_range(0.0f, 1.0f) > alpha) { break; }
-        weight /= alpha;
+        const float P_bounce = glm::compAdd(material.brdf()) / 3.0f;
+        if (random::real_in_range(0.0f, 1.0f) > P_bounce) { break; }
+        weight /= P_bounce;
 
         // bounce ray //
         const Quaternion R = glm::rotation(N, Vector3(0, 1, 0));
@@ -101,7 +110,7 @@ const Vector3& PathTracer::horizon() const
 {
     return horizon_;
 }
-size_t PathTracer::max_depth() const
+size_t PathTracer::max_bounce_count() const
 {
-    return max_depth_;
+    return max_bounce_count_;
 }

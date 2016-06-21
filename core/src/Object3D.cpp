@@ -41,12 +41,12 @@ void Object3D::raycast(Raycast& result) const
     (
         Vector3
         (
-            world_matrix_inverse() * 
+            world_matrix_inverse_ * 
             Vector4(result.ray().origin(), 1)
         ), 
         Vector3
         (
-            world_rotation_matrix_inverse() * 
+            world_rotation_matrix_inverse_ * 
             Vector4(result.ray().direction(), 1)
         )
     );
@@ -218,7 +218,7 @@ void Object3D::update()
 
     if (has_parent())
     {
-        world_matrix_ = parent().world_matrix() * this->matrix();
+        world_matrix_ = parent_->world_matrix() * this->matrix();
         world_matrix_inverse_ = glm::inverse(world_matrix_);
     }
     else 

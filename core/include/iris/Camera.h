@@ -8,9 +8,9 @@
  */
 
 
-#include <iris/matrix_types.h>
 #include <iris/Object3D.h>
 #include <iris/vector_types.h>
+#include <iris/matrix_types.h>
 
 
 namespace iris
@@ -125,7 +125,7 @@ namespace iris
         float w_, w2_;
         float h_, h2_;
 
-        bool free_ = true;
+        bool is_free_ = true;
 
         Vector3 position_ = Vector3(0);
         Vector3 forward_ = Vector3(0, 0, 1); 

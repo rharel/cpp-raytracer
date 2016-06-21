@@ -47,10 +47,7 @@
       <Filter>ray</Filter>
     </ClInclude>
     <ClInclude Include="..\include\iris\Raytracer.h">
-      <Filter>raytracing</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\iris\rayop.h">
-      <Filter>raytracing</Filter>
+      <Filter>tracers</Filter>
     </ClInclude>
     <ClInclude Include="..\include\iris\Object3D.h">
       <Filter>scene</Filter>
@@ -81,10 +78,10 @@
       <Filter>utility</Filter>
     </ClInclude>
     <ClInclude Include="..\include\iris\NaiveTracer.h">
-      <Filter>raytracing</Filter>
+      <Filter>tracers</Filter>
     </ClInclude>
     <ClInclude Include="..\include\iris\PathTracer.h">
-      <Filter>raytracing</Filter>
+      <Filter>tracers</Filter>
     </ClInclude>
     <ClInclude Include="..\include\iris\color.h">
       <Filter>utility</Filter>
@@ -110,6 +107,9 @@
     <ClInclude Include="..\include\iris\XMLConfigurationLoader.h">
       <Filter>io</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\iris\ray_math.h">
+      <Filter>ray</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="light">
@@ -133,9 +133,6 @@
     <Filter Include="geometry">
       <UniqueIdentifier>{ce01ed08-9480-466b-b384-fac1bcb11c53}</UniqueIdentifier>
     </Filter>
-    <Filter Include="raytracing">
-      <UniqueIdentifier>{e1e0188f-0102-41ec-980c-4a0f73aa3b3c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="scene">
       <UniqueIdentifier>{7986cf13-2f4c-4ab6-b490-5bb5755dfe2c}</UniqueIdentifier>
     </Filter>
@@ -150,6 +147,9 @@
     </Filter>
     <Filter Include="3rd\tinyxml2">
       <UniqueIdentifier>{7169fe68-ce29-4cff-b8e3-0763e99c4c90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tracers">
+      <UniqueIdentifier>{e1e0188f-0102-41ec-980c-4a0f73aa3b3c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -183,9 +183,6 @@
     <ClCompile Include="..\src\Raycast.cpp">
       <Filter>ray</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\rayop.cpp">
-      <Filter>raytracing</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\Object3D.cpp">
       <Filter>scene</Filter>
     </ClCompile>
@@ -214,10 +211,10 @@
       <Filter>utility</Filter>
     </ClCompile>
     <ClCompile Include="..\src\NaiveTracer.cpp">
-      <Filter>raytracing</Filter>
+      <Filter>tracers</Filter>
     </ClCompile>
     <ClCompile Include="..\src\PathTracer.cpp">
-      <Filter>raytracing</Filter>
+      <Filter>tracers</Filter>
     </ClCompile>
     <ClCompile Include="..\src\color.cpp">
       <Filter>utility</Filter>
@@ -245,6 +242,9 @@
     </ClCompile>
     <ClCompile Include="..\src\XMLConfigurationLoader.cpp">
       <Filter>io</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\ray_math.cpp">
+      <Filter>ray</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -127,7 +127,7 @@
     <ClInclude Include="..\include\iris\RandomSampler.h" />
     <ClInclude Include="..\include\iris\Ray.h" />
     <ClInclude Include="..\include\iris\Raycast.h" />
-    <ClInclude Include="..\include\iris\rayop.h" />
+    <ClInclude Include="..\include\iris\ray_math.h" />
     <ClInclude Include="..\include\iris\Raytracer.h" />
     <ClInclude Include="..\include\iris\Sampler.h" />
     <ClInclude Include="..\include\iris\aggregators.h" />
@@ -168,7 +168,7 @@
     <ClCompile Include="..\src\RandomSampler.cpp" />
     <ClCompile Include="..\src\Ray.cpp" />
     <ClCompile Include="..\src\Raycast.cpp" />
-    <ClCompile Include="..\src\rayop.cpp" />
+    <ClCompile Include="..\src\ray_math.cpp" />
     <ClCompile Include="..\src\aggregators.cpp" />
     <ClCompile Include="..\src\Scene.cpp" />
     <ClCompile Include="..\src\Object3D.cpp" />

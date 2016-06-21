@@ -1,8 +1,8 @@
 #include <iris/iris.h>
 
-#include <glm/trigonometric.hpp>
-
 #include "../lib/FreeImagePlus.h"
+
+#include <glm/trigonometric.hpp>
 
 #include <chrono>
 #include <iostream>
@@ -11,11 +11,6 @@
 using namespace iris;
 using namespace iris::constant;
 
-
-const size_t IMAGE_WIDTH = 512;
-const size_t IMAGE_HEIGHT = 512;
-
-const char* PATH_OUTPUT = "../img/demo.bmp";
 
 RGBQUAD to_24bit(const Vector3& source)
 {
@@ -51,7 +46,7 @@ void save(const Image& image, const std::string& path)
 
 void main()
 {
-    const char* config_path = "../config/checkered_plane.xml";
+    const char* config_path = "../config/checkered_sphere.xml";
     XMLConfigurationLoader reader;
     Configuration config = reader.load_from_path(config_path);
     std::cout << reader.status_message() << std::endl;
@@ -83,7 +78,6 @@ void main()
         ));
         std::cout << pct << "%" << std::endl;
     }
-    //composer.render();
     auto end = std::chrono::high_resolution_clock::now();
     
     std::cout << "Time: "

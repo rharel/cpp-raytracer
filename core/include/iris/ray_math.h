@@ -1,7 +1,6 @@
-#ifndef IRIS_RAYOP_H
-#define IRIS_RAYOP_H
+#ifndef IRIS_RAY_MATH_H
+#define IRIS_RAY_MATH_H
 /**
- * @file rayop.h
  * @author Raoul Harel
  * @url github.com/rharel/cpp-raytracer
  *
@@ -24,11 +23,12 @@ namespace iris
      *
      * @returns Form factor G between A and B.
      */
-    float form_factor(
-        
+    float form_factor
+    (
         const Vector3& a, const Vector3& Na,
-        const Vector3& b, const Vector3& Nb);
+        const Vector3& b, const Vector3& Nb
+    );
 }
 
 
-#endif  // IRIS_RAYOP_H
+#endif  // IRIS_RAY_MATH_H

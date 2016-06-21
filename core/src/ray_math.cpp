@@ -1,10 +1,11 @@
-#include <iris/rayop.h>
+#include <iris/ray_math.h>
 
 #include <glm/geometric.hpp>
 
 
 using namespace iris;
 using glm::dot;
+using glm::normalize;
 
 
 float iris::form_factor(

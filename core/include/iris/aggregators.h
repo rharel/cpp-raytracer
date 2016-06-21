@@ -1,10 +1,10 @@
-#ifndef IRIS_SAMPLE_AGGREGATORS_H
-#define IRIS_SAMPLE_AGGREGATORS_H
+#ifndef IRIS_AGGREGATORS_H
+#define IRIS_AGGREGATORS_H
 /**
  * @author Raoul Harel
  * @url github.com/rharel/cpp-raytracer
  *
- * Sample weighing methods.
+ * Sample aggregation methods.
  */
 
 
@@ -25,8 +25,8 @@ namespace iris
     };
 
     /**
-        * Computes the color average with uniform weights.
-        */
+     * Computes the color average with uniform weights.
+     */
     class UniformAggregator : public Aggregator
     {
         public:
@@ -54,10 +54,12 @@ namespace iris
             size_t n
         ) const override;
 
+        float sigma() const;
+
         private:
         float sigma_;
     };
 }
 
 
-#endif  // IRIS_SAMPLE_AGGREGATORS_H
+#endif  // IRIS_AGGREGATORS_H

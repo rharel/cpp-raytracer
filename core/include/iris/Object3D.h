@@ -1,5 +1,5 @@
-#ifndef IRIS_SCENE_COMPONENT_H
-#define IRIS_SCENE_COMPONENT_H
+#ifndef IRIS_OBJECT_3D_H
+#define IRIS_OBJECT_3D_H
 /**
  * @author Raoul Harel
  * @url github.com/rharel/cpp-raytracer
@@ -9,12 +9,12 @@
 
 
 #include <iris/Geometry.h>
-#include <iris/matrix_types.h>
-#include <iris/Raycast.h>
 #include <iris/Texture.h>
+#include <iris/Raycast.h>
+#include <iris/matrix_types.h>
 #include <iris/vector_types.h>
 
-#include <unordered_set>
+#include <set>
 
 
 namespace iris
@@ -45,7 +45,7 @@ namespace iris
         bool is_empty() const;
 
         /**
-         * Checks for ray-surface intersection.
+         * Checks for ray-geometry intersection.
          *
          * @param[in, out] result Raycast result description.
          *
@@ -179,7 +179,7 @@ namespace iris
         const Texture* texture_;
 
         Object3D* parent_ = nullptr;
-        std::unordered_set<Object3D*> children_;
+        std::set<Object3D*> children_;
 
         Vector3 translation_ = Vector3(0);
         Vector3 scale_ = Vector3(1);
@@ -195,4 +195,4 @@ namespace iris
 }
 
 
-#endif  // IRIS_SCENE_COMPONENT_H
+#endif  // IRIS_OBJECT_3D_H

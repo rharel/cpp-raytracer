@@ -19,6 +19,11 @@ namespace iris
 
     /**
      * Solves the quadratic equation ax^2 + bx + c = 0
+     *
+     * @param[out] x0 First root.
+     * @param[out] x1 Second root.
+     *
+     * @returns True if solution(s) exist.
      */
     bool solve_quadratic
     (
@@ -28,6 +33,10 @@ namespace iris
 
     /**
      * Computes the average value of a collection.
+     *
+     * @pre Value type must: 
+     *        1. Support ctor: Value(int)
+     *        2. Support operators: =(Value),+=(Value),/(float)
      */
     template <typename Value, typename Iterator>
     Value average(Iterator begin, Iterator end)

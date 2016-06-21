@@ -34,8 +34,8 @@
 #include <iris/Image.h>
 #include <iris/Composer.h>
 
-#include <iris/SceneReader.h>
-#include <iris/XMLSceneReader.h>
+#include <iris/ConfigurationLoader.h>
+#include <iris/XMLConfigurationLoader.h>
 
 #include <iris/aggregators.h>
 #include <iris/color.h>

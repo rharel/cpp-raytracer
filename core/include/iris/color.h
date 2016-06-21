@@ -1,6 +1,7 @@
 #ifndef IRIS_COLOR_H
 #define IRIS_COLOR_H
 
+
 #include <iris/vector_types.h>
 
 

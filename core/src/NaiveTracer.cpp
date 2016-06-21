@@ -14,9 +14,10 @@ Vector3 NaiveTracer::trace(const Ray ray, const Scene& scene) const
     Raycast collision(ray); 
     scene.raycast(collision);
 
-    if (!collision.hit()) { return horizon(); }
+    if (!collision.hit()) { return horizon_; }
     return collision.material().brdf();
 }
+
 const Vector3& NaiveTracer::horizon() const
 {
     return horizon_;

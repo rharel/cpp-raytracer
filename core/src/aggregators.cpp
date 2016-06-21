@@ -1,7 +1,6 @@
 #include <iris/aggregators.h>
 #include <iris/math.h>
 
-#include <functional>
 #include <vector>
 
 
@@ -35,7 +34,6 @@ Vector3 GaussianAggregator::operator()
 ) const
 {
     std::vector<float> weights(n);
-    auto it = weights.begin();
     for (size_t i = 0; i < n; ++i)
     {
         const Vector2 sample = samples[i];
@@ -50,4 +48,9 @@ Vector3 GaussianAggregator::operator()
         &colors[0], &colors[n],
         weights.begin()
     );
+}
+
+float GaussianAggregator::sigma() const
+{
+    return sigma_;
 }

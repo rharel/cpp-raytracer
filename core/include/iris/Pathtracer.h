@@ -36,20 +36,22 @@ namespace iris
          * Creates a tracer with given maximum ray
          * bounce limit.
          *
-         * @param max_depth Won't trace rays beyond this many bounces.
-         *                  If < 0, will trace until ray weight is near
-         *                  zero.
+         * @param max_bounce_count
+         *      Won't trace rays beyond this many bounces.
+         *      If zero, will trace until ray weight is near
+         *      zero.
          */
-        PathTracer(size_t max_depth);
+        PathTracer(size_t max_bounce_count);
         /**
          * Creates tracer with given parameters.
          *
          * @param horizon Horizon color.
-         * @param max_depth Won't trace rays beyond this many bounces.
-         *                  If < 0, will trace until ray weight is near
-         *                  zero.
+         * @param max_bounce_count
+         *      Won't trace rays beyond this many bounces.
+         *      If zero, will trace until ray weight is near
+         *      zero.
          */
-        PathTracer(const Vector3& horizon, size_t max_depth);
+        PathTracer(const Vector3& horizon, size_t max_bounce_count);
 
         /**
          * Traces a ray through the scene.
@@ -61,9 +63,9 @@ namespace iris
          */
         const Vector3& horizon() const;
         /**
-         * Gets max_depth.
+         * Gets max_bounce_count.
          */
-        size_t max_depth() const;
+        size_t max_bounce_count() const;
 
         private:
         Vector3 illuminate
@@ -76,7 +78,7 @@ namespace iris
         ) const;
 
         Vector3 horizon_;
-        size_t max_depth_;
+        size_t max_bounce_count_;
     };
 }
 

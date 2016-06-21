@@ -31,32 +31,36 @@ Camera::Camera
       
 void Camera::update()
 {
+    using glm::cross;
+    using glm::normalize;
+    using glm::affineInverse;
+
     Object3D::update();
 
     const Matrix4& W = world_matrix();
 
     position_ = Vector3(W[3]);
     
-    if (is_free() || position() == target())
+    if (is_free_ || position_ == target_)
     {
         Matrix4 R = W;
         R[3] = Vector4(0, 0, 0, 1);
-        const Vector3 offset = glm::normalize(
-
+        const Vector3 offset = normalize
+        (
             Vector3(R * Vector4(0, 0, -1, 1))
         );
-        look_at(position() + offset);
+        look_at(position_ + offset);
     }
 
     Vector3 X, Y, Z;
     Y = Vector3(0, 1, 0);
-    Z = glm::normalize(position() - target());
+    Z = normalize(position_ - target_);
     if (Z == Y || Z == -Y)
     {
         Y = Vector3(0, 0, 1);
     }
-    X = glm::cross(-Z, Y);
-    Y = glm::cross(Z, X);
+    X = cross(-Z, Y);
+    Y = cross(Z, X);
 
     right_ = X;
     up_ = Y;
@@ -66,7 +70,7 @@ void Camera::update()
     view_[1] = Vector4(Y, 0);
     view_[2] = Vector4(Z, 0);
     view_[3] = W[3];
-    view_inverse_ = glm::affineInverse(view_);
+    view_inverse_ = affineInverse(view_);
 }
 
 Vector3 Camera::on_near(const float x, const float y) const
@@ -93,17 +97,17 @@ void Camera::look_at
 }
 void Camera::look_at(const Vector3& target)
 {
-    free_ = false;
+    is_free_ = false;
     target_ = target;
 }
 
 bool Camera::is_free() const
 {
-    return free_;
+    return is_free_;
 }
 void Camera::free()
 {
-    free_ = true;
+    is_free_ = true;
 }
 
 float Camera::fov() const

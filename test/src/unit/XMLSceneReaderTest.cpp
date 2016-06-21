@@ -202,7 +202,7 @@ TEST_CASE("xml scene reader", "[scene-reader][xml-scene-reader]")
         const Object3D& o_planes = config.scene->object(0);
         REQUIRE(is_close(o_planes.translation(), Vector3(1, 2, 3)));
         REQUIRE(is_close(o_planes.scale(), Vector3(4, 5, 6)));
-        REQUIRE(is_close(o_planes.rotation(), Vector3(7, 8, 9)));
+        REQUIRE(is_close(o_planes.rotation(), glm::radians(Vector3(7, 8, 9))));
         REQUIRE(o_planes.child_count() == 2);
         REQUIRE(o_planes.child(0).child_count() == 0);
         REQUIRE(o_planes.child(0).geometry() == *g_plane);
@@ -224,14 +224,14 @@ TEST_CASE("xml scene reader", "[scene-reader][xml-scene-reader]")
         REQUIRE(light_a.intensity() == 1.0f);
         REQUIRE(is_close(light_a.translation(), Vector3(1, 2, 3)));
         REQUIRE(is_close(light_a.scale(), Vector3(4, 5, 6)));
-        REQUIRE(is_close(light_a.rotation(), Vector3(7, 8, 9)));
+        REQUIRE(is_close(light_a.rotation(), glm::radians(Vector3(7, 8, 9))));
         
         const Light& light_b = config.scene->light(1); 
         REQUIRE(is_close(light_b.color(), Vector3(0.4, 0.5, 0.6)));
         REQUIRE(light_b.intensity() == 2.0f);
         REQUIRE(is_close(light_b.translation(), Vector3(9, 8, 7)));
         REQUIRE(is_close(light_b.scale(), Vector3(6, 5, 4)));
-        REQUIRE(is_close(light_b.rotation(), Vector3(3, 2, 1)));
+        REQUIRE(is_close(light_b.rotation(), glm::radians(Vector3(3, 2, 1))));
     }
     SECTION("sampler")
     {
@@ -285,7 +285,7 @@ TEST_CASE("xml scene reader", "[scene-reader][xml-scene-reader]")
         REQUIRE(reader.status() == Status::Success);
         auto tracer_path = dynamic_cast<const PathTracer*>(config_random.tracer.get());  
         REQUIRE(tracer_path != nullptr);
-        REQUIRE(tracer_path->max_depth() == 2);
+        REQUIRE(tracer_path->max_bounce_count() == 2);
     }
     SECTION("camera")
     {
