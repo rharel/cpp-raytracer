@@ -22,7 +22,7 @@ RGBQUAD to_24bit(const Vector3& source)
     
     return result;
 }
-void save(const Image& image, const std::string& path)
+BOOL save(const Image& image, const std::string& path)
 {
     fipImage img
     (
@@ -38,18 +38,21 @@ void save(const Image& image, const std::string& path)
             img.setPixelColor(x, y, &color);
         }
     }
-    if (!img.save(path.c_str()))
-    {
-        std::cout << "Error saving image!" << std::endl;
-    }
+    return img.save(path.c_str());
 }
 
 void main()
 {
-    const char* config_path = "../config/checkered_sphere.xml";
+    const char* config_path = "../config/three_lambertian_spheres.xml";
     XMLConfigurationLoader reader;
+
+    std::cout << "Loading configuration: " << config_path << std::endl;
     Configuration config = reader.load_from_path(config_path);
-    std::cout << reader.status_message() << std::endl;
+    if (reader.status() != XMLConfigurationLoader::Status::Success)
+    {
+        std::cout << "ERROR: " << reader.status_message() << std::endl;
+        return;
+    }
 
     UniformAggregator aggregator;
     Composer composer
@@ -57,24 +60,26 @@ void main()
         *config.scene, config.camera, config.image_size,
         *config.sampler, *config.tracer, aggregator 
     );
-    auto begin = std::chrono::high_resolution_clock::now();
-    const Vector2u last
-    (
-        composer.image().width(), 
-        composer.image().height()
-    );
+    
+    const size_t w = composer.image().width();
+    const size_t h = composer.image().height();
+    const size_t image_size = composer.image().size();
+    const size_t render_batch_size = static_cast<size_t>(0.01f * image_size);
     Vector2u offset(0, 0);
-    const size_t n = 512; static_cast<size_t>(0.01f * composer.image().size());
-    size_t k = 0;
-    while (offset.y < last.y)
+    size_t rendered_count = 0;
+
+    std::cout << "Rendering..." << std::endl;
+
+    auto begin = std::chrono::high_resolution_clock::now();
+    while (offset.y < h)
     {
-        offset = composer.render(offset, n);
-        k += n;
+        offset = composer.render(offset, render_batch_size);
+        rendered_count += render_batch_size;
         const int pct = static_cast<int>(round
         (
             100.0f * 
-            static_cast<float>(k) / 
-            static_cast<float>(composer.image().size())
+            static_cast<float>(rendered_count) / 
+            static_cast<float>(image_size)
         ));
         std::cout << pct << "%" << std::endl;
     }
@@ -87,6 +92,10 @@ void main()
                  >
                 (end - begin).count() 
               << " ms" << std::endl;
-    
-    save(composer.image(), config.image_path);
+
+    std::cout << "Saving to: " << config.image_path << std::endl;
+    if (!save(composer.image(), config.image_path))
+    {
+        std::cout << "ERROR: could not save image." << std::endl;
+    }
 }
