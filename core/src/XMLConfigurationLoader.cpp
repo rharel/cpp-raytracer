@@ -487,7 +487,7 @@ void XMLConfigurationLoader::parse_lights(const Element* source)
 Light* XMLConfigurationLoader::parse_light_sphere(const Element* source)
 {
     const char* color_str = source->Attribute(ATTRIBUTE_COLOR);
-    const Vector3 color = parse_vector3(color_str);
+    const Vector3 color = parse_color(color_str);
     if (status() != Status::Success) { return nullptr; }
     const float intensity = source->FloatAttribute(ATTRIBUTE_INTENSITY);
     
@@ -574,13 +574,16 @@ void XMLConfigurationLoader::parse_tracer(const Element* source)
     else if (strcmp(type, VALUE_PATH) == 0)
     {
         const int degree = source->IntAttribute(ATTRIBUTE_DEGREE);
-        if (degree <= 0)
+        
+        if (degree < 0)
         {
             status_ = Status::ParsingError;
-            status_message_ = "Tracer degree is <= 0";
+            status_message_ = "Tracer degree is < 0";
             return;
         }
-        configuration_.tracer = TracerPtr(new PathTracer(degree));
+        const char* color_str = source->Attribute(ATTRIBUTE_COLOR);
+        const Vector3 color = parse_color(color_str);
+        configuration_.tracer = TracerPtr(new PathTracer(color, degree));
     }
     else
     {
@@ -637,7 +640,11 @@ void XMLConfigurationLoader::parse_image(const Element* source)
 Vector3 XMLConfigurationLoader::parse_color(const char* str)
 {
     Vector3 result;
-    if (str[0] == HEX_SYMBOL)
+    if (str == nullptr)
+    {
+        result = Vector3(0);
+    }
+    else if (str[0] == HEX_SYMBOL)
     {
         std::stringstream ss;
         int hex_value;
@@ -647,8 +654,7 @@ Vector3 XMLConfigurationLoader::parse_color(const char* str)
     }
     else
     {
-        status_ = Status::ParsingError;
-        status_message_ = "Unknown color: " + std::string(str);
+        result = parse_vector3(str);
     }
     return result;
 }

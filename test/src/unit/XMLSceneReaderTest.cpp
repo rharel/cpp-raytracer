@@ -167,7 +167,7 @@ TEST_CASE("xml scene reader", "[scene-reader][xml-scene-reader]")
                     "<lights>"
                         "<light type='sphere' color='0.1,0.2,0.3' intensity='1'" 
                                 "translation='1,2,3' scale='4,5,6' rotation='7,8,9' />"
-                        "<light type='sphere' color='0.4,0.5,0.6' intensity='2'" 
+                        "<light type='sphere' color='#505050' intensity='2'" 
                                 "translation='9,8,7' scale='6,5,4' rotation='3,2,1' />"
                     "</lights>"
                 "</scene>"
@@ -227,7 +227,7 @@ TEST_CASE("xml scene reader", "[scene-reader][xml-scene-reader]")
         REQUIRE(is_close(light_a.rotation(), glm::radians(Vector3(7, 8, 9))));
         
         const Light& light_b = config.scene->light(1); 
-        REQUIRE(is_close(light_b.color(), Vector3(0.4, 0.5, 0.6)));
+        REQUIRE(is_close(light_b.color(), color::from_hex(0x505050)));
         REQUIRE(light_b.intensity() == 2.0f);
         REQUIRE(is_close(light_b.translation(), Vector3(9, 8, 7)));
         REQUIRE(is_close(light_b.scale(), Vector3(6, 5, 4)));
