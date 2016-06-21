@@ -36,7 +36,8 @@ Vector3 PathTracer::trace(Ray ray, const Scene& scene) const
     Vector3 weight(1);
     
     size_t bounce_count = 0;
-    while (bounce_count < max_bounce_count_)
+    while ((max_bounce_count_ == 0 && glm::length2(weight) < 0.01f) ||
+           (max_bounce_count_ > 0 && bounce_count < max_bounce_count_))
     {
         Raycast collision(ray); 
         scene.raycast(collision);
