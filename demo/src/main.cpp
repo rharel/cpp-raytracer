@@ -22,7 +22,7 @@ RGBQUAD to_24bit(const Vector3& source)
     
     return result;
 }
-BOOL save(const Image& image, const std::string& path)
+BOOL save_image(const Image& image, const std::string& path)
 {
     fipImage img
     (
@@ -40,10 +40,8 @@ BOOL save(const Image& image, const std::string& path)
     }
     return img.save(path.c_str());
 }
-
-void main()
+void render(const char* config_path)
 {
-    const char* config_path = "../config/mirror_sphere.xml";
     XMLConfigurationLoader reader;
 
     std::cout << "Loading configuration: " << config_path << std::endl;
@@ -62,7 +60,7 @@ void main()
         *config.scene, config.camera, config.image_size,
         sampler, *config.tracer, aggregator 
     );
-    
+
     const size_t h = composer.image().height();
     const size_t image_size = composer.image().size();
     const size_t render_batch_size = static_cast<size_t>(0.01f * image_size);
@@ -95,8 +93,16 @@ void main()
               << " ms" << std::endl;
 
     std::cout << "Saving to: " << config.image_path << std::endl;
-    if (!save(composer.image(), config.image_path))
+    if (!save_image(composer.image(), config.image_path))
     {
         std::cout << "ERROR: could not save image." << std::endl;
+    }
+}
+
+void main(const int argc, char* argv[])
+{
+    for (int i = 1; i < argc; ++i)
+    {
+        render(argv[i]);
     }
 }
