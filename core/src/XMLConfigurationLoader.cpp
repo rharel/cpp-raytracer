@@ -81,6 +81,7 @@ const char* XMLConfigurationLoader::ATTRIBUTE_NEAR = "near";
 const char* XMLConfigurationLoader::ATTRIBUTE_FAR = "far";
 const char* XMLConfigurationLoader::ATTRIBUTE_LOOK_AT = "lookAt";
 const char* XMLConfigurationLoader::ATTRIBUTE_PATH = "path";
+const char* XMLConfigurationLoader::ATTRIBUTE_PRECISION = "precision";
 
 const char* XMLConfigurationLoader::VALUE_LAMBERT = "lambert";
 const char* XMLConfigurationLoader::VALUE_PLANE = "plane";
@@ -556,6 +557,7 @@ void XMLConfigurationLoader::parse_sampler(const Element* source)
         status_ = Status::ParsingError;
         status_message_ = "Unknown sampler type: " + string(type);
     }
+    configuration_.sampler_precision = source->FloatAttribute(ATTRIBUTE_PRECISION);
 }
 void XMLConfigurationLoader::parse_tracer(const Element* source)
 {

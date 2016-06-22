@@ -37,7 +37,7 @@ const T* get_geometry(const Configuration& config, const std::string& name)
     );
 }
 
-TEST_CASE("xml scene reader", "[scene-reader][xml-scene-reader]")
+TEST_CASE("xml configuration loader", "[configuration-loader][xml-configuration-loader]")
 {
     XMLConfigurationLoader reader;
 

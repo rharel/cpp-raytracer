@@ -106,6 +106,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\include\iris\AdaptiveSampler.h" />
     <ClInclude Include="..\include\iris\Camera.h" />
     <ClInclude Include="..\include\iris\color.h" />
     <ClInclude Include="..\include\iris\Composer.h" />
@@ -146,6 +147,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\lib\tinyxml2\tinyxml2.cpp" />
+    <ClCompile Include="..\src\AdaptiveSampler.cpp" />
     <ClCompile Include="..\src\Camera.cpp" />
     <ClCompile Include="..\src\color.cpp" />
     <ClCompile Include="..\src\Composer.cpp" />

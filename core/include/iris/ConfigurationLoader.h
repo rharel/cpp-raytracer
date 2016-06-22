@@ -55,6 +55,7 @@ namespace iris
         LightList lights;
         ScenePtr scene;
         SamplerPtr sampler;
+        float sampler_precision = 0.0f;
         TracerPtr tracer;
         Camera camera;
         Vector2u image_size = Vector2u(256, 256);

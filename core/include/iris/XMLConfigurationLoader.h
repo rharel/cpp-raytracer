@@ -70,6 +70,7 @@ namespace iris
         static const char* ATTRIBUTE_FAR;
         static const char* ATTRIBUTE_LOOK_AT;
         static const char* ATTRIBUTE_PATH;
+        static const char* ATTRIBUTE_PRECISION;
 
         static const char* VALUE_LAMBERT;
         static const char* VALUE_PLANE;

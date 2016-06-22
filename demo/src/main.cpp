@@ -48,20 +48,21 @@ void main()
 
     std::cout << "Loading configuration: " << config_path << std::endl;
     Configuration config = reader.load_from_path(config_path);
-    if (reader.status() != XMLConfigurationLoader::Status::Success)
+    if (reader.status() != ConfigurationLoader::Status::Success)
     {
         std::cout << "ERROR: " << reader.status_message() << std::endl;
         return;
     }
 
+    AdaptiveSampler adaptive_sampler(*config.sampler, config.sampler_precision);
+    Sampler& sampler = config.sampler_precision > 0 ? adaptive_sampler : *config.sampler;
     UniformAggregator aggregator;
     Composer composer
     (
         *config.scene, config.camera, config.image_size,
-        *config.sampler, *config.tracer, aggregator 
+        sampler, *config.tracer, aggregator 
     );
     
-    const size_t w = composer.image().width();
     const size_t h = composer.image().height();
     const size_t image_size = composer.image().size();
     const size_t render_batch_size = static_cast<size_t>(0.01f * image_size);

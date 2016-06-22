@@ -110,6 +110,9 @@
     <ClInclude Include="..\include\iris\ray_math.h">
       <Filter>ray</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\iris\AdaptiveSampler.h">
+      <Filter>sampling</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="light">
@@ -245,6 +248,9 @@
     </ClCompile>
     <ClCompile Include="..\src\ray_math.cpp">
       <Filter>ray</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\AdaptiveSampler.cpp">
+      <Filter>sampling</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

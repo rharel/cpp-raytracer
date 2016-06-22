@@ -23,6 +23,7 @@
 #include <iris/NaiveSampler.h>
 #include <iris/RandomSampler.h>
 #include <iris/JitterSampler.h>
+#include <iris/AdaptiveSampler.h>
 
 #include <iris/Raytracer.h>
 #include <iris/NaiveTracer.h>
