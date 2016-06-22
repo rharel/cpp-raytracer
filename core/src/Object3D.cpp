@@ -60,6 +60,12 @@ void Object3D::raycast(Raycast& result) const
     if ((!hit_before && hit_now) || 
         ( hit_before && t_now < t_before))
     {
+        result.contact
+        (
+            result.time(), 
+            Vector3(world_rotation_matrix_ * Vector4(result.normal(), 1)),
+            result.uv()
+        );
         result.contact(texture_->sample
         (
             result.u(), 
