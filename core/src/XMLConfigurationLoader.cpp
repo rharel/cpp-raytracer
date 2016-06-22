@@ -103,6 +103,7 @@ Configuration XMLConfigurationLoader::load_from_path(const string& path)
     if (!file.is_open())
     {
         status_ = Status::FileError;
+        status_message_ = "Could not access path: " + path;
         return Configuration();
     }
     std::stringstream contents;
