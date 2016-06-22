@@ -1,0 +1,38 @@
+<configuration>
+	<materials>
+		<material name='white' type='lambert' albedo='#F0F0F0' />
+		<material name='black' type='lambert' albedo='#101010' />
+	    
+		<material name='mirror' type='mirror' />
+	</materials>
+	<textures>
+		<texture name='bw_checkers' width='2' height='2' 
+				 pattern='black,white,white,black' />
+		
+		<texture name='mirror' width='1' height='1' pattern='mirror' />
+	</textures>
+	<geometries>
+		<geometry name='plane' type='plane' 
+		          textureScaleU='0.5' textureScaleV='0.5' />
+	    <geometry name='sphere' type='sphere'
+		          textureScaleU='1' textureScaleV='1' />
+	</geometries>
+	<scene>
+		<objects>
+			<object geometry='plane' texture='bw_checkers' />
+			<object geometry='sphere' texture='mirror' 
+			        translation='0,0.35,0' rotation='0,0,0' />
+		</objects>
+		<lights>
+			<light type='sphere' color='#FFFFE0' intensity='50' 
+			       translation='30,100,30' scale='20,20,20' />
+		</lights>
+	</scene>
+	<!-- <sampler type='jitter' degree='2' precision='0.2' /> -->
+	<sampler type='jitter' degree='5' precision='0.004' />
+	<tracer type='path' color='#7EC0EE' degree='3' />
+	<camera fov='75' aspect='1' near='0.1' far='100' 
+	        translation='0,0.35,2' lookAt='0,0.35,0' />
+	<image width='512' height='512'
+	       path='../img/mirror_hemisphere.bmp' />
+</configuration>
