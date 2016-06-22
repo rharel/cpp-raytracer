@@ -110,7 +110,6 @@
     <ClInclude Include="..\include\iris\Camera.h" />
     <ClInclude Include="..\include\iris\color.h" />
     <ClInclude Include="..\include\iris\Composer.h" />
-    <ClInclude Include="..\include\iris\CookTorranceMaterial.h" />
     <ClInclude Include="..\include\iris\Image.h" />
     <ClInclude Include="..\include\iris\iris.h" />
     <ClInclude Include="..\include\iris\JitterSampler.h" />
@@ -150,7 +149,6 @@
     <ClCompile Include="..\src\Camera.cpp" />
     <ClCompile Include="..\src\color.cpp" />
     <ClCompile Include="..\src\Composer.cpp" />
-    <ClCompile Include="..\src\CookTorranceMaterial.cpp" />
     <ClCompile Include="..\src\Geometry.cpp" />
     <ClCompile Include="..\src\Image.cpp" />
     <ClCompile Include="..\src\JitterSampler.cpp" />
