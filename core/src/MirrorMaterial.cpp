@@ -1,7 +1,5 @@
 #include <iris/MirrorMaterial.h>
 
-#include <glm/gtx/component_wise.hpp>
-
 
 using namespace iris;
 
