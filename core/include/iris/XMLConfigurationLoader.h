@@ -73,6 +73,7 @@ namespace iris
         static const char* ATTRIBUTE_PRECISION;
 
         static const char* VALUE_LAMBERT;
+        static const char* VALUE_MIRROR;
         static const char* VALUE_PLANE;
         static const char* VALUE_SPHERE;
         static const char* VALUE_NAIVE;
@@ -124,6 +125,7 @@ namespace iris
 
         void parse_materials(const Element* source);
         Material* parse_material_lambert(const Element* source);
+        Material* parse_material_mirror(const Element* source);
 
         void parse_textures(const Element* source);
         Texture* parse_texture(const Element* source);

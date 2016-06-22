@@ -10,6 +10,7 @@
 
 #include <iris/Material.h>
 #include <iris/LambertMaterial.h>
+#include <iris/MirrorMaterial.h>
 #include <iris/Texture.h>
 
 #include <iris/Geometry.h>

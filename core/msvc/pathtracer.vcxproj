@@ -139,7 +139,6 @@
     <ClInclude Include="..\include\iris\SphereGeometry.h" />
     <ClInclude Include="..\include\iris\Geometry.h" />
     <ClInclude Include="..\include\iris\string.h" />
-    <ClInclude Include="..\include\iris\SunLight.h" />
     <ClInclude Include="..\include\iris\Texture.h" />
     <ClInclude Include="..\include\iris\vector_types.h" />
     <ClInclude Include="..\include\iris\XMLConfigurationLoader.h" />
@@ -181,7 +180,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\src\string.cpp" />
-    <ClCompile Include="..\src\SunLight.cpp" />
     <ClCompile Include="..\src\Texture.cpp" />
     <ClCompile Include="..\src\XMLConfigurationLoader.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>

@@ -43,7 +43,7 @@ BOOL save(const Image& image, const std::string& path)
 
 void main()
 {
-    const char* config_path = "../config/three_lambertian_spheres.xml";
+    const char* config_path = "../config/mirror_sphere.xml";
     XMLConfigurationLoader reader;
 
     std::cout << "Loading configuration: " << config_path << std::endl;

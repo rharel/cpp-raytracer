@@ -1,6 +1,7 @@
 #include <iris/XMLConfigurationLoader.h>
 
 #include <iris/LambertMaterial.h>
+#include <iris/MirrorMaterial.h>
 
 #include <iris/PlaneGeometry.h>
 #include <iris/SphereGeometry.h>
@@ -84,6 +85,7 @@ const char* XMLConfigurationLoader::ATTRIBUTE_PATH = "path";
 const char* XMLConfigurationLoader::ATTRIBUTE_PRECISION = "precision";
 
 const char* XMLConfigurationLoader::VALUE_LAMBERT = "lambert";
+const char* XMLConfigurationLoader::VALUE_MIRROR = "mirror";
 const char* XMLConfigurationLoader::VALUE_PLANE = "plane";
 const char* XMLConfigurationLoader::VALUE_SPHERE = "sphere";
 const char* XMLConfigurationLoader::VALUE_NAIVE = "naive";
@@ -223,6 +225,13 @@ void XMLConfigurationLoader::parse_materials(const Element* source)
                 parse_material_lambert(child)
             );
         }
+        else if (strcmp(type, VALUE_MIRROR) == 0)
+        {
+            configuration_.materials[name] = MaterialPtr
+            (
+                parse_material_mirror(child)
+            );
+        }
         else
         {
             status_ = Status::ParsingError;
@@ -240,7 +249,10 @@ Material* XMLConfigurationLoader::parse_material_lambert(const Element* source)
     const Vector3 albedo = parse_color(albedo_str);
     return new LambertMaterial(albedo);
 }
-
+Material* XMLConfigurationLoader::parse_material_mirror(const Element*)
+{
+    return new MirrorMaterial();
+}
 void XMLConfigurationLoader::parse_textures(const Element* source)
 {
     if (!require_has_child(source, ELEMENT_TEXTURE)) { return; }

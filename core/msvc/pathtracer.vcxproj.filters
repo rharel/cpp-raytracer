@@ -92,9 +92,6 @@
     <ClInclude Include="..\include\iris\CookTorranceMaterial.h">
       <Filter>material</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\iris\SunLight.h">
-      <Filter>light</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\iris\string.h">
       <Filter>utility</Filter>
     </ClInclude>
@@ -227,9 +224,6 @@
     </ClCompile>
     <ClCompile Include="..\src\MirrorMaterial.cpp">
       <Filter>material</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\SunLight.cpp">
-      <Filter>light</Filter>
     </ClCompile>
     <ClCompile Include="..\src\Geometry.cpp">
       <Filter>geometry</Filter>

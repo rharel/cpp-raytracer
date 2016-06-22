@@ -121,6 +121,7 @@
     <ClCompile Include="..\src\unit\LambertMaterialTest.cpp" />
     <ClCompile Include="..\src\unit\LightTest.cpp" />
     <ClCompile Include="..\src\unit\mathTest.cpp" />
+    <ClCompile Include="..\src\unit\MirrorMaterialTest.cpp" />
     <ClCompile Include="..\src\unit\NaiveSamplerTest.cpp" />
     <ClCompile Include="..\src\unit\PlaneGeometryTest.cpp" />
     <ClCompile Include="..\src\unit\RandomSamplerTest.cpp" />

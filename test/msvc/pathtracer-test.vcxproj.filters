@@ -57,6 +57,9 @@
     <ClCompile Include="..\src\unit\XMLConfigurationLoaderTest.cpp">
       <Filter>unit\io</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\unit\MirrorMaterialTest.cpp">
+      <Filter>unit\material</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="unit">
