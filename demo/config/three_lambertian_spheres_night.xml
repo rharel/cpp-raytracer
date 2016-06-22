@@ -41,5 +41,5 @@
 	<camera fov='75' aspect='1' near='0.1' far='100' 
 	        translation='0,1,5' lookAt='0,1,0' />
 	<image width='512' height='512'
-	       path='../img/three_lambertian_spheres.bmp' />
+	       path='../img/three_lambertian_spheres_night.bmp' />
 </configuration>

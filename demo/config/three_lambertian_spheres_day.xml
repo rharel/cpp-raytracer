@@ -1,0 +1,45 @@
+<configuration>
+	<materials>
+		<material name='white' type='lambert' albedo='#F0F0F0' />
+		<material name='black' type='lambert' albedo='#101010' />
+	    
+	    <material name='red' type='lambert' albedo='#D00000' />
+	    <material name='green' type='lambert' albedo='#00D000' />
+		<material name='blue' type='lambert' albedo='#0000D0' />
+	</materials>
+	<textures>
+		<texture name='bw_checkers' width='2' height='2' 
+				 pattern='black,white,white,black' />
+		
+		<texture name='red' width='1' height='1' pattern='red' />
+		<texture name='green' width='1' height='1' pattern='green' />
+		<texture name='blue' width='1' height='1' pattern='blue' />
+	</textures>
+	<geometries>
+		<geometry name='plane' type='plane' 
+		          textureScaleU='2' textureScaleV='2' />
+	    <geometry name='sphere' type='sphere'
+		          textureScaleU='1' textureScaleV='1' />
+	</geometries>
+	<scene>
+		<objects>
+			<object geometry='plane' texture='bw_checkers' />
+			<object geometry='sphere' texture='red' 
+			        translation='-2,1,0' />
+			<object geometry='sphere' texture='green' 
+			        translation='0,1,0' />
+			<object geometry='sphere' texture='blue' 
+			        translation='2,1,0' />
+		</objects>
+		<lights>
+			<light type='sphere' color='#FFFFE0' intensity='50' 
+			       translation='30,100,30' scale='20,20,20' />
+		</lights>
+	</scene>
+	<sampler type='jitter' degree='5' precision='0.004' />
+	<tracer type='path' color='#7EC0EE' degree='3' />
+	<camera fov='75' aspect='1' near='0.1' far='100' 
+	        translation='5,3,5' lookAt='0,1,0' />
+	<image width='512' height='512'
+	       path='../img/three_lambertian_spheres_day.bmp' />
+</configuration>
