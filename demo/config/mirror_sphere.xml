@@ -21,14 +21,15 @@
 		<objects>
 			<object geometry='plane' texture='bw_checkers' />
 			<object geometry='sphere' texture='mirror' 
-			        translation='0,1,0' />
+			        translation='0,1,0' rotation='0,0,0' />
 		</objects>
 		<lights>
 			<light type='sphere' color='#FFFFE0' intensity='50' 
 			       translation='30,100,30' scale='20,20,20' />
 		</lights>
 	</scene>
-	<sampler type='jitter' degree='5' precision='0.004' />
+	<sampler type='jitter' degree='2' precision='0.2' />
+	<!-- <sampler type='jitter' degree='5' precision='0.004' /> -->
 	<tracer type='path' color='#7EC0EE' degree='3' />
 	<camera fov='75' aspect='1' near='0.1' far='100' 
 	        translation='0,1,2' lookAt='0,1,0' />
