@@ -8,7 +8,7 @@ Straightforward raytracing library in C++. It is single-core, nothing fancy - pe
    * Infinite plane
    * Sphere
  * Light types
-   * Spehre
+   * Sphere
  * Materials
    * Lambert
    * Mirror
